@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Admin\API_Admin_ChangePwd.cs" />
+    <Compile Include="API\Admin\API_Admin_GetAllUsers.cs" />
     <Compile Include="API\Admin\API_Admin_Login.cs" />
     <Compile Include="API_Def.cs" />
     <Compile Include="GRSVR.cs" />
