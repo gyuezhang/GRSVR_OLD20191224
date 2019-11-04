@@ -4,7 +4,7 @@ using SuperSocket.SocketBase.Protocol;
 
 namespace GRSVR
 {
-    class API_Admin_Login : CommandBase<GRSession, StringRequestInfo>
+    public class API_Admin_Login : CommandBase<GRSession, StringRequestInfo>
     {
         public override string Name
         {

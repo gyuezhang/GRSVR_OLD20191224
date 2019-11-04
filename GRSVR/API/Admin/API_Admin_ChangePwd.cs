@@ -2,9 +2,9 @@
 using SuperSocket.SocketBase.Command;
 using SuperSocket.SocketBase.Protocol;
 
-namespace GRSVR.API.Admin
+namespace GRSVR
 {
-    class API_Admin_ChangePwd : CommandBase<GRSession, StringRequestInfo>
+    public class API_Admin_ChangePwd : CommandBase<GRSession, StringRequestInfo>
     {
         public override string Name
         {

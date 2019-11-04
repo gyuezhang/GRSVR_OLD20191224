@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTestConsole", "Test\DbTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvrStartConsole", "Test\SvrStartConsole\SvrStartConsole.csproj", "{CAE9991F-5AC9-490F-A700-929A881873E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvrTestConsole", "Test\SvrTestConsole\SvrTestConsole.csproj", "{55EB4D98-45ED-4C1B-B3E8-D323A19F9B0D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,10 +35,6 @@ Global
 		{CAE9991F-5AC9-490F-A700-929A881873E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAE9991F-5AC9-490F-A700-929A881873E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAE9991F-5AC9-490F-A700-929A881873E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55EB4D98-45ED-4C1B-B3E8-D323A19F9B0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55EB4D98-45ED-4C1B-B3E8-D323A19F9B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55EB4D98-45ED-4C1B-B3E8-D323A19F9B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55EB4D98-45ED-4C1B-B3E8-D323A19F9B0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,7 +42,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8D8214E2-F01C-43E0-81E7-972699D49EE1} = {915BABB5-7FA5-4059-B06A-4B4BD47F07CB}
 		{CAE9991F-5AC9-490F-A700-929A881873E9} = {915BABB5-7FA5-4059-B06A-4B4BD47F07CB}
-		{55EB4D98-45ED-4C1B-B3E8-D323A19F9B0D} = {915BABB5-7FA5-4059-B06A-4B4BD47F07CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9E17F8E6-86DA-402E-8985-23980F29BBCA}

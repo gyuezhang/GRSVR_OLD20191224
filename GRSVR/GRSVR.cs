@@ -1,5 +1,6 @@
 ﻿using Db;
 using SuperSocket.SocketBase;
+using SuperSocket.SocketBase.Protocol;
 
 namespace GRSVR
 {
@@ -19,6 +20,11 @@ namespace GRSVR
         {
             string strMsg = api_id.ToString() + " " + res.ToString() + " " + RESTMNT;
             base.Send(strMsg);
+        }
+
+        protected override void HandleUnknownRequest(StringRequestInfo requestInfo)
+        {
+            base.HandleUnknownRequest(requestInfo);
         }
     }
 }
