@@ -2,20 +2,20 @@
 
 namespace Db
 {
-    class DbAdminUser
+    public class DbAdminUser
     {
         /// <summary>
         /// 初始化数据表，首次初始化生成默认用户名密码
         /// </summary>
         public static void InitTabs()
         {
-            DbOper.Exec("create table if not exists grims.admin(Name varchar(255) not null unique,Pwd varchar(255) not null) default charset=utf8;");
+            DbOper.Exec("create table if not exists grims.admin_user(Name varchar(255) not null unique,Pwd varchar(255) not null) default charset=utf8;");
 
-            string cmd = "select * from grims.admin;";
+            string cmd = "select * from grims.admin_user;";
             MySqlDataReader reader = DbOper.Query(cmd);
             if (!reader.HasRows)
             {
-                DbOper.Exec("insert into grims.admin (Name,Pwd) values(\'admin\',\'123456\');");
+                DbOper.Exec("insert into grims.admin_user (Name,Pwd) values(\'admin\',\'123456\');");
             }
         }
 
@@ -27,7 +27,7 @@ namespace Db
         /// <returns>成功返回true,失败返回false</returns>
         public static bool Login(string Name, string Pwd)
         {
-            MySqlDataReader reader = DbOper.Query("select * from grims.admin;");
+            MySqlDataReader reader = DbOper.Query("select * from grims.admin_user;");
             reader.Read();
             if ((reader.GetString("Name") == Name) && (Pwd == reader.GetString("Pwd")))
                 return true;
@@ -43,11 +43,11 @@ namespace Db
         /// <returns>成功返回true,失败返回false</returns>
         public static bool ChangePwd(string oldPwd, string newPwd)
         {
-            MySqlDataReader reader = DbOper.Query("select * from grims.admin;");
+            MySqlDataReader reader = DbOper.Query("select * from grims.admin_user;");
             reader.Read();
             if (oldPwd == reader.GetString("Pwd"))
             {
-                string cmd = "update grims.admin set Pwd='" + newPwd + "' where Name='admin';";
+                string cmd = "update grims.admin_user set Pwd='" + newPwd + "' where Name='admin';";
                 DbOper.Exec(cmd);
                 return true;
             }

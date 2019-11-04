@@ -2,7 +2,7 @@
 
 namespace Db
 {
-    class DbOper
+    public class DbOper
     {
         /// <summary>
         /// 单例模式
