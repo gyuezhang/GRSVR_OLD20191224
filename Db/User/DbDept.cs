@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 
 namespace Db
@@ -32,20 +33,36 @@ namespace Db
         /// 通过部门名新建部门
         /// </summary>
         /// <param name="strDeptName">部门名</param>
-        public static void CreateDept(string strDeptName)
+        public static bool CreateDept(string strDeptName)
         {
-            string cmd = "insert into grims.dept (Name) values('" + strDeptName + "');";
-            DbOper.Exec(cmd);
+            try
+            {
+                string cmd = "insert into grims.dept (Name) values('" + strDeptName + "');";
+                DbOper.Exec(cmd);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
         /// 通过部门名删除部门
         /// </summary>
         /// <param name="strDeptName">部门名</param>
-        public static void DeleteDept(string strDeptName)
+        public static bool DeleteDept(string strDeptName)
         {
-            string cmd = "delete from grims.dept where Name='" + strDeptName + "';";
-            DbOper.Exec(cmd);
+            try
+            {
+                string cmd = "delete from grims.dept where Name='" + strDeptName + "';";
+                DbOper.Exec(cmd);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -53,10 +70,18 @@ namespace Db
         /// </summary>
         /// <param name="strOldName">旧名</param>
         /// <param name="strNewName">新名</param>
-        public static void ChangeDept(string strOldName, string strNewName)
+        public static bool ChangeDept(string strOldName, string strNewName)
         {
-            string cmd = "update grims.dept set Name='" + strNewName + "' where Name='" + strOldName + "';";
-            DbOper.Exec(cmd);
+            try
+            {
+                string cmd = "update grims.dept set Name='" + strNewName + "' where Name='" + strOldName + "';";
+                DbOper.Exec(cmd);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>

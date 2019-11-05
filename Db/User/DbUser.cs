@@ -17,7 +17,7 @@ namespace Db
                             "DeptId int not null," +
                             "Tel varchar(255)," +
                             "Email varchar(255)," +
-                            "primary key(Id),foreign key(DeptId) references grims.user_dept(Id)" +
+                            "primary key(Id),foreign key(DeptId) references grims.dept(Id)" +
                             ") default charset=utf8;");
         }
 
