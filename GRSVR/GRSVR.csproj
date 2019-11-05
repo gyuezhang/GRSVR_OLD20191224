@@ -88,6 +88,8 @@
     <Compile Include="API\Admin\UserMng\API_Admin_DeleteUsers.cs" />
     <Compile Include="API\Admin\UserMng\API_Admin_GetAllUsers.cs" />
     <Compile Include="API\Admin\AdminAccount\API_Admin_Login.cs" />
+    <Compile Include="API\User\Account\API_ChangeAccount.cs" />
+    <Compile Include="API\User\Account\API_Login.cs" />
     <Compile Include="API_Def.cs" />
     <Compile Include="GRSVR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
