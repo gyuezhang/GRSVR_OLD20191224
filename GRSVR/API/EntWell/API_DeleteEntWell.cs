@@ -4,22 +4,22 @@ using SuperSocket.SocketBase.Protocol;
 
 namespace GRSVR
 {
-    public class API_Login : CommandBase<GRSession, StringRequestInfo>
+    public class API_DeleteEntWell : CommandBase<GRSession, StringRequestInfo>
     {
         public override string Name
         {
-            get { return "API_Login"; }
+            get { return "API_DeleteEntWell"; }
         }
 
         public override void ExecuteCommand(GRSession session, StringRequestInfo requestInfo)
         {
-            if (DbUser.Login(requestInfo.Parameters[0], requestInfo.Parameters[1]))
+            if (DbEntWell.DeleteEntWell(int.Parse(requestInfo.Parameters[0])))
             {
-                session.Send(API_ID.API_Login, RES_ID.OK);
+                session.Send(API_ID.API_DeleteEntWell, RES_ID.OK);
             }
             else
             {
-                session.Send(API_ID.API_Login, RES_ID.FAILED);
+                session.Send(API_ID.API_DeleteEntWell, RES_ID.FAILED);
             }
         }
     }

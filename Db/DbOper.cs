@@ -31,6 +31,9 @@ namespace Db
             DbAdminUser.InitTabs();
             DbDept.InitTabs();
             DbUser.InitTabs();
+
+            DbWell.InitTabs();
+            DbEntWell.InitTabs();
         }
 
         /// <summary>

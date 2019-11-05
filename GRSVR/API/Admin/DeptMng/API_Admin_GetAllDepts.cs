@@ -15,7 +15,7 @@ namespace GRSVR
         public override void ExecuteCommand(GRSession session, StringRequestInfo requestInfo)
         {
             List<string>  res = DbDept.GetAllDepts();
-            session.Send(API_ADMIN_ID.API_Admin_GetAllDepts, RES_ID.OK, res);
+            session.Send(API_ID.API_Admin_GetAllDepts, RES_ID.OK, res);
         }
     }
 }

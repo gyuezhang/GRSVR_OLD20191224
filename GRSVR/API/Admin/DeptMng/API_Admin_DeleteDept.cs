@@ -15,11 +15,11 @@ namespace GRSVR
         {
             if (DbDept.DeleteDept(requestInfo.Parameters[0]))
             {
-                session.Send(API_ADMIN_ID.API_Admin_DeleteDept, RES_ID.OK);
+                session.Send(API_ID.API_Admin_DeleteDept, RES_ID.OK);
             }
             else
             {
-                session.Send(API_ADMIN_ID.API_Admin_DeleteDept, RES_ID.FAILED);
+                session.Send(API_ID.API_Admin_DeleteDept, RES_ID.FAILED);
             }
         }
     }

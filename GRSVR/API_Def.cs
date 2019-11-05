@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace GRSVR
 {
-    public enum API_ADMIN_ID
+    public enum API_ID
     {
-        //Admin_API
         API_Admin_Login,
         API_Admin_ChangePwd,
+
         API_Admin_CreateDept,
         API_Admin_DeleteDept,
         API_Admin_ChangeDept,
@@ -20,13 +20,18 @@ namespace GRSVR
         API_Admin_ChangeUser,
         API_Admin_GetAllUsers,
 
-    }
-
-    public enum API_ID
-    {
-        //User_API
         API_Login,
         API_ChangeAccount,
+
+        API_ChangeWell,
+        API_CreateWell,
+        API_DeleteWell,
+        API_GetWellByFilter,
+
+        API_ChangeEntWell,
+        API_CreateEntWell,
+        API_DeleteEntWell,
+        API_GetEntWellByFilter,
     }
 
     public enum RES_ID
