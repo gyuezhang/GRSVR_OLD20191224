@@ -4,11 +4,11 @@ using SuperSocket.SocketBase.Protocol;
 
 namespace GRSVR
 {
-    public class API_Login : CommandBase<GRSession, StringRequestInfo>
+    public class API_ChangeEntWell : CommandBase<GRSession, StringRequestInfo>
     {
         public override string Name
         {
-            get { return "API_Login"; }
+            get { return "API_ChangeEntWell"; }
         }
 
         public override void ExecuteCommand(GRSession session, StringRequestInfo requestInfo)
