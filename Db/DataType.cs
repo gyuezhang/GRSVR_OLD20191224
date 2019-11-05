@@ -62,7 +62,7 @@ namespace Db
         /// <summary>
         /// 用途
         /// </summary>
-        public string Usage { get; set; }
+        public string Usefor { get; set; }
 
         /// <summary>
         /// 是否记录了成井时间
@@ -171,7 +171,7 @@ namespace Db
 
         public Struct_Well(int id,string tsOrSt, string village, string unitCat,
                                 string loc, double lng, double lat,
-                                string usage, bool ifRecordDigTime,DateTime digTime, string waterIntakingNo,
+                                string usefor, bool ifRecordDigTime,DateTime digTime, string waterIntakingNo,
                                 int wellDepth, string tubeMat, int tubeIR,
                                 int stanWaterDepth, int saltWaterFloorDepth, int filterLocLow,
                                 int filterLocHigh, int stillWaterLoc, string pumpModel, float pumpPower,
@@ -186,7 +186,7 @@ namespace Db
             Loc = loc;
             Lng = lng;
             Lat = lat;
-            Usage = usage;
+            Usefor = usefor;
             IfRecordDigTime = ifRecordDigTime;
             DigTime = digTime;
             WaterIntakingNo = waterIntakingNo;
@@ -255,7 +255,7 @@ namespace Db
         /// <summary>
         /// 用途
         /// </summary>
-        public string Usage { get; set; }
+        public string Usefor { get; set; }
 
         /// <summary>
         /// 是否记录了成井时间
@@ -340,7 +340,7 @@ namespace Db
 
         public Struct_EntWell(int id,string tsOrSt, string entName, string unitCat,
                                 string loc, double lng, double lat,
-                                string usage, bool ifRecordDigTime, DateTime digTime, string waterIntakingNo,
+                                string usefor, bool ifRecordDigTime, DateTime digTime, string waterIntakingNo,
                                 bool isPaid, int wellDepth, string tubeMat,
                                 int tubeIR, int stanWaterDepth, int saltWaterFloorDepth,
                                 int filterLocLow, int filterLocHigh, int stillWaterLoc, string pumpModel,
@@ -354,7 +354,7 @@ namespace Db
             Loc = loc;
             Lng = lng;
             Lat = lat;
-            Usage = usage;
+            Usefor = usefor;
             IfRecordDigTime = ifRecordDigTime;
             DigTime = digTime;
             WaterIntakingNo = waterIntakingNo;

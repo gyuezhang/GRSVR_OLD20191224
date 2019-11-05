@@ -67,6 +67,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\DbDept.cs" />
     <Compile Include="User\DbUser.cs" />
+    <Compile Include="Well\DbEntWell.cs" />
+    <Compile Include="Well\DbWell.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
