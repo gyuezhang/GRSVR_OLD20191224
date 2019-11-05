@@ -47,40 +47,71 @@ namespace Db
         /// 创建用户
         /// </summary>
         /// <param name="user">用户结构体</param>
-        public static void CreateUser(STR_User user)
+        public static bool CreateUser(STR_User user)
         {
-            string cmd = "insert into grims.user (Name,Pwd,DeptId,Tel,Email) values('" + user.Name + "'" +
-                ",'" + user.Pwd +
-                "','" + user.DeptId +
-                "','" + user.Tel +
-                "','" + user.Email +
-                "');";
-            DbOper.Exec(cmd);
+            try
+            {
+                string cmd = "insert into grims.user (Name,Pwd,DeptId,Tel,Email) values('" + user.Name + "'" +
+                    ",'" + user.Pwd +
+                    "','" + user.DeptId +
+                    "','" + user.Tel +
+                    "','" + user.Email +
+                    "');";
+                DbOper.Exec(cmd);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
         /// 根据用户id删除用户
         /// </summary>
         /// <param name="userId">用户id</param>
-        public static void DeleteUser(int userId)
+        public static bool DeleteUser(List<int> userIds)
         {
-            string cmd = "delete from grims.user where Id='" + userId + "';";
-            DbOper.Exec(cmd);
+            try
+            {
+                string cmd = "delete from grims.user where ";
+                foreach(int id in userIds)
+                {
+                    cmd += "Id='";
+                    cmd += id.ToString();
+                    cmd += "' or ";
+                }
+                cmd += "Id='-1';";
+                DbOper.Exec(cmd);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
         /// 修改用户信息
         /// </summary>
         /// <param name="user">用户结构体</param>
-        public static void ChangeUser(STR_User user)
+        public static bool ChangeUser(STR_User user)
         {
-            string cmd = "update grims.user set Name='" + user.Name + "'," +
-                "Pwd='" + user.Pwd + "'," +
-                "DeptId='" + user.DeptId + "'," +
-                "Tel='" + user.Tel + "'," +
-                "Email='" + user.Email +
-                "' where Id='" + user.Id + "';";
-            DbOper.Exec(cmd);
+            try
+            {
+                string cmd = "update grims.user set Name='" + user.Name + "'," +
+                    "Pwd='" + user.Pwd + "'," +
+                    "DeptId='" + user.DeptId + "'," +
+                    "Tel='" + user.Tel + "'," +
+                    "Email='" + user.Email +
+                    "' where Id='" + user.Id + "';";
+                DbOper.Exec(cmd);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace GRSVR
         API_Admin_ChangeDept,
         API_Admin_GetAllDepts,
         API_Admin_CreateUser,
-        API_Admin_DeleteUser,
+        API_Admin_DeleteUsers,
         API_Admin_ChangeUser,
         API_Admin_GetAllUsers,
     }
