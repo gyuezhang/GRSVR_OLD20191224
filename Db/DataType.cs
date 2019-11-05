@@ -22,7 +22,7 @@ namespace Db
     /// <summary>
     /// 机井结构体
     /// </summary>
-    public struct Struct_Well
+    public struct STR_Well
     {
         /// <summary>
         /// 井Id
@@ -169,7 +169,7 @@ namespace Db
         /// </summary>
         public string Remark { get; set; }
 
-        public Struct_Well(int id,string tsOrSt, string village, string unitCat,
+        public STR_Well(int id,string tsOrSt, string village, string unitCat,
                                 string loc, double lng, double lat,
                                 string usefor, bool ifRecordDigTime,DateTime digTime, string waterIntakingNo,
                                 int wellDepth, string tubeMat, int tubeIR,
@@ -215,7 +215,7 @@ namespace Db
     /// <summary>
     /// 企业井结构体
     /// </summary>
-    public struct Struct_EntWell
+    public struct STR_EntWell
     {
         /// <summary>
         /// 企业井Id
@@ -330,15 +330,19 @@ namespace Db
         /// <summary>
         /// 是否为水位观测点
         /// </summary>
-        public string IsWaterLevelOp { get; set; }
+        public bool IsWaterLevelOp { get; set; }
 
         /// <summary>
         /// 是否安装计量设施
         /// </summary>
-        public string IsMfInstall { get; set; }
+        public bool IsMfInstall { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
         public string Remark { get; set; }
 
-        public Struct_EntWell(int id,string tsOrSt, string entName, string unitCat,
+        public STR_EntWell(int id,string tsOrSt, string entName, string unitCat,
                                 string loc, double lng, double lat,
                                 string usefor, bool ifRecordDigTime, DateTime digTime, string waterIntakingNo,
                                 bool isPaid, int wellDepth, string tubeMat,
