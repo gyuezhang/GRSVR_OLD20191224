@@ -13,13 +13,13 @@ namespace GRSVR
 
         public override void ExecuteCommand(GRSession session, StringRequestInfo requestInfo)
         {
-            if (DbUser.Login(requestInfo.Parameters[0], requestInfo.Parameters[1]))
+            if (DbWell.DeleteWell(int.Parse(requestInfo.Parameters[0])))
             {
-                session.Send(API_ID.API_Login, RES_ID.OK);
+                session.Send(API_ID.API_DeleteWell, RES_ID.OK);
             }
             else
             {
-                session.Send(API_ID.API_Login, RES_ID.FAILED);
+                session.Send(API_ID.API_DeleteWell, RES_ID.FAILED);
             }
         }
     }

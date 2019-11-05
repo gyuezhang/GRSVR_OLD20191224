@@ -72,7 +72,7 @@ namespace Db
         /// <summary>
         /// 成井时间
         /// </summary>
-        public DateTime DigTime { get; set; }
+        public int DigTime { get; set; }
         
         /// <summary>
         /// 取水证号
@@ -169,46 +169,46 @@ namespace Db
         /// </summary>
         public string Remark { get; set; }
 
-        public STR_Well(int id,string tsOrSt, string village, string unitCat,
-                                string loc, double lng, double lat,
-                                string usefor, bool ifRecordDigTime,DateTime digTime, string waterIntakingNo,
-                                int wellDepth, string tubeMat, int tubeIR,
-                                int stanWaterDepth, int saltWaterFloorDepth, int filterLocLow,
-                                int filterLocHigh, int stillWaterLoc, string pumpModel, float pumpPower,
-                                float coverArea, int supPeopleNo, bool isWaterLevelOp,
-                                bool isMfInstall, bool isConnSeepageChn, float seepageChnLength,
-                                int linkWellNo, string remark)
-        {
-            Id = id;
-            TsOrSt = tsOrSt;
-            Village = village;
-            UnitCat = unitCat;
-            Loc = loc;
-            Lng = lng;
-            Lat = lat;
-            Usefor = usefor;
-            IfRecordDigTime = ifRecordDigTime;
-            DigTime = digTime;
-            WaterIntakingNo = waterIntakingNo;
-            WellDepth = wellDepth;
-            TubeMat = tubeMat;
-            TubeIR = tubeIR;
-            StanWaterDepth = stanWaterDepth;
-            SaltWaterFloorDepth = saltWaterFloorDepth;
-            FilterLocLow = filterLocLow;
-            FilterLocHigh = filterLocHigh;
-            StillWaterLoc = stillWaterLoc;
-            PumpModel = pumpModel;
-            PumpPower = pumpPower;
-            CoverArea = coverArea;
-            SupPeopleNo = supPeopleNo;
-            IsWaterLevelOp = isWaterLevelOp;
-            IsMfInstall = isMfInstall;
-            IsConnSeepageChn = isConnSeepageChn;
-            SeepageChnLength = seepageChnLength;
-            LinkWellNo = linkWellNo;
-            Remark = remark;
-        }
+        //public STR_Well(int id,string tsOrSt, string village, string unitCat,
+        //                        string loc, double lng, double lat,
+        //                        string usefor, bool ifRecordDigTime,DateTime digTime, string waterIntakingNo,
+        //                        int wellDepth, string tubeMat, int tubeIR,
+        //                        int stanWaterDepth, int saltWaterFloorDepth, int filterLocLow,
+        //                        int filterLocHigh, int stillWaterLoc, string pumpModel, float pumpPower,
+        //                        float coverArea, int supPeopleNo, bool isWaterLevelOp,
+        //                        bool isMfInstall, bool isConnSeepageChn, float seepageChnLength,
+        //                        int linkWellNo, string remark)
+        //{
+        //    Id = id;
+        //    TsOrSt = tsOrSt;
+        //    Village = village;
+        //    UnitCat = unitCat;
+        //    Loc = loc;
+        //    Lng = lng;
+        //    Lat = lat;
+        //    Usefor = usefor;
+        //    IfRecordDigTime = ifRecordDigTime;
+        //    DigTime = digTime;
+        //    WaterIntakingNo = waterIntakingNo;
+        //    WellDepth = wellDepth;
+        //    TubeMat = tubeMat;
+        //    TubeIR = tubeIR;
+        //    StanWaterDepth = stanWaterDepth;
+        //    SaltWaterFloorDepth = saltWaterFloorDepth;
+        //    FilterLocLow = filterLocLow;
+        //    FilterLocHigh = filterLocHigh;
+        //    StillWaterLoc = stillWaterLoc;
+        //    PumpModel = pumpModel;
+        //    PumpPower = pumpPower;
+        //    CoverArea = coverArea;
+        //    SupPeopleNo = supPeopleNo;
+        //    IsWaterLevelOp = isWaterLevelOp;
+        //    IsMfInstall = isMfInstall;
+        //    IsConnSeepageChn = isConnSeepageChn;
+        //    SeepageChnLength = seepageChnLength;
+        //    LinkWellNo = linkWellNo;
+        //    Remark = remark;
+        //}
 
     }
 
@@ -265,7 +265,7 @@ namespace Db
         /// <summary>
         /// 成井时间
         /// </summary>
-        public DateTime DigTime { get; set; }
+        public int DigTime { get; set; }
 
         /// <summary>
         /// 取水证号
@@ -342,40 +342,40 @@ namespace Db
         /// </summary>
         public string Remark { get; set; }
 
-        public STR_EntWell(int id,string tsOrSt, string entName, string unitCat,
-                                string loc, double lng, double lat,
-                                string usefor, bool ifRecordDigTime, DateTime digTime, string waterIntakingNo,
-                                bool isPaid, int wellDepth, string tubeMat,
-                                int tubeIR, int stanWaterDepth, int saltWaterFloorDepth,
-                                int filterLocLow, int filterLocHigh, int stillWaterLoc, string pumpModel,
-                                float pumpPower, string isWaterLevelOp, string isMfInstall,
-                                string remark)
-        {
-            Id = id;
-            TsOrSt = tsOrSt;
-            EntName = entName;
-            UnitCat = unitCat;
-            Loc = loc;
-            Lng = lng;
-            Lat = lat;
-            Usefor = usefor;
-            IfRecordDigTime = ifRecordDigTime;
-            DigTime = digTime;
-            WaterIntakingNo = waterIntakingNo;
-            IsPaid = isPaid;
-            WellDepth = wellDepth;
-            TubeMat = tubeMat;
-            TubeIR = tubeIR;
-            StanWaterDepth = stanWaterDepth;
-            SaltWaterFloorDepth = saltWaterFloorDepth;
-            FilterLocLow = filterLocLow;
-            FilterLocHigh = filterLocHigh;
-            StillWaterLoc = stillWaterLoc;
-            PumpModel = pumpModel;
-            PumpPower = pumpPower;
-            IsWaterLevelOp = isWaterLevelOp;
-            IsMfInstall = isMfInstall;
-            Remark = remark;
-        }
+        //public STR_EntWell(int id,string tsOrSt, string entName, string unitCat,
+        //                        string loc, double lng, double lat,
+        //                        string usefor, bool ifRecordDigTime, DateTime digTime, string waterIntakingNo,
+        //                        bool isPaid, int wellDepth, string tubeMat,
+        //                        int tubeIR, int stanWaterDepth, int saltWaterFloorDepth,
+        //                        int filterLocLow, int filterLocHigh, int stillWaterLoc, string pumpModel,
+        //                        float pumpPower, bool isWaterLevelOp, bool isMfInstall,
+        //                        string remark)
+        //{
+        //    Id = id;
+        //    TsOrSt = tsOrSt;
+        //    EntName = entName;
+        //    UnitCat = unitCat;
+        //    Loc = loc;
+        //    Lng = lng;
+        //    Lat = lat;
+        //    Usefor = usefor;
+        //    IfRecordDigTime = ifRecordDigTime;
+        //    DigTime = digTime;
+        //    WaterIntakingNo = waterIntakingNo;
+        //    IsPaid = isPaid;
+        //    WellDepth = wellDepth;
+        //    TubeMat = tubeMat;
+        //    TubeIR = tubeIR;
+        //    StanWaterDepth = stanWaterDepth;
+        //    SaltWaterFloorDepth = saltWaterFloorDepth;
+        //    FilterLocLow = filterLocLow;
+        //    FilterLocHigh = filterLocHigh;
+        //    StillWaterLoc = stillWaterLoc;
+        //    PumpModel = pumpModel;
+        //    PumpPower = pumpPower;
+        //    IsWaterLevelOp = isWaterLevelOp;
+        //    IsMfInstall = isMfInstall;
+        //    Remark = remark;
+        //}
     }
 }

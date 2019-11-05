@@ -23,11 +23,11 @@ namespace GRSVR
 
             if (DbUser.ChangeUser(user))
             {
-                session.Send(API_ADMIN_ID.API_Admin_ChangeUser, RES_ID.OK);
+                session.Send(API_ID.API_Admin_ChangeUser, RES_ID.OK);
             }
             else
             {
-                session.Send(API_ADMIN_ID.API_Admin_ChangeUser, RES_ID.FAILED);
+                session.Send(API_ID.API_Admin_ChangeUser, RES_ID.FAILED);
             }
         }
     }

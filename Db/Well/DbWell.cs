@@ -24,7 +24,7 @@ namespace Db
                         "Lat double,                            "   +
                         "Usefor varchar(255),                   "   +
                         "IfRecordDigTime bool,                  "   +
-                        "DigTime timestamp,                     "   +
+                        "DigTime int,                     "   +
                         "WaterIntakingNo varchar(255),          "   +
                         "WellDepth int,                         "   +
                         "TubeMat varchar(255),                  "   +
@@ -89,7 +89,7 @@ namespace Db
                                                         well.IsConnSeepageChn       + "," +
                                                         well.SeepageChnLength       + "," +
                                                         well.LinkWellNo             + "," +
-                                                        well.Remark                 + "," +
+                                                        well.Remark                 + 
                                                         ");";
                 DbOper.Exec(cmd);
                 return true;
@@ -128,36 +128,36 @@ namespace Db
         {
             try
             {
-                string cmd = "  update grims.well set" +
-                                "TsOrSt             ='" + well.TsOrSt              + "'," +
-                                "Village            ='" + well.Village             + "'," +
-                                "UnitCat            ='" + well.UnitCat             + "'," +
-                                "Loc                ='" + well.Loc                 + "'," +
-                                "Lng                ='" + well.Lng                 + "'," +
-                                "Lat                ='" + well.Lat                 + "'," +
-                                "Usefor             ='" + well.Usefor              + "'," +
-                                "IfRecordDigTime    ='" + well.IfRecordDigTime     + "'," +
-                                "DigTime            ='" + well.DigTime             + "'," +
-                                "WaterIntakingNo    ='" + well.WaterIntakingNo     + "'," +
-                                "WellDepth          ='" + well.WellDepth           + "'," +
-                                "TubeMat            ='" + well.TubeMat             + "'," +
-                                "TubeIR             ='" + well.TubeIR              + "'," +
-                                "StanWaterDepth     ='" + well.StanWaterDepth      + "'," +
-                                "SaltWaterFloorDepth='" + well.SaltWaterFloorDepth + "'," +
-                                "FilterLocLow       ='" + well.FilterLocLow        + "'," +
-                                "FilterLocHigh      ='" + well.FilterLocHigh       + "'," +
-                                "StillWaterLoc      ='" + well.StillWaterLoc       + "'," +
-                                "PumpModel          ='" + well.PumpModel           + "'," +
-                                "PumpPower          ='" + well.PumpPower           + "'," +
-                                "CoverArea          ='" + well.CoverArea           + "'," +
-                                "SupPeopleNo        ='" + well.SupPeopleNo         + "'," +
-                                "IsMfInstall        ='" + well.IsMfInstall         + "'," +
-                                "IsWaterLevelOp     ='" + well.IsWaterLevelOp      + "'," +
-                                "IsConnSeepageChn   ='" + well.IsConnSeepageChn    + "'," +
-                                "SeepageChnLength   ='" + well.SeepageChnLength    + "'," +
-                                "LinkWellNo         ='" + well.LinkWellNo          + "'," +
-                                "Remark             ='" + well.Remark + "'," +
-                                "where Id = '" + well.Id +"'" + 
+                string cmd = "  update grims.well set " +
+                                "TsOrSt             =" + well.TsOrSt              + "," +
+                                "Village            =" + well.Village             + "," +
+                                "UnitCat            =" + well.UnitCat             + "," +
+                                "Loc                =" + well.Loc                 + "," +
+                                "Lng                =" + well.Lng                 + "," +
+                                "Lat                =" + well.Lat                 + "," +
+                                "Usefor             =" + well.Usefor              + "," +
+                                "IfRecordDigTime    =" + well.IfRecordDigTime     + "," +
+                                "DigTime            =" + well.DigTime             + "," +
+                                "WaterIntakingNo    =" + well.WaterIntakingNo     + "," +
+                                "WellDepth          =" + well.WellDepth           + "," +
+                                "TubeMat            =" + well.TubeMat             + "," +
+                                "TubeIR             =" + well.TubeIR              + "," +
+                                "StanWaterDepth     =" + well.StanWaterDepth      + "," +
+                                "SaltWaterFloorDepth=" + well.SaltWaterFloorDepth + "," +
+                                "FilterLocLow       =" + well.FilterLocLow        + "," +
+                                "FilterLocHigh      =" + well.FilterLocHigh       + "," +
+                                "StillWaterLoc      =" + well.StillWaterLoc       + "," +
+                                "PumpModel          =" + well.PumpModel           + "," +
+                                "PumpPower          =" + well.PumpPower           + "," +
+                                "CoverArea          =" + well.CoverArea           + "," +
+                                "SupPeopleNo        =" + well.SupPeopleNo         + "," +
+                                "IsMfInstall        =" + well.IsMfInstall         + "," +
+                                "IsWaterLevelOp     =" + well.IsWaterLevelOp      + "," +
+                                "IsConnSeepageChn   =" + well.IsConnSeepageChn    + "," +
+                                "SeepageChnLength   =" + well.SeepageChnLength    + "," +
+                                "LinkWellNo         =" + well.LinkWellNo          + "," +
+                                "Remark             =" + well.Remark + "" +
+                                " where Id = " + well.Id +"" + 
                                 ";";
                 DbOper.Exec(cmd);
                 return true;
@@ -180,31 +180,30 @@ namespace Db
             try
             {
                 MySqlDataReader reader;
-                if (filter == "")
+                if (filter == "x")
                     reader = DbOper.Query("select * from grims.well;");
                 else
                     reader = DbOper.Query("select * from grims.well where (" + filter + ");");
-
                 while (reader.Read())
                 {
                     STR_Well well = new STR_Well();
                     well.Id = reader.GetInt32("Id");
-                    well.TsOrSt = reader.GetString("TsOrSt ");
+                    well.TsOrSt = reader.GetString("TsOrSt");
                     well.Village = reader.GetString("Village");
                     well.UnitCat = reader.GetString("UnitCat");
                     well.Loc = reader.GetString("Loc");
                     well.Lng = reader.GetDouble("Lng");
                     well.Lat = reader.GetDouble("Lat");
-                    well.Usefor = reader.GetString("Usefor ");
+                    well.Usefor = reader.GetString("Usefor");
                     well.IfRecordDigTime = reader.GetBoolean("IfRecordDigTime");
-                    well.DigTime = new DateTime() + reader.GetTimeSpan("DigTime");
+                    well.DigTime = reader.GetInt32("DigTime");
                     well.WaterIntakingNo = reader.GetString("WaterIntakingNo");
                     well.WellDepth = reader.GetInt32("WellDepth");
                     well.TubeMat = reader.GetString("TubeMat");
-                    well.TubeIR = reader.GetInt32("TubeIR ");
-                    well.StanWaterDepth = reader.GetInt32("StanWaterDepth ");
+                    well.TubeIR = reader.GetInt32("TubeIR");
+                    well.StanWaterDepth = reader.GetInt32("StanWaterDepth");
                     well.SaltWaterFloorDepth = reader.GetInt32("SaltWaterFloorDepth");
-                    well.FilterLocLow = reader.GetInt32("FilterLocLow ");
+                    well.FilterLocLow = reader.GetInt32("FilterLocLow");
                     well.FilterLocHigh = reader.GetInt32("FilterLocHigh");
                     well.StillWaterLoc = reader.GetInt32("StillWaterLoc");
                     well.PumpModel = reader.GetString("PumpModel");
@@ -216,7 +215,7 @@ namespace Db
                     well.IsConnSeepageChn = reader.GetBoolean("IsConnSeepageChn");
                     well.SeepageChnLength = reader.GetFloat("SeepageChnLength");
                     well.LinkWellNo = reader.GetInt32("LinkWellNo");
-                    well.Remark = reader.GetString("Remark ");
+                    well.Remark = reader.GetString("Remark");
                     res.Add(well);
                 }
                 return res;

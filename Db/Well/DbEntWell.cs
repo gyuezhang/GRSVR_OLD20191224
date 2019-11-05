@@ -24,7 +24,7 @@ namespace Db
                         "Lat double,                                "+
                         "Usefor varchar(255),                       "+
                         "IfRecordDigTime bool,                      "+
-                        "DigTime timestamp,                         "+
+                        "DigTime int,                         "+
                         "WaterIntakingNo varchar(255),              "+
                         "IsPaid bool,                               "+
                         "WellDepth int,                             "+
@@ -56,7 +56,7 @@ namespace Db
                 string cmd = "insert into grims.entwell (           TsOrSt,             EntName,                UnitCat,            Loc,                    Lng,                Lat,                " +
                                                                 "   Usefor,             IfRecordDigTime,        DigTime,            WaterIntakingNo,        IsPaid, WellDepth,  TubeMat,            " +
                                                                 "   TubeIR,             StanWaterDepth,         SaltWaterFloorDepth,FilterLocLow,           FilterLocHigh,      StillWaterLoc,      " +
-                                                                "   PumpModel,          PumpPower,              IsWaterLevelOp,     IsMfInstall,            Remark, " +
+                                                                "   PumpModel,          PumpPower,              IsWaterLevelOp,     IsMfInstall,            Remark" +
                                                                 ")values(" +
                                                                 entWell.TsOrSt + "," +
                                                                 entWell.EntName + "," +
@@ -81,7 +81,7 @@ namespace Db
                                                                 entWell.PumpPower + "," +
                                                                 entWell.IsWaterLevelOp + "," +
                                                                 entWell.IsMfInstall + "," +
-                                                                entWell.Remark + "," +
+                                                                entWell.Remark + 
                                                                 ");";
                 DbOper.Exec(cmd);
                 return true;
@@ -120,31 +120,31 @@ namespace Db
         {
             try
             {
-                string cmd = "  update grims.entwell set" +
-                "TsOrSt             ='" + entWell.TsOrSt + "'," +
-                "EntName            ='" + entWell.EntName + "'," +
-                "UnitCat            ='" + entWell.UnitCat + "'," +
-                "Loc                ='" + entWell.Loc + "'," +
-                "Lng                ='" + entWell.Lng + "'," +
-                "Lat                ='" + entWell.Lat + "'," +
-                "Usefor             ='" + entWell.Usefor + "'," +
-                "IfRecordDigTime    ='" + entWell.IfRecordDigTime + "'," +
-                "DigTime            ='" + entWell.DigTime + "'," +
-                "WaterIntakingNo    ='" + entWell.WaterIntakingNo + "'," +
-                "WellDepth          ='" + entWell.WellDepth + "'," +
-                "TubeMat            ='" + entWell.TubeMat + "'," +
-                "TubeIR             ='" + entWell.TubeIR + "'," +
-                "StanWaterDepth     ='" + entWell.StanWaterDepth + "'," +
-                "SaltWaterFloorDepth='" + entWell.SaltWaterFloorDepth + "'," +
-                "FilterLocLow       ='" + entWell.FilterLocLow + "'," +
-                "FilterLocHigh      ='" + entWell.FilterLocHigh + "'," +
-                "StillWaterLoc      ='" + entWell.StillWaterLoc + "'," +
-                "PumpModel          ='" + entWell.PumpModel + "'," +
-                "PumpPower          ='" + entWell.PumpPower + "'," +
-                "IsMfInstall        ='" + entWell.IsMfInstall + "'," +
-                "IsWaterLevelOp     ='" + entWell.IsWaterLevelOp + "'," +
-                "Remark             ='" + entWell.Remark + "'," +
-                "where Id = '" + entWell.Id + "'" +
+                string cmd = "  update grims.entwell set " +
+                "TsOrSt             =" + entWell.TsOrSt + "," +
+                "EntName            =" + entWell.EntName + "," +
+                "UnitCat            =" + entWell.UnitCat + "," +
+                "Loc                =" + entWell.Loc + "," +
+                "Lng                =" + entWell.Lng + "," +
+                "Lat                =" + entWell.Lat + "," +
+                "Usefor             =" + entWell.Usefor + "," +
+                "IfRecordDigTime    =" + entWell.IfRecordDigTime + "," +
+                "DigTime            =" + entWell.DigTime + "," +
+                "WaterIntakingNo    =" + entWell.WaterIntakingNo + "," +
+                "WellDepth          =" + entWell.WellDepth + "," +
+                "TubeMat            =" + entWell.TubeMat + "," +
+                "TubeIR             =" + entWell.TubeIR + "," +
+                "StanWaterDepth     =" + entWell.StanWaterDepth + "," +
+                "SaltWaterFloorDepth=" + entWell.SaltWaterFloorDepth + "," +
+                "FilterLocLow       =" + entWell.FilterLocLow + "," +
+                "FilterLocHigh      =" + entWell.FilterLocHigh + "," +
+                "StillWaterLoc      =" + entWell.StillWaterLoc + "," +
+                "PumpModel          =" + entWell.PumpModel + "," +
+                "PumpPower          =" + entWell.PumpPower + "," +
+                "IsMfInstall        =" + entWell.IsMfInstall + "," +
+                "IsWaterLevelOp     =" + entWell.IsWaterLevelOp + "," +
+                "Remark             =" + entWell.Remark + "" +
+                " where Id = " + entWell.Id + "" +
                 ";";
                 DbOper.Exec(cmd);
                 return true;
@@ -166,7 +166,7 @@ namespace Db
             try
             {
                 MySqlDataReader reader;
-                if (filter == "")
+                if (filter == "x")
                     reader = DbOper.Query("select * from grims.entwell;");
                 else
                     reader = DbOper.Query("select * from grims.entwell where (" + filter + ");");
@@ -175,29 +175,29 @@ namespace Db
                 {
                     STR_EntWell entWell = new STR_EntWell();
                     entWell.Id = reader.GetInt32("Id");
-                    entWell.TsOrSt = reader.GetString("TsOrSt ");
-                    entWell.EntName = reader.GetString("Village");
+                    entWell.TsOrSt = reader.GetString("TsOrSt");
+                    entWell.EntName = reader.GetString("EntName");
                     entWell.UnitCat = reader.GetString("UnitCat");
                     entWell.Loc = reader.GetString("Loc");
                     entWell.Lng = reader.GetDouble("Lng");
                     entWell.Lat = reader.GetDouble("Lat");
-                    entWell.Usefor = reader.GetString("Usefor ");
+                    entWell.Usefor = reader.GetString("Usefor");
                     entWell.IfRecordDigTime = reader.GetBoolean("IfRecordDigTime");
-                    entWell.DigTime = new DateTime() + reader.GetTimeSpan("DigTime");
+                    entWell.DigTime = reader.GetInt32("DigTime");
                     entWell.WaterIntakingNo = reader.GetString("WaterIntakingNo");
                     entWell.WellDepth = reader.GetInt32("WellDepth");
                     entWell.TubeMat = reader.GetString("TubeMat");
-                    entWell.TubeIR = reader.GetInt32("TubeIR ");
-                    entWell.StanWaterDepth = reader.GetInt32("StanWaterDepth ");
+                    entWell.TubeIR = reader.GetInt32("TubeIR");
+                    entWell.StanWaterDepth = reader.GetInt32("StanWaterDepth");
                     entWell.SaltWaterFloorDepth = reader.GetInt32("SaltWaterFloorDepth");
-                    entWell.FilterLocLow = reader.GetInt32("FilterLocLow ");
+                    entWell.FilterLocLow = reader.GetInt32("FilterLocLow");
                     entWell.FilterLocHigh = reader.GetInt32("FilterLocHigh");
                     entWell.StillWaterLoc = reader.GetInt32("StillWaterLoc");
                     entWell.PumpModel = reader.GetString("PumpModel");
                     entWell.PumpPower = reader.GetFloat("PumpPower");
                     entWell.IsMfInstall = reader.GetBoolean("IsMfInstall");
                     entWell.IsWaterLevelOp = reader.GetBoolean("IsWaterLevelOp");
-                    entWell.Remark = reader.GetString("Remark ");
+                    entWell.Remark = reader.GetString("Remark");
                     res.Add(entWell);
                 }
                 return res;

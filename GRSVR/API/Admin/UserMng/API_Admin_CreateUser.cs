@@ -22,11 +22,11 @@ namespace GRSVR
 
             if (DbUser.CreateUser(user))
             {
-                session.Send(API_ADMIN_ID.API_Admin_CreateUser, RES_ID.OK);
+                session.Send(API_ID.API_Admin_CreateUser, RES_ID.OK);
             }
             else
             {
-                session.Send(API_ADMIN_ID.API_Admin_CreateUser, RES_ID.FAILED);
+                session.Send(API_ID.API_Admin_CreateUser, RES_ID.FAILED);
             }
         }
     }
