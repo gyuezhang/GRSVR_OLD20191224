@@ -29,6 +29,8 @@ namespace Db
             Exec("create database If Not Exists grims Character Set UTF8");
 
             DbAdminUser.InitTabs();
+            DbDept.InitTabs();
+            DbUser.InitTabs();
         }
 
         /// <summary>

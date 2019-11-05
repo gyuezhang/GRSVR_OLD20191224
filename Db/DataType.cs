@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Db
 {
-    /////
-    ///     管理员-数据类型
-    /////
-    
-    /////
-    ///     用户-数据类型
-    /////
-
+    public struct STR_User
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Pwd { get; set; }
+        public int DeptId { get; set; }
+        public string Tel { get; set; }
+        public string Email { get; set; }
+    }
 }

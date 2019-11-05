@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GRSVR.API.Admin
+namespace GRSVR
 {
-    class API_Admin_GetAllUsers
+    public class API_Admin_ChangeDept
     {
     }
 }
