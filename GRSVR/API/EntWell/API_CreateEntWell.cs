@@ -44,11 +44,11 @@ namespace GRSVR
 
                 if (DbEntWell.CreateEntWell(entWell))
                 {
-                    session.Send(API_ID.API_CreateEntWell, RES_ID.OK);
+                    session.Send(API_ID.API_CreateEntWell, RES_STATE.OK);
                 }
                 else
                 {
-                    session.Send(API_ID.API_CreateEntWell, RES_ID.FAILED);
+                    session.Send(API_ID.API_CreateEntWell, RES_STATE.FAILED);
                 }
 
             }

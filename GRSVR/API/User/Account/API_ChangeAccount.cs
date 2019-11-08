@@ -28,11 +28,11 @@ namespace GRSVR
 
             if (DbUser.ChangeUser(user))
             {
-                session.Send(API_ID.API_ChangeAccount, RES_ID.OK);
+                session.Send(API_ID.API_ChangeAccount, RES_STATE.OK);
             }
             else
             {
-                session.Send(API_ID.API_ChangeAccount, RES_ID.FAILED);
+                session.Send(API_ID.API_ChangeAccount, RES_STATE.FAILED);
             }
 
         }

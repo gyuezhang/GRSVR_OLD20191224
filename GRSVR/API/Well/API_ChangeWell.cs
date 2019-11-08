@@ -49,11 +49,11 @@ namespace GRSVR
 
                 if (DbWell.ChangeWell(well))
                 {
-                    session.Send(API_ID.API_ChangeWell, RES_ID.OK);
+                    session.Send(API_ID.API_ChangeWell, RES_STATE.OK);
                 }
                 else
                 {
-                    session.Send(API_ID.API_ChangeWell, RES_ID.FAILED);
+                    session.Send(API_ID.API_ChangeWell, RES_STATE.FAILED);
                 }
 
             }

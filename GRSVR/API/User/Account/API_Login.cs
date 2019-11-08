@@ -15,11 +15,11 @@ namespace GRSVR
         {
             if (DbUser.Login(requestInfo.Parameters[0], requestInfo.Parameters[1]))
             {
-                session.Send(API_ID.API_Login, RES_ID.OK);
+                session.Send(API_ID.API_Login, RES_STATE.OK);
             }
             else
             {
-                session.Send(API_ID.API_Login, RES_ID.FAILED);
+                session.Send(API_ID.API_Login, RES_STATE.FAILED);
             }
         }
     }

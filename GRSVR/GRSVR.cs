@@ -17,13 +17,13 @@ namespace GRSVR
     {
         public const string RESTMNT = "<RESTMNT>";
 
-        public void Send(API_ID api_id, RES_ID res)
+        public void Send(API_ID api_id, RES_STATE res)
         {
             string strMsg = api_id.ToString() + " " + res.ToString() + " " + RESTMNT;
             base.Send(strMsg);
         }
 
-        public void Send(API_ID api_id, RES_ID res, List<string> Parameters)
+        public void Send(API_ID api_id, RES_STATE res, List<string> Parameters)
         {
             string strMsg = api_id.ToString() + " " + res.ToString() + " ";
             foreach(string para in Parameters)
@@ -37,6 +37,11 @@ namespace GRSVR
         protected override void HandleUnknownRequest(StringRequestInfo requestInfo)
         {
             base.HandleUnknownRequest(requestInfo);
+        }
+
+        protected override void OnSessionStarted()
+        {
+            this.Send(API_ID.API_ConnState,RES_STATE.OK);
         }
     }
 }

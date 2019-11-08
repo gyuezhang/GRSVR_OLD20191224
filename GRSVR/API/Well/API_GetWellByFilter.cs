@@ -52,12 +52,12 @@ namespace GRSVR
                     res.Add(well.LinkWellNo.ToString() + " ");
                     res.Add(well.Remark              + " ");
                 }
-                session.Send(API_ID.API_GetWellByFilter, RES_ID.OK, res);
+                session.Send(API_ID.API_GetWellByFilter, RES_STATE.OK, res);
 
             }
             catch
             {
-                session.Send(API_ID.API_GetWellByFilter, RES_ID.FAILED);
+                session.Send(API_ID.API_GetWellByFilter, RES_STATE.FAILED);
             }
         }
     }

@@ -15,11 +15,11 @@ namespace GRSVR
         {
             if (DbWell.DeleteWell(int.Parse(requestInfo.Parameters[0])))
             {
-                session.Send(API_ID.API_DeleteWell, RES_ID.OK);
+                session.Send(API_ID.API_DeleteWell, RES_STATE.OK);
             }
             else
             {
-                session.Send(API_ID.API_DeleteWell, RES_ID.FAILED);
+                session.Send(API_ID.API_DeleteWell, RES_STATE.FAILED);
             }
         }
     }

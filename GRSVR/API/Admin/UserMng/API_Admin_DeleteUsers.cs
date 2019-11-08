@@ -23,11 +23,11 @@ namespace GRSVR
 
             if (DbUser.DeleteUser(UserIds))
             {
-                session.Send(API_ID.API_Admin_DeleteUsers, RES_ID.OK);
+                session.Send(API_ID.API_Admin_DeleteUsers, RES_STATE.OK);
             }
             else
             {
-                session.Send(API_ID.API_Admin_DeleteUsers, RES_ID.FAILED);
+                session.Send(API_ID.API_Admin_DeleteUsers, RES_STATE.FAILED);
             }
         }
     }

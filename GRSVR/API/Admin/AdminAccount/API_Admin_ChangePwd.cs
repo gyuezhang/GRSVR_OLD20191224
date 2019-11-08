@@ -15,11 +15,11 @@ namespace GRSVR
         {
             if (DbAdminUser.ChangePwd(requestInfo.Parameters[0], requestInfo.Parameters[1]))
             {
-                session.Send(API_ID.API_Admin_ChangePwd, RES_ID.OK);
+                session.Send(API_ID.API_Admin_ChangePwd, RES_STATE.OK);
             }
             else
             {
-                session.Send(API_ID.API_Admin_ChangePwd, RES_ID.FAILED);
+                session.Send(API_ID.API_Admin_ChangePwd, RES_STATE.FAILED);
             }
         }
     }

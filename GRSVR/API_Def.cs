@@ -8,6 +8,8 @@ namespace GRSVR
 {
     public enum API_ID
     {
+        API_ConnState,
+
         API_Admin_Login,
         API_Admin_ChangePwd,
 
@@ -34,7 +36,7 @@ namespace GRSVR
         API_GetEntWellByFilter,
     }
 
-    public enum RES_ID
+    public enum RES_STATE
     {
         OK,
         FAILED,

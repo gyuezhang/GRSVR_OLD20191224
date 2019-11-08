@@ -47,12 +47,12 @@ namespace GRSVR
                     res.Add(entWell.IsWaterLevelOp.ToString() + " ");
                     res.Add(entWell.Remark + " ");
                 }
-                session.Send(API_ID.API_GetEntWellByFilter, RES_ID.OK, res);
+                session.Send(API_ID.API_GetEntWellByFilter, RES_STATE.OK, res);
 
             }
             catch
             {
-                session.Send(API_ID.API_GetEntWellByFilter, RES_ID.FAILED);
+                session.Send(API_ID.API_GetEntWellByFilter, RES_STATE.FAILED);
             }
         }
     }

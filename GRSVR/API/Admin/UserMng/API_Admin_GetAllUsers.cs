@@ -25,7 +25,7 @@ namespace GRSVR
                 res.Add(user.Tel + " ");
                 res.Add(user.Email + " ");
             }
-            session.Send(API_ID.API_Admin_GetAllUsers, RES_ID.OK, res);
+            session.Send(API_ID.API_Admin_GetAllUsers, RES_STATE.OK, res);
 
         }
     }

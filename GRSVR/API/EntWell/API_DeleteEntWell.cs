@@ -15,11 +15,11 @@ namespace GRSVR
         {
             if (DbEntWell.DeleteEntWell(int.Parse(requestInfo.Parameters[0])))
             {
-                session.Send(API_ID.API_DeleteEntWell, RES_ID.OK);
+                session.Send(API_ID.API_DeleteEntWell, RES_STATE.OK);
             }
             else
             {
-                session.Send(API_ID.API_DeleteEntWell, RES_ID.FAILED);
+                session.Send(API_ID.API_DeleteEntWell, RES_STATE.FAILED);
             }
         }
     }
