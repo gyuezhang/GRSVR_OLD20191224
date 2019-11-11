@@ -2,12 +2,14 @@
 using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Protocol;
 using System.Collections.Generic;
+using System.Text;
 
 namespace GRSVR
 {
     public class GRServer:AppServer<GRSession>
     {
         public GRServer()
+            :base(new TerminatorReceiveFilterFactory("\r\n",Encoding.UTF8))
         {
             DbOper.ConnDb("localhost", "3306", "root", "123456");
         }
