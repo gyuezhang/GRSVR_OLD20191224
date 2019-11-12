@@ -1,5 +1,6 @@
 ﻿using Db;
 using SuperSocket.SocketBase;
+using SuperSocket.SocketBase.Config;
 using SuperSocket.SocketBase.Protocol;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +13,11 @@ namespace GRSVR
             :base(new TerminatorReceiveFilterFactory("\r\n",Encoding.UTF8))
         {
             DbOper.ConnDb("localhost", "3306", "root", "123456");
+        }
+
+        protected override bool Setup(IRootConfig rootConfig, IServerConfig config)
+        {
+            return base.Setup(rootConfig, config);
         }
     }
 

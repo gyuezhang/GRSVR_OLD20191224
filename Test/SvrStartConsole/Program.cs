@@ -1,4 +1,6 @@
 ﻿using GRSVR;
+using SuperSocket.SocketBase;
+using SuperSocket.SocketEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +13,41 @@ namespace SvrStartConsole
     {
         static void Main(string[] args)
         {
-            GRServer server = new GRServer();
+            var bootstrap = BootstrapFactory.CreateBootstrap();
 
-            if (!server.Setup(6666))
-                Console.WriteLine("Failed to setup GRSVR!");
-            if (!server.Start())
-                Console.WriteLine("Start GRSVR Failed!");
+            if (!bootstrap.Initialize())
+            {
+                Console.WriteLine("Failed to initialize!");
+                Console.ReadKey();
+                return;
+            }
 
-            Console.WriteLine("Start GRSVR succeed!,Press q to exit!");
+            var result = bootstrap.Start();
+
+            Console.WriteLine("Start result: {0}!", result);
+
+            if (result == StartResult.Failed)
+            {
+                Console.WriteLine("Failed to start!");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.WriteLine("Press key 'q' to stop it!");
+
             while (Console.ReadKey().KeyChar != 'q')
             {
                 Console.WriteLine();
                 continue;
             }
 
-            server.Stop();
+            Console.WriteLine();
+
+            //Stop the appServer
+            bootstrap.Stop();
+
+            Console.WriteLine("The server was stopped!");
+            Console.ReadKey();
         }
     }
 }

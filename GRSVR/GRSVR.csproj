@@ -107,6 +107,9 @@
     <Content Include="Config\log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\exe.config.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Config\log4net.unix.config" />
     <None Include="packages.config" />
     <None Include="supersocket.cmd" />
