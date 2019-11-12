@@ -18,12 +18,7 @@ namespace GRSVR
             List<string> res = new List<string>();
             foreach(STR_User user in users)
             {
-                res.Add(user.Id.ToString() + " ");
-                res.Add(user.Name + " ");
-                res.Add(user.Pwd + " ");
-                res.Add(user.DeptId.ToString() + " ");
-                res.Add(user.Tel + " ");
-                res.Add(user.Email + " ");
+                res.Add(user.UsrToStr());
             }
             session.Send(API_ID.API_Admin_GetAllUsers, RES_STATE.OK, res);
 

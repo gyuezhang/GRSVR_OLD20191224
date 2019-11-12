@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommFuncs.cs" />
     <Compile Include="User\DbAdminUser.cs" />
     <Compile Include="DataType.cs" />
     <Compile Include="DbOper.cs" />

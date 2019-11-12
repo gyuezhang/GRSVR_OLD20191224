@@ -21,6 +21,7 @@ namespace GRSVR
         API_Admin_DeleteUsers,
         API_Admin_ChangeUser,
         API_Admin_GetAllUsers,
+        API_Admin_GetDeptIdByName,
 
         API_Login,
         API_ChangeAccount,

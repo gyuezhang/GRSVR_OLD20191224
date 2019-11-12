@@ -83,6 +83,7 @@
     <Compile Include="API\Admin\DeptMng\API_Admin_CreateDept.cs" />
     <Compile Include="API\Admin\DeptMng\API_Admin_DeleteDept.cs" />
     <Compile Include="API\Admin\DeptMng\API_Admin_GetAllDepts.cs" />
+    <Compile Include="API\Admin\DeptMng\API_Admin_GetDeptIdByName.cs" />
     <Compile Include="API\Admin\UserMng\API_Admin_ChangeUser.cs" />
     <Compile Include="API\Admin\UserMng\API_Admin_CreateUser.cs" />
     <Compile Include="API\Admin\UserMng\API_Admin_DeleteUsers.cs" />
