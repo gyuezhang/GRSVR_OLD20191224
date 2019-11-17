@@ -13,13 +13,23 @@ namespace GRSVR
 
         public override void ExecuteCommand(GRSession session, StringRequestInfo requestInfo)
         {
-            if (DbUser.Login(requestInfo.Parameters[0], requestInfo.Parameters[1]))
+            try
             {
-                session.Send(API_ID.API_Login, RES_STATE.OK);
+                string name = requestInfo.Parameters[0];
+                string pwd = requestInfo.Parameters[1];
+
+                if (DbUser.Login(name, pwd))
+                {
+                    session.Send(API_ID.API_Login, RES_STATE.OK);
+                }
+                else
+                {
+                    session.Send(API_ID.API_Login, RES_STATE.FAILED);
+                }
             }
-            else
+            catch
             {
-                session.Send(API_ID.API_Login, RES_STATE.FAILED);
+                session.Send(API_ID.API_Login, RES_STATE.BAD_REQUEST);
             }
         }
     }
