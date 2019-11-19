@@ -119,16 +119,17 @@ namespace Db
         /// </summary>
         /// <param name="name">用户名</param>
         /// <returns>用户结构体</returns>
-        public static STR_User GetUserByUserName(string name)
+        public static User GetUserByUserName(string name)
         {
-            STR_User res = new STR_User();
-            MySqlDataReader reader = DbOper.Query("select * from grims.user where Name='" + name + "';");
+            User res = new User();
+            //user2';
+            MySqlDataReader reader = DbOper.Query("select grims.user.Id,grims.user.Name,grims.dept.DeptName,grims.user.Tel,grims.user.Email from grims.user left outer join grims.dept on grims.user.DeptId = grims.dept.Id where grims.user.Name='" + name + "';");
             while (reader.Read())
             {
-                res.Id = reader.GetInt32("Id");
+                res.Id = reader.GetString("Id");
                 res.Name = reader.GetString("Name");
-                res.Pwd = reader.GetString("Pwd");
-                res.DeptId = reader.GetInt32("DeptId");
+                res.Pwd = "";
+                res.DeptName = reader.GetString("DeptName");
                 res.Tel = reader.GetString("Tel");
                 res.Email = reader.GetString("Email");
             }

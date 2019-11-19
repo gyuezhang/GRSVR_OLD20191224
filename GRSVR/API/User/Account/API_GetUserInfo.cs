@@ -16,10 +16,10 @@ namespace GRSVR
         {
             try
             {
-                STR_User user = DbUser.GetUserByUserName(requestInfo.Parameters[0]);
-                List<string> para = new List<string>();
-                para.Add(user.UsrToStr());
-                session.Send(API_ID.API_GetUserInfo, RES_STATE.OK, para);
+                //STR_User user = DbUser.GetUserByUserName(requestInfo.Parameters[0]);
+                //List<string> para = new List<string>();
+                //para.Add(user.UsrToStr());
+                //session.Send(API_ID.API_GetUserInfo, RES_STATE.OK, para);
             }
             catch
             {

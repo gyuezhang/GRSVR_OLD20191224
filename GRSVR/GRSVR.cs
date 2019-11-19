@@ -31,6 +31,13 @@ namespace GRSVR
             base.Send(strMsg);
         }
 
+        public void Send(API_ID api_id, RES_STATE res, string json)
+        {
+            string strMsg = api_id.ToString() + " " + res.ToString() + " " + json;
+            strMsg += RESTMNT;
+            base.Send(strMsg);
+        }
+
         public void Send(API_ID api_id, RES_STATE res, List<string> Parameters)
         {
             string strMsg = api_id.ToString() + " " + res.ToString() + " ";

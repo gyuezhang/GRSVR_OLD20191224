@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -411,4 +412,34 @@ namespace Db
         //    Remark = remark;
         //}
     }
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class User
+    {
+        private string _id;
+        private string _name;
+        private string _pwd;
+        private string _deptName;
+        private string _tel;
+        private string _email;
+
+        [JsonProperty]
+        public string Id { get; set; }
+
+        [JsonProperty]
+        public string Name { get; set; }
+
+        [JsonProperty]
+        public string Pwd { get; set; }
+
+        [JsonProperty]
+        public string DeptName { get; set; }
+
+        [JsonProperty]
+        public string Tel { get; set; }
+
+        [JsonProperty]
+        public string Email { get; set; }
+    }
+
 }

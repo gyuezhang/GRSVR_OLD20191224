@@ -11,7 +11,7 @@ namespace Db
         /// </summary>
         public static void InitTabs()
         {
-            DbOper.Exec("create table if not exists grims.dept(Id int auto_increment,Name varchar(255) not null unique,primary key(Id)) default charset=utf8;");
+            DbOper.Exec("create table if not exists grims.dept(Id int auto_increment,DeptName varchar(255) not null unique,primary key(Id)) default charset=utf8;");
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Db
             MySqlDataReader reader = DbOper.Query("select * from grims.dept;");
             while (reader.Read())
             {
-                res.Add(reader.GetString("Name"));
+                res.Add(reader.GetString("DeptName"));
             }
             return res;
         }
@@ -37,7 +37,7 @@ namespace Db
         {
             try
             {
-                string cmd = "insert into grims.dept (Name) values('" + strDeptName + "');";
+                string cmd = "insert into grims.dept (DeptName) values('" + strDeptName + "');";
                 DbOper.Exec(cmd);
                 return true;
             }
@@ -55,7 +55,7 @@ namespace Db
         {
             try
             {
-                string cmd = "delete from grims.dept where Name='" + strDeptName + "';";
+                string cmd = "delete from grims.dept where DeptName='" + strDeptName + "';";
                 DbOper.Exec(cmd);
                 return true;
             }
@@ -74,7 +74,7 @@ namespace Db
         {
             try
             {
-                string cmd = "update grims.dept set Name='" + strNewName + "' where Name='" + strOldName + "';";
+                string cmd = "update grims.dept set DeptName='" + strNewName + "' where DeptName='" + strOldName + "';";
                 DbOper.Exec(cmd);
                 return true;
             }
@@ -91,7 +91,7 @@ namespace Db
         /// <returns>部门id</returns>
         public static int GetDeptIdByName(string strDeptName)
         {
-            string cmd = "select * from grims.dept where Name='" + strDeptName + "';";
+            string cmd = "select * from grims.dept where DeptName='" + strDeptName + "';";
             MySqlDataReader reader = DbOper.Query(cmd);
             int res = 0;
             while (reader.Read())
@@ -113,7 +113,7 @@ namespace Db
             string res = "";
             while (reader.Read())
             {
-                res = reader.GetString("Name");
+                res = reader.GetString("DeptName");
             }
             return res;
         }
