@@ -114,6 +114,45 @@ namespace Db
             }
         }
 
+        public static bool ChangeUserInfo(string userid,string newTel,string newEmail)
+        {
+            try
+            {
+                string cmd = "update grims.user set Tel='" + newTel + "',Email='" + newEmail + "' where Id='" + userid + "';";
+                DbOper.Exec(cmd);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool ResetPwd(string userid,string oldPwd,string newPwd)
+        {
+            try
+            {
+                string cmd = "select grims.user.Pwd from grims.user where grims.user.Id='" + userid + "';";
+                MySqlDataReader reader = DbOper.Query(cmd);
+                string getOldPwd="";
+                while (reader.Read())
+                {
+                    getOldPwd = reader.GetString("Pwd");
+                }
+                if(getOldPwd != oldPwd)
+                {
+                    return false;
+                }
+                cmd = "update grims.user set Pwd='" + newPwd + "'where grims.user.Id='" + userid + "';";
+                DbOper.Exec(cmd);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         /// 根据用户名获取用户结构体
         /// </summary>

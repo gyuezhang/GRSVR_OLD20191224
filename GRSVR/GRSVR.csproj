@@ -97,8 +97,10 @@
     <Compile Include="API\EntWell\API_DeleteEntWell.cs" />
     <Compile Include="API\EntWell\API_GetEntWellByFilter.cs" />
     <Compile Include="API\User\Account\API_ChangeAccount.cs" />
+    <Compile Include="API\User\Account\API_ChangeUserInfo.cs" />
     <Compile Include="API\User\Account\API_GetUserInfo.cs" />
     <Compile Include="API\User\Account\API_Login.cs" />
+    <Compile Include="API\User\Account\API_ResetPwd.cs" />
     <Compile Include="API\Well\API_ChangeWell.cs" />
     <Compile Include="API\Well\API_CreateWell.cs" />
     <Compile Include="API\Well\API_DeleteWell.cs" />

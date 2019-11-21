@@ -11,7 +11,9 @@ namespace GRSVR
         API_ConnState,
 
         API_Admin_Login,
-        API_Admin_ChangePwd,
+        API_Admin_ChangePwd, 
+        API_ChangeUserInfo,
+        API_ResetPwd,
 
         API_Admin_CreateDept,
         API_Admin_DeleteDept,
