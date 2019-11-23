@@ -34,6 +34,7 @@ namespace Db
 
             DbWell.InitTabs();
             DbEntWell.InitTabs();
+            AreaCode.InitTabs();
         }
 
         /// <summary>
