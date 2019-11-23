@@ -874,9 +874,10 @@ namespace Db
             string cmd = "select * from grims.area_code_2019 where grims.area_code_2019.level = " + iLevel.ToString() + ";";
             MySqlDataReader reader = DbOper.Query(cmd);
             List<ZoningNode> res = new List<ZoningNode>();
-            ZoningNode tmp = new ZoningNode();
             while (reader.Read())
             {
+                ZoningNode tmp = new ZoningNode();
+
                 tmp.code = reader.GetInt64("code");
                 tmp.name = reader.GetString("name");
                 tmp.level = reader.GetInt32("level");
