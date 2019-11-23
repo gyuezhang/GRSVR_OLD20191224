@@ -7,15 +7,15 @@ using MySql.Data.MySqlClient;
 
 namespace Db
 {
-    class AreaCode
+    public class DBZones
     {
         public static void InitTabs()
         {
             DbOper.Exec("create table if not exists grims.area_code_2019(" +
-                            "code bigint(12)," +
-                            "name varchar(128)," +
-                            "level tinyint(1)," +
-                            "pcode bigint(12)" +
+                            "code bigint," +
+                            "name varchar(255)," +
+                            "level int," +
+                            "pcode bigint" +
                             ") default charset=utf8;");
             MySqlDataReader reader = DbOper.Query("select * from grims.area_code_2019;");
             if (!reader.HasRows)
@@ -867,6 +867,23 @@ namespace Db
                 "(120115502000, '大钟农场', 4, 120115000000),"                                  +
                 "(120115502598, '大钟农场虚拟社生活区', 5, 120115502000)"                       +
                 ";");
+        }
+
+        public static List<ZoningNode> GetLevelNode(int iLevel)
+        {
+            string cmd = "select * from grims.area_code_2019 where grims.area_code_2019.level = " + iLevel.ToString() + ";";
+            MySqlDataReader reader = DbOper.Query(cmd);
+            List<ZoningNode> res = new List<ZoningNode>();
+            ZoningNode tmp = new ZoningNode();
+            while (reader.Read())
+            {
+                tmp.code = reader.GetInt64("code");
+                tmp.name = reader.GetString("name");
+                tmp.level = reader.GetInt32("level");
+                tmp.pCode = reader.GetInt64("pcode");
+                res.Add(tmp);
+            }
+            return res;
         }
     }
 }

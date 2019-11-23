@@ -64,7 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AreaCode.cs" />
+    <Compile Include="DBZones.cs" />
     <Compile Include="CommFuncs.cs" />
     <Compile Include="User\DbAdminUser.cs" />
     <Compile Include="DataType.cs" />

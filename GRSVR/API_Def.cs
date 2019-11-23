@@ -38,6 +38,8 @@ namespace GRSVR
         API_CreateEntWell,
         API_DeleteEntWell,
         API_GetEntWellByFilter,
+
+        API_GetLevelZoning,
     }
 
     public enum RES_STATE

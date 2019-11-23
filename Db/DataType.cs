@@ -442,4 +442,25 @@ namespace Db
         public string Email { get; set; }
     }
 
+    [JsonObject(MemberSerialization.OptIn)]
+
+    public class ZoningNode
+    {
+        [JsonProperty]
+        public long code { get; set; }
+
+        [JsonProperty]
+        public long pCode { get; set; }
+
+        [JsonProperty]
+        public int level { get; set; }
+
+        [JsonProperty]
+        public string name { get; set; }
+
+        private long _code;
+        private long _pCode;
+        private int _level;
+        private string _name;
+    }
 }
