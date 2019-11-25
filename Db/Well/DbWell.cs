@@ -15,36 +15,35 @@ namespace Db
         public static void InitTabs()
         {
             DbOper.Exec("create table if not exists grims.well( "   +
-                        "Id int auto_increment,                 "   +
-                        "TsOrSt varchar(255),                   "   +
-                        "Village varchar(255),                  "   +
-                        "UnitCat varchar(255),                  "   +
-                        "Loc varchar(255),                      "   +
-                        "Lng double,                            "   +
-                        "Lat double,                            "   +
-                        "Usefor varchar(255),                   "   +
-                        "IfRecordDigTime bool,                  "   +
-                        "DigTime int,                     "   +
-                        "WaterIntakingNo varchar(255),          "   +
-                        "WellDepth int,                         "   +
-                        "TubeMat varchar(255),                  "   +
-                        "TubeIR int,                            "   +
-                        "StanWaterDepth int,                    "   +
-                        "SaltWaterFloorDepth int,               "   +
-                        "FilterLocLow int,                      "   +
-                        "FilterLocHigh int,                     "   +
-                        "StillWaterLoc int,                     "   +
-                        "PumpModel varchar(255),                "   +
-                        "PumpPower float,                       "   +
-                        "CoverArea float,                       "   +
-                        "SupPeopleNo int,                       "   +
-                        "IsMfInstall bool,                      "   +
-                        "IsWaterLevelOp bool,                   "   +
-                        "IsConnSeepageChn bool,                 "   +
-                        "SeepageChnLength float,                "   +
-                        "LinkWellNo int,                        "   +
-                        "Remark  varchar(255),                  "   +
-                        "primary key(Id)                        "   +
+                        "Id int auto_increment,                 "   +          //0
+                        "TsOrSt varchar(255),                   "   +          //1
+                        "Village varchar(255),                  "   +          //2
+                        "UnitCat varchar(255),                  "   +          //3
+                        "Loc varchar(255),                      "   +          //4
+                        "Lng varchar(255),                            " +      //5
+                        "Lat varchar(255),                            " +      //6
+                        "Usefor varchar(255),                   " +             //7
+                        "DigTime date,                  " +                    //8
+                        "WellDepth float,                     " +              //9
+                        "TubeMat varchar(255),          " +                    //10
+                        "TubeIr float,                         " +             //11
+                        "StanWaterDepth float,                  " +            //12
+                        "SaltWaterFloorDepth float,            " +             //13
+                        "FilterLocLow float,                    " +            //14
+                        "FilterLocHigh float,               " +                //15
+                        "StillWaterLoc float,                      " +         //16
+
+                        "PumpMode varchar(255),                     " +          //17
+                        "PumpPower int,                     " +          //18
+                        "CoverArea varchar(255),                " +          //19
+                        "SupPeopleNum float,                       " +          //20
+                        "IsWaterLevelOp float,                       " +          //21
+                        "IsMfInstalled int,                       " +          //22
+                        "LinkWellNo bool,                      " +          //23
+                        "IsSeepChnLinked bool,                   " +          //24
+                        "SeepChnLength bool,                 " +          //25
+                        "Remark varchar(255),                " +          //26
+                        "primary key(Id)                        "   +          
                         ")default charset = utf8; ");
         }
 
@@ -52,45 +51,74 @@ namespace Db
         /// 创建机井
         /// </summary>
         /// <param name="user">机井结构体</param>
-        public static bool CreateWell(STR_Well well)
+        public static bool CreateWell(List<Well> wells)
         {
             try
             {
-                string cmd = "insert into grims.well (      TsOrSt,             Village,                UnitCat,            Loc,                    Lng,                Lat,                " +
-                                                        "   Usefor,             IfRecordDigTime,        DigTime,            WaterIntakingNo,        WellDepth,          TubeMat,            " +
-                                                        "   TubeIR,             StanWaterDepth,         SaltWaterFloorDepth,FilterLocLow,           FilterLocHigh,      StillWaterLoc,      " +
-                                                        "   PumpModel,          PumpPower,              CoverArea,          SupPeopleNo,            IsMfInstall,        IsWaterLevelOp,     " +
-                                                        "   IsConnSeepageChn,   SeepageChnLength,       LinkWellNo,         Remark                                                          " +
-                                                        ")values(" +
-                                                        well.TsOrSt                 +"," +
-                                                        well.Village                + "," +
-                                                        well.UnitCat                + "," +
-                                                        well.Loc                    + "," +
-                                                        well.Lng                    + "," +
-                                                        well.Lat                    + "," +
-                                                        well.Usefor                 + "," +
-                                                        well.IfRecordDigTime        + "," +
-                                                        well.DigTime                + "," +
-                                                        well.WaterIntakingNo        + "," +
-                                                        well.WellDepth              + "," +
-                                                        well.TubeMat                + "," +
-                                                        well.TubeIR                 + "," +
-                                                        well.StanWaterDepth         + "," +
-                                                        well.SaltWaterFloorDepth    + "," +
-                                                        well.FilterLocLow           + "," +
-                                                        well.FilterLocHigh          + "," +
-                                                        well.StillWaterLoc          + "," +
-                                                        well.PumpModel              + "," +
-                                                        well.PumpPower              + "," +
-                                                        well.CoverArea              + "," +
-                                                        well.SupPeopleNo            + "," +
-                                                        well.IsMfInstall            + "," +
-                                                        well.IsWaterLevelOp         + "," +
-                                                        well.IsConnSeepageChn       + "," +
-                                                        well.SeepageChnLength       + "," +
-                                                        well.LinkWellNo             + "," +
-                                                        well.Remark                 + 
-                                                        ");";
+                string cmd = "insert into grims.well (   TsOrSt," +//1
+                                                        "Village," +//2
+                                                        "UnitCat," +//3
+                                                        "Loc," +//4
+                                                        "Lng," +//5
+                                                        "Lat," +//6
+                                                        "Usefor," +//7
+                                                        "DigTime," +//8
+                                                        "WellDepth," +//9
+                                                        "TubeMat," +//10
+                                                        "TubeIr," +//11
+                                                        "StanWaterDepth," +//12
+                                                        "SaltWaterFloorDepth," +//13
+                                                        "FilterLocLow," +//14
+                                                        "FilterLocHigh," +//15
+                                                        "StillWaterLoc," +//16
+                                                        "PumpMode," +//17
+                                                        "PumpPower," +//18
+                                                        "CoverArea," +//19
+                                                        "SupPeopleNum," +//20
+                                                        "IsWaterLevelOp," +//21
+                                                        "IsMfInstalled," +//22
+                                                        "LinkWellNo," +//23
+                                                        "IsSeepChnLinked," +//24
+                                                        "SeepChnLength," +//25
+                                                        "Remark" +//26
+                                                        ")values";
+                string tmp;
+                for(int i=0; i<wells.Count;++i)
+                {
+                    tmp = "('" +
+                    wells[i].TsOrSt + "','" +    //1
+                    wells[i].Village + "','" +   //2
+                    wells[i].UnitCat + "','" +   //3
+                    wells[i].Loc + "','" +   //4
+                    wells[i].Lng + "','" +   //5
+                    wells[i].Lat + "','" +   //6
+                    wells[i].Usefor + "','" +   //7
+                    wells[i].DigTime.ToString("yyyy-MM-dd") + "'," +   //8
+                    wells[i].WellDepth + ",'" +   //9
+                    wells[i].TubeMat + "'," +   //10
+                    wells[i].TubeIr + "," +   //11
+                    wells[i].StanWaterDepth + "," +   //12
+                    wells[i].SaltWaterFloorDepth + "," +   //13
+                    wells[i].FilterLocLow + "," +   //14
+                    wells[i].FilterLocHigh + "," +   //15
+                    wells[i].StillWaterLoc + ",'" +   //16
+                    wells[i].PumpMode + "'," +   //17
+                    wells[i].PumpPower + "," +   //18
+                    wells[i].CoverArea + "," +   //19
+                    wells[i].SupPeopleNum + "," +   //20
+                    wells[i].IsWaterLevelOp + "," +   //21
+                    wells[i].IsMfInstalled + "," +   //22
+                    wells[i].LinkWellNo + "," +   //23
+                    wells[i].IsSeepChnLinked + "," +   //24
+                    wells[i].SeepChnLength + ",'" +   //25
+                    wells[i].Remark +         //26
+                    "')";
+                    if (i == wells.Count - 1)
+                        tmp += ";";
+                    else
+                        tmp += ",";
+                    cmd += tmp;
+                }
                 DbOper.Exec(cmd);
                 return true;
             }

@@ -74,6 +74,7 @@
     <Compile Include="User\DbUser.cs" />
     <Compile Include="Well\DbEntWell.cs" />
     <Compile Include="Well\DbWell.cs" />
+    <Compile Include="Well\Well.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
