@@ -17,12 +17,16 @@ namespace GRSVR
         {
             try
             {
+                string filter;
+                if (requestInfo.Parameters.Length > 0)
+                    filter = requestInfo.Parameters[0];
+                else
+                    filter = "";
 
-                WellParas wells = DbWell.GetWellParas();
+                List<Well> wells = DbWell.GetWellByFilter(filter);
                 string p = JsonConvert.SerializeObject(wells);
 
                 session.Send(API_ID.API_GetWellByFilter, RES_STATE.OK, p);
-
             }
             catch
             {
