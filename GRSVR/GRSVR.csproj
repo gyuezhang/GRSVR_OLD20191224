@@ -106,6 +106,8 @@
     <Compile Include="API\Well\API_CreateWell.cs" />
     <Compile Include="API\Well\API_DeleteWell.cs" />
     <Compile Include="API\Well\API_GetWellByFilter.cs" />
+    <Compile Include="API\Well\API_SetWellParas.cs" />
+    <Compile Include="API\Well\GetWellParas.cs" />
     <Compile Include="API_Def.cs" />
     <Compile Include="API_Login_Req.cs" />
     <Compile Include="GRSVR.cs" />

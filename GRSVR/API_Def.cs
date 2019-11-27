@@ -33,6 +33,8 @@ namespace GRSVR
         API_CreateWell,
         API_DeleteWell,
         API_GetWellByFilter,
+        API_SetWellParas,
+        API_GetWellParas,
 
         API_ChangeEntWell,
         API_CreateEntWell,

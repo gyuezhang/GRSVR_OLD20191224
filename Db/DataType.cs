@@ -463,4 +463,80 @@ namespace Db
         private int _level;
         private string _name;
     }
+
+    public enum WellParaType
+    {
+        UnitCat,
+        Loc,
+        TubeMat,
+        PumpModel,
+    }
+
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class WellPara
+    {
+        [JsonProperty]
+        public WellParaType Type { get; set; }
+        [JsonProperty]
+        public string Value { get; set; }
+    }
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class WellParas
+    {
+        public WellParas()
+        {
+            UnitCat = new List<WellPara>();
+            Loc = new List<WellPara>();
+            TubeMat = new List<WellPara>();
+            PumpModel = new List<WellPara>();
+            AllParas = new List<WellPara>();
+        }
+        public WellParas(List<WellPara> iWellParas)
+        {
+            UnitCat = new List<WellPara>();
+            Loc = new List<WellPara>();
+            TubeMat = new List<WellPara>();
+            PumpModel = new List<WellPara>();
+            AllParas = new List<WellPara>();
+            AllParas = iWellParas;
+
+            foreach (WellPara node in iWellParas)
+            {
+                switch (node.Type)
+                {
+                    case WellParaType.Loc:
+                        Loc.Add(node);
+                        break;
+                    case WellParaType.UnitCat:
+                        UnitCat.Add(node);
+                        break;
+                    case WellParaType.TubeMat:
+                        TubeMat.Add(node);
+                        break;
+                    case WellParaType.PumpModel:
+                        PumpModel.Add(node);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        [JsonProperty]
+        public List<WellPara> UnitCat { get; set; }
+
+        [JsonProperty]
+        public List<WellPara> Loc { get; set; }
+
+        [JsonProperty]
+        public List<WellPara> TubeMat { get; set; }
+
+        [JsonProperty]
+        public List<WellPara> PumpModel { get; set; }
+        
+        [JsonProperty]
+        public List<WellPara> AllParas { get; set; }
+    }
 }

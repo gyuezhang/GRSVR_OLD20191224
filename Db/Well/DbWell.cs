@@ -45,6 +45,8 @@ namespace Db
                         "Remark varchar(255),                " +          //26
                         "primary key(Id)                        "   +          
                         ")default charset = utf8; ");
+
+            DbOper.Exec("create table if not exists grims.wellparas(ParaType varchar(255),ParaValue varchar(255))default charset = utf8;");
         }
 
         /// <summary>
@@ -248,6 +250,47 @@ namespace Db
             {
                 return res;
             }
+        }
+
+        public static bool SetWellParas(WellParas paras)
+        {
+            DbOper.Exec("truncate table grims.wellparas;");
+            string cmd = "insert into grims.wellparas (ParaType,ParaValue) values";
+            string tmp;
+            for (int i = 0; i < paras.AllParas.Count; ++i)
+            {
+
+                tmp = "('" +
+                paras.AllParas[i].Type + "','" +  
+                paras.AllParas[i].Value +         
+                "')";
+                if (i == paras.AllParas.Count - 1)
+                    tmp += ";";
+                else
+                    tmp += ",";
+                cmd += tmp;
+            }
+            DbOper.Exec(cmd);
+            return true;
+        }
+
+        public static WellParas GetWellParas()
+        {
+            MySqlDataReader reader;
+
+            WellParas para = new WellParas();
+            List<WellPara> nodes = new List<WellPara>();
+            reader = DbOper.Query("select * from grims.wellparas;");
+
+            while (reader.Read())
+            {
+                WellPara well = new WellPara();
+                well.Type = (WellParaType)Enum.Parse(typeof(WellParaType), reader.GetString("ParaType"), true);
+                well.Value = reader.GetString("ParaValue");
+                nodes.Add(well);
+            }
+
+            return new WellParas(nodes);
         }
     }
 }

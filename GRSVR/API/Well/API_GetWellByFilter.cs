@@ -17,13 +17,8 @@ namespace GRSVR
         {
             try
             {
-                string filter;
-                if (requestInfo.Parameters.Length > 0)
-                    filter = requestInfo.Parameters[0];
-                else
-                    filter = "";
 
-                List<Well> wells = DbWell.GetWellByFilter(filter);
+                WellParas wells = DbWell.GetWellParas();
                 string p = JsonConvert.SerializeObject(wells);
 
                 session.Send(API_ID.API_GetWellByFilter, RES_STATE.OK, p);
