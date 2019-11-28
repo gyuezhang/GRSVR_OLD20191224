@@ -3,10 +3,9 @@
     <configSections>
         <section name="superSocket" type="SuperSocket.SocketEngine.Configuration.SocketServiceConfig, SuperSocket.SocketEngine" />
     </configSections>
-
     <startup> 
         <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
-    </startup>
+    </startup>    
 
     <appSettings>
         <add key="GRServer" value="SupperSocketService" />
@@ -14,7 +13,7 @@
 
     <superSocket>
         <servers>
-            <server name="GRServer" serverType="GRSVR.GRServer, GRSVR" ip="Any" port="6666" textEncoding="UTF-8">
+            <server name="GRServer" serverType="GRSVR.GRServer, GRSVR" ip="Any" port="6666" textEncoding="UTF-8" maxRequestLength="10240000">
             </server>
         </servers>
         <serverTypes>
