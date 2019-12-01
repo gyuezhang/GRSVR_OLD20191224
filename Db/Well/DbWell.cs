@@ -211,7 +211,37 @@ namespace Db
                 if (filter == "")
                     reader = DbOper.Query("select * from grims.well;");
                 else
-                    reader = DbOper.Query("select * from grims.well where (" + filter + ");");
+                {
+                    string cmd = "select * from grims.well where (" +
+                        "TsOrSt                   LIKE '%" + filter + "%' OR " +
+                        "Village                  LIKE '%" + filter + "%' OR " +
+                        "UnitCat                  LIKE '%" + filter + "%' OR " +
+                        "Loc                      LIKE '%" + filter + "%' OR " +
+                        "Lng                      LIKE '%" + filter + "%' OR " +
+                        "Lat                      LIKE '%" + filter + "%' OR " +
+                        "Usefor                   LIKE '%" + filter + "%' OR " +
+                        "DigTime                  LIKE '%" + filter + "%' OR " +
+                        "WellDepth                LIKE '%" + filter + "%' OR " +
+                        "TubeMat                  LIKE '%" + filter + "%' OR " +
+                        "TubeIr                   LIKE '%" + filter + "%' OR " +
+                        "StanWaterDepth           LIKE '%" + filter + "%' OR " +
+                        "SaltWaterFloorDepth      LIKE '%" + filter + "%' OR " +
+                        "FilterLocLow             LIKE '%" + filter + "%' OR " +
+                        "FilterLocHigh            LIKE '%" + filter + "%' OR " +
+                        "StillWaterLoc            LIKE '%" + filter + "%' OR " +
+                        "PumpMode                 LIKE '%" + filter + "%' OR " +
+                        "PumpPower                LIKE '%" + filter + "%' OR " +
+                        "CoverArea                LIKE '%" + filter + "%' OR " +
+                        "SupPeopleNum             LIKE '%" + filter + "%' OR " +
+                        "IsWaterLevelOp           LIKE '%" + filter + "%' OR " +
+                        "IsMfInstalled            LIKE '%" + filter + "%' OR " +
+                        "LinkWellNo               LIKE '%" + filter + "%' OR " +
+                        "IsSeepChnLinked          LIKE '%" + filter + "%' OR " +
+                        "SeepChnLength            LIKE '%" + filter + "%' OR " +
+                        "Remark                   LIKE '%" + filter + "%' " +
+                        ");";
+                    reader = DbOper.Query(cmd);
+                }
                 while (reader.Read())
                 {
                     Well well = new Well();
