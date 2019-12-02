@@ -46,7 +46,7 @@ namespace Db
                         "primary key(Id)                        "   +          
                         ")default charset = utf8; ");
 
-            DbOper.Exec("create table if not exists grims.wellparas(ParaType varchar(255),ParaValue varchar(255))default charset = utf8;");
+            DbOper.Exec("create table if not exists grims.wellparas(ParaType varchar(255),ParaValue varchar(255) unique)default charset = utf8;");
         }
 
         /// <summary>
@@ -284,24 +284,32 @@ namespace Db
 
         public static bool SetWellParas(WellParas paras)
         {
-            DbOper.Exec("truncate table grims.wellparas;");
-            string cmd = "insert into grims.wellparas (ParaType,ParaValue) values";
-            string tmp;
-            for (int i = 0; i < paras.AllParas.Count; ++i)
+            try
             {
+                DbOper.Exec("truncate table grims.wellparas;");
+                string cmd = "insert into grims.wellparas (ParaType,ParaValue) values";
+                string tmp;
+                for (int i = 0; i < paras.AllParas.Count; ++i)
+                {
 
-                tmp = "('" +
-                paras.AllParas[i].Type + "','" +  
-                paras.AllParas[i].Value +         
-                "')";
-                if (i == paras.AllParas.Count - 1)
-                    tmp += ";";
-                else
-                    tmp += ",";
-                cmd += tmp;
+                    tmp = "('" +
+                    paras.AllParas[i].Type + "','" +
+                    paras.AllParas[i].Value +
+                    "')";
+                    if (i == paras.AllParas.Count - 1)
+                        tmp += ";";
+                    else
+                        tmp += ",";
+                    cmd += tmp;
+                }
+                DbOper.Exec(cmd);
+
+                return true;
             }
-            DbOper.Exec(cmd);
-            return true;
+            catch(Exception e)
+            {
+                return false;
+            }
         }
 
         public static WellParas GetWellParas()
