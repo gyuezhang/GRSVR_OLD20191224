@@ -34,14 +34,14 @@ namespace Db
                         "StillWaterLoc float,                      " +         //16
 
                         "PumpMode varchar(255),                     " +          //17
-                        "PumpPower int,                     " +          //18
-                        "CoverArea varchar(255),                " +          //19
-                        "SupPeopleNum float,                       " +          //20
-                        "IsWaterLevelOp float,                       " +          //21
-                        "IsMfInstalled int,                       " +          //22
-                        "LinkWellNo bool,                      " +          //23
+                        "PumpPower float,                     " +          //18
+                        "CoverArea float,                " +          //19
+                        "SupPeopleNum int,                       " +          //20
+                        "IsWaterLevelOp bool,                       " +          //21
+                        "IsMfInstalled bool,                       " +          //22
+                        "LinkWellNo int,                      " +          //23
                         "IsSeepChnLinked bool,                   " +          //24
-                        "SeepChnLength bool,                 " +          //25
+                        "SeepChnLength float,                 " +          //25
                         "Remark varchar(255),                " +          //26
                         "primary key(Id)                        "   +          
                         ")default charset = utf8; ");
