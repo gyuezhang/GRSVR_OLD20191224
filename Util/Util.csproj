@@ -49,5 +49,10 @@
       <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Db\AreaCode\" />
+    <Folder Include="Db\User\" />
+    <Folder Include="Db\Well\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
