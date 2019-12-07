@@ -62,22 +62,12 @@ namespace Model
     [JsonObject(MemberSerialization.OptIn)]
     public class BDAreaCode : PropertyChangedBase
     {
-        public BDAreaCode()
-        {
-            _l4Index = new AreaCode();
-            _l5Index = new AreaCode();
-            _allL4AreaCodes = new List<AreaCode>();
-            _allL5AreaCodes = new List<AreaCode>();
-            _curL5AreaCodes = new List<AreaCode>();
-        }
+        public BDAreaCode(){ }
 
         public BDAreaCode(List<AreaCode> ac)
         {
             if (ac.Count == 0)
                 return;
-            _allL4AreaCodes = new List<AreaCode>();
-            _allL5AreaCodes = new List<AreaCode>();
-            _curL5AreaCodes = new List<AreaCode>();
             foreach (AreaCode node in ac)
             {
                 if(node.Level == 4)
@@ -93,11 +83,11 @@ namespace Model
                 L4Index = AllL4AreaCodes[0];
         }
 
-        private AreaCode _l4Index;
-        private AreaCode _l5Index;
-        private List<AreaCode> _allL4AreaCodes;
-        private List<AreaCode> _allL5AreaCodes;
-        private List<AreaCode> _curL5AreaCodes;
+        private AreaCode _l4Index = new AreaCode();
+        private AreaCode _l5Index = new AreaCode();
+        private List<AreaCode> _allL4AreaCodes = new List<AreaCode>();
+        private List<AreaCode> _allL5AreaCodes = new List<AreaCode>();
+        private List<AreaCode> _curL5AreaCodes = new List<AreaCode>();
 
         [JsonProperty]
         public AreaCode L4Index
