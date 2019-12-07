@@ -4,36 +4,6 @@ using Stylet;
 namespace Model
 {
     /// <summary>
-    /// 部门
-    /// </summary>
-    [JsonObject(MemberSerialization.OptIn)]
-    public class Dept : PropertyChangedBase
-    {
-        private int _id;
-        private string _name;
-
-        [JsonProperty]
-        public int Id
-        {
-            get { return _id; }
-            set
-            {
-                SetAndNotify(ref _id, value);
-            }
-        }
-
-        [JsonProperty]
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                SetAndNotify(ref _name, value);
-            }
-        }
-    }
-
-    /// <summary>
     /// 管理员用户
     /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
