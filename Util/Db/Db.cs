@@ -30,7 +30,7 @@ namespace Util
 
         private static void InitDb()
         {
-            Exec("create database If Not Exists Grims Character Set UTF8");
+            Exec("create database If Not Exists grims Character Set UTF8");
             
             C_DbLog.InitTabs();
             C_DbAreaCode.InitTabs();

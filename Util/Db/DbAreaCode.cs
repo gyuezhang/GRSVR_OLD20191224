@@ -13,9 +13,8 @@ namespace Util
         public static void InitTabs()
         {
             Tuple<E_DbRes, Exception> ERes;
-            Tuple<E_DbRes, MySqlDataReader, Exception> QRes;
 
-            ERes = C_Db.Exec("create table if not exists Grims.AreaCode(" +
+            ERes = C_Db.Exec("create table if not exists grims.areaCode(" +
                             "code bigint," +
                             "name varchar(255)," +
                             "level int," +
@@ -23,20 +22,19 @@ namespace Util
                             ") default charset=utf8;");
             if(ERes.Item1 != E_DbRes.Success)
             {
-                //Db.
+                C_DbLog.Record(new C_Log(E_LogType.Db,E_UserType.Sys,0, E_OperType.AreaCodeInitTab,"",ERes.Item2.Message));
             }
 
-            QRes = C_Db.Query("select * from Grims.AreaCode;");
-            MySqlDataReader reader = QRes.Item2;
-            if (!reader.HasRows)
+            if (Get().Count == 0)
                 InitData();
-
         }
 
         public static void InitData()
         {
+            Tuple<E_DbRes, Exception> ERes;
+
             #region default bdareacode
-            C_Db.Exec("insert into Grims.AreaCode (code,name,level,pcode) values" +
+            ERes = C_Db.Exec("insert into grims.areaCode (code,name,level,pcode) values" +
                 "(120115000000, '宝坻区', 3, 120100000000)," +
                 "(120115001000, '海滨街道', 4, 120115000000)," +
                 "(120115001001, '石幢南社区居委会', 5, 120115001000)," +
@@ -879,23 +877,40 @@ namespace Util
                 "(120115502598, '大钟农场虚拟社生活区', 5, 120115502000)" +
                 ";");
             #endregion
+
+            if (ERes.Item1 != E_DbRes.Success)
+            {
+                C_DbLog.Record(new C_Log(E_LogType.Db, E_UserType.Sys, 0, E_OperType.AreaCodeInitData, "", ERes.Item2.Message));
+            }
+
         }
 
-        public static List<C_AreaCode> GetAllAreaCode()
+        public static List<C_AreaCode> Get()
         {
-            string cmd = "select * from Grims.AreaCode;";
-            MySqlDataReader reader = C_Db.Query(cmd).Item2;
+            Tuple<E_DbRes, MySqlDataReader, Exception> QRes;
+
+            string cmd = "select * from grims.areaCode;";
             List<C_AreaCode> res = new List<C_AreaCode>();
             C_AreaCode tmp = new C_AreaCode();
-            while (reader.Read())
+
+            QRes = C_Db.Query(cmd);
+            if (QRes.Item1 == E_DbRes.Success)
             {
-                tmp.Code = reader.GetInt64("code");
-                tmp.PCode = reader.GetInt64("pcode");
-                tmp.Level = reader.GetInt32("level");
-                tmp.Name = reader.GetString("name");
-                res.Add(tmp);
+                while (QRes.Item2.Read())
+                {
+                    tmp.Code = QRes.Item2.GetInt64("code");
+                    tmp.PCode = QRes.Item2.GetInt64("pcode");
+                    tmp.Level = QRes.Item2.GetInt32("level");
+                    tmp.Name = QRes.Item2.GetString("name");
+                    res.Add(tmp);
+                }
+                return res;
             }
-            return res;
+            else
+            {
+                C_DbLog.Record(new C_Log(E_LogType.Db, E_UserType.Sys, 0, E_OperType.AreaCodeGet, "", QRes.Item3.Message));
+                return new List<C_AreaCode>();
+            }
         }
     }
 }

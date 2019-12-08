@@ -22,6 +22,7 @@ namespace Model
     {
         Admin,
         User,
+        Sys,
     }
 
     /// <summary>
@@ -29,7 +30,9 @@ namespace Model
     /// </summary>
     public enum E_OperType
     {
-
+        AreaCodeInitTab,
+        AreaCodeInitData,
+        AreaCodeGet,
     }
 
     /// <summary>
