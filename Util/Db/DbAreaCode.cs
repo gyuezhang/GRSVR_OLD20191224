@@ -22,7 +22,7 @@ namespace Util
                             ") default charset=utf8;");
             if(ERes.Item1 != E_DbRes.Success)
             {
-                C_DbLog.Record(new C_Log(E_LogType.Db,E_UserType.Sys,0, E_OperType.AreaCodeInitTab,"",ERes.Item2.Message));
+                //
             }
 
             if (Get().Count == 0)
@@ -880,7 +880,7 @@ namespace Util
 
             if (ERes.Item1 != E_DbRes.Success)
             {
-                C_DbLog.Record(new C_Log(E_LogType.Db, E_UserType.Sys, 0, E_OperType.AreaCodeInitData, "", ERes.Item2.Message));
+                //
             }
 
         }
@@ -908,7 +908,7 @@ namespace Util
             }
             else
             {
-                C_DbLog.Record(new C_Log(E_LogType.Db, E_UserType.Sys, 0, E_OperType.AreaCodeGet, "", QRes.Item3.Message));
+                //
                 return new List<C_AreaCode>();
             }
         }

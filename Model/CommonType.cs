@@ -33,6 +33,11 @@ namespace Model
         AreaCodeInitTab,
         AreaCodeInitData,
         AreaCodeGet,
+
+        AdminUserInitTab,
+        AdminUserGet,
+        AdminUserInitPwd,
+
     }
 
     /// <summary>

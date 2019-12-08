@@ -12,14 +12,31 @@ namespace Util
     {
         public static void InitTabs()
         {
-            C_Db.Exec("create table if not exists grims.adminPwd(pwd varchar(255) not null) default charset=utf8;");
+            Tuple<E_DbRes, Exception> ERes;
+            Tuple<E_DbRes, MySqlDataReader, Exception> QRes;
 
-            string cmd = "select * from grims.adminPwd;";
-            MySqlDataReader reader = C_Db.Query(cmd).Item2;
-            //if (!reader.HasRows)
-            //{
-            //    C_Db.Exec("insert into grims.AdminPwd (pwd) values(\'123456\');");
-            //}null
+            ERes = C_Db.Exec("create table if not exists grims.adminPwd(pwd varchar(255) not null) default charset=utf8;");
+            if (ERes.Item1 != E_DbRes.Success)
+            {
+                C_DbLog.Record(new C_Log(E_LogType.Db, E_UserType.Sys, 0, E_OperType.AdminUserInitTab, "", ERes.Item2.Message));
+            }
+
+            QRes = C_Db.Query("select * from grims.adminPwd;");
+            if (QRes.Item1 == E_DbRes.Success)
+            {
+                if (!QRes.Item2.HasRows)
+                {
+                    ERes = C_Db.Exec("insert into grims.AdminPwd (pwd) values(\'123456\');");
+                    if(ERes.Item1 != E_DbRes.Success)
+                    {
+                        C_DbLog.Record(new C_Log(E_LogType.Db, E_UserType.Sys, 0, E_OperType.AdminUserInitPwd, "", ERes.Item2.Message));
+                    }
+                }
+            }
+            else
+            {
+                C_DbLog.Record(new C_Log(E_LogType.Db, E_UserType.Sys, 0, E_OperType.AdminUserGet, "", ERes.Item2.Message));
+            }
         }
 
         public static bool Login(string pwd)
