@@ -31,6 +31,13 @@ namespace Util
         private static void InitDb()
         {
             Exec("create database If Not Exists Grims Character Set UTF8");
+            
+            C_DbLog.InitTabs();
+            C_DbAreaCode.InitTabs();
+            C_DbAdminUser.InitTabs();
+            C_DbDept.InitTabs();
+            C_DbUser.InitTabs();
+            C_DbWell.InitTabs();
         }
 
         public static void ConnDb(string ServerIp, int Port, string DbUserName, string DbUserPwd)
