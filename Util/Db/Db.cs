@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Model;
+using MySql.Data.MySqlClient;
 using System;
 
 namespace Util
@@ -6,7 +7,7 @@ namespace Util
     /// <summary>
     /// 数据库操作类
     /// </summary>
-    public class Db
+    public class C_Db
     {
         private static string _dbSvrIp;
         private static int _dbSvrPort;
@@ -42,38 +43,33 @@ namespace Util
             InitDb();
         }
 
-        public static MySqlDataReader Query(string cmdStr)
+        public static Tuple<E_DbRes, MySqlDataReader, Exception>  Query(string cmdStr)
         {
-            _cmd = new MySqlCommand(cmdStr, GetConn());
-            _reader = _cmd.ExecuteReader();
-            return _reader;
+            try
+            {
+                _cmd = new MySqlCommand(cmdStr, GetConn());
+                _reader = _cmd.ExecuteReader();
+                return new Tuple<E_DbRes, MySqlDataReader, Exception>(E_DbRes.Success, _reader, null);
+            }
+            catch (Exception e)
+            {
+                return new Tuple<E_DbRes, MySqlDataReader, Exception>(E_DbRes.Error, null, e);
+            }
         }
 
-        public static Tuple<DbRes,Exception> Exec(string cmdStr)
+        public static Tuple<E_DbRes,Exception> Exec(string cmdStr)
         {
             try
             {
                 _cmd = new MySqlCommand(cmdStr, GetConn());
                 _cmd.ExecuteNonQuery();
-                return new Tuple<DbRes, Exception>(DbRes.Success,null);
+                return new Tuple<E_DbRes, Exception>(E_DbRes.Success,null);
             }
             catch (Exception e)
             {
-                return new Tuple<DbRes, Exception>(DbRes.Error, e);
+                return new Tuple<E_DbRes, Exception>(E_DbRes.Error, e);
             }
         }
 
-    }
-
-    public enum DbRes
-    {
-        Success,
-        Error,
-        Created,
-        Deleted,
-        Changed,
-        NoResult,
-        GotSuccess,
-        GramError,
     }
 }

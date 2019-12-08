@@ -6,34 +6,23 @@ using System.Collections.Generic;
 namespace Model
 {
     /// <summary>
-    /// 机井参数类型
-    /// </summary>
-    public enum WellParaType
-    {
-        UnitCat,
-        Loc,
-        TubeMat,
-        PumpModel,
-    }
-
-    /// <summary>
     /// 机井参数
     /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
-    public class WellPara : PropertyChangedBase
+    public class C_WellPara : PropertyChangedBase
     {
-        public WellPara() { }
-        public WellPara(WellParaType type, string value)
+        public C_WellPara() { }
+        public C_WellPara(E_WellParaType type, string value)
         {
             Type = type;
             Value = value;
         }
 
-        private WellParaType _type;
+        private E_WellParaType _type;
         private string _value;
 
         [JsonProperty]
-        public WellParaType Type
+        public E_WellParaType Type
         {
             get { return _type; }
             set
@@ -57,11 +46,11 @@ namespace Model
     /// 机井参数列表
     /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
-    public class WellParas : PropertyChangedBase
+    public class C_WellParas : PropertyChangedBase
     {
-        public WellParas(){ }
+        public C_WellParas(){ }
 
-        public WellParas(List<WellPara> paras)
+        public C_WellParas(List<C_WellPara> paras)
         {
             AllParas = paras;
             UnitCat.Clear();
@@ -74,20 +63,20 @@ namespace Model
             if (paras.Count == 0)
                 return;
 
-            foreach(WellPara node in paras)
+            foreach(C_WellPara node in paras)
             {
                 switch(node.Type)
                 {
-                    case WellParaType.Loc:
+                    case E_WellParaType.Loc:
                         Loc.Add(node);
                         break;
-                    case WellParaType.PumpModel:
+                    case E_WellParaType.PumpModel:
                         PumpModel.Add(node);
                         break;
-                    case WellParaType.TubeMat:
+                    case E_WellParaType.TubeMat:
                         TubeMat.Add(node);
                         break;
-                    case WellParaType.UnitCat:
+                    case E_WellParaType.UnitCat:
                         UnitCat.Add(node);
                         break;
                     default:
@@ -122,19 +111,19 @@ namespace Model
             AllParas.AddRange(PumpModel);
         }
 
-        private List<WellPara> _allParas = new List<WellPara>();
-        private List<WellPara> _unitCat = new List<WellPara>();
-        private List<WellPara> _loc = new List<WellPara>();
-        private List<WellPara> _tubeMat = new List<WellPara>();
-        private List<WellPara> _pumpModel = new List<WellPara>();
+        private List<C_WellPara> _allParas = new List<C_WellPara>();
+        private List<C_WellPara> _unitCat = new List<C_WellPara>();
+        private List<C_WellPara> _loc = new List<C_WellPara>();
+        private List<C_WellPara> _tubeMat = new List<C_WellPara>();
+        private List<C_WellPara> _pumpModel = new List<C_WellPara>();
 
-        private WellPara _unitCatIndex = new WellPara();
-        private WellPara _locIndex = new WellPara();
-        private WellPara _tubeMatIndex = new WellPara();
-        private WellPara _pumpModelIndex = new WellPara();
+        private C_WellPara _unitCatIndex = new C_WellPara();
+        private C_WellPara _locIndex = new C_WellPara();
+        private C_WellPara _tubeMatIndex = new C_WellPara();
+        private C_WellPara _pumpModelIndex = new C_WellPara();
 
         [JsonProperty]
-        public List<WellPara> AllParas
+        public List<C_WellPara> AllParas
         {
             get { return _allParas; }
             set
@@ -144,7 +133,7 @@ namespace Model
         }
 
         [JsonProperty]
-        public List<WellPara> UnitCat
+        public List<C_WellPara> UnitCat
         {
             get { return _unitCat; }
             set
@@ -154,7 +143,7 @@ namespace Model
         }
 
         [JsonProperty]
-        public List<WellPara> Loc
+        public List<C_WellPara> Loc
         {
             get { return _loc; }
             set
@@ -164,7 +153,7 @@ namespace Model
         }
 
         [JsonProperty]
-        public List<WellPara> TubeMat
+        public List<C_WellPara> TubeMat
         {
             get { return _tubeMat; }
             set
@@ -174,7 +163,7 @@ namespace Model
         }
 
         [JsonProperty]
-        public List<WellPara> PumpModel
+        public List<C_WellPara> PumpModel
         {
             get { return _pumpModel; }
             set
@@ -183,7 +172,7 @@ namespace Model
             }
         }
 
-        public WellPara UnitCatIndex
+        public C_WellPara UnitCatIndex
         {
             get { return _unitCatIndex; }
             set
@@ -192,7 +181,7 @@ namespace Model
             }
         }
 
-        public WellPara LocIndex
+        public C_WellPara LocIndex
         {
             get { return _locIndex; }
             set
@@ -201,7 +190,7 @@ namespace Model
             }
         }
 
-        public WellPara TubeMatIndex
+        public C_WellPara TubeMatIndex
         {
             get { return _tubeMatIndex; }
             set
@@ -210,7 +199,7 @@ namespace Model
             }
         }
 
-        public WellPara PumpModelIndex
+        public C_WellPara PumpModelIndex
         {
             get { return _pumpModelIndex; }
             set
@@ -225,7 +214,7 @@ namespace Model
     /// 机井
     /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
-    public class Well : PropertyChangedBase
+    public class C_Well : PropertyChangedBase
     {
         private int _id;                                     //0
         private string _tsOrSt;                             //所属乡镇（街道）                  1
@@ -526,5 +515,4 @@ namespace Model
             }
         }
     }
-
 }

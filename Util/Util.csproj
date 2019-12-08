@@ -65,6 +65,7 @@
     <Compile Include="Db\Db.cs" />
     <Compile Include="Db\DbLog.cs" />
     <Compile Include="Db\DbUser.cs" />
+    <Compile Include="Db\DbWell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,17 +8,26 @@ using MySql.Data.MySqlClient;
 
 namespace Util
 {
-    public class DBAreaCode
+    public class C_DbAreaCode
     {
         public static void InitTabs()
         {
-            Db.Exec("create table if not exists Grims.AreaCode(" +
+            Tuple<E_DbRes, Exception> ERes;
+            Tuple<E_DbRes, MySqlDataReader, Exception> QRes;
+
+            ERes = C_Db.Exec("create table if not exists Grims.AreaCode(" +
                             "code bigint," +
                             "name varchar(255)," +
                             "level int," +
                             "pcode bigint" +
                             ") default charset=utf8;");
-            MySqlDataReader reader = Db.Query("select * from Grims.AreaCode;");
+            if(ERes.Item1 != E_DbRes.Success)
+            {
+                //Db.
+            }
+
+            QRes = C_Db.Query("select * from Grims.AreaCode;");
+            MySqlDataReader reader = QRes.Item2;
             if (!reader.HasRows)
                 InitData();
 
@@ -26,7 +35,8 @@ namespace Util
 
         public static void InitData()
         {
-            Db.Exec("insert into Grims.AreaCode (code,name,level,pcode) values" +
+            #region default bdareacode
+            C_Db.Exec("insert into Grims.AreaCode (code,name,level,pcode) values" +
                 "(120115000000, '宝坻区', 3, 120100000000)," +
                 "(120115001000, '海滨街道', 4, 120115000000)," +
                 "(120115001001, '石幢南社区居委会', 5, 120115001000)," +
@@ -868,14 +878,15 @@ namespace Util
                 "(120115502000, '大钟农场', 4, 120115000000)," +
                 "(120115502598, '大钟农场虚拟社生活区', 5, 120115502000)" +
                 ";");
+            #endregion
         }
 
-        public static List<AreaCode> GetAllAreaCode()
+        public static List<C_AreaCode> GetAllAreaCode()
         {
             string cmd = "select * from Grims.AreaCode;";
-            MySqlDataReader reader = Db.Query(cmd);
-            List<AreaCode> res = new List<AreaCode>();
-            AreaCode tmp = new AreaCode();
+            MySqlDataReader reader = C_Db.Query(cmd).Item2;
+            List<C_AreaCode> res = new List<C_AreaCode>();
+            C_AreaCode tmp = new C_AreaCode();
             while (reader.Read())
             {
                 tmp.Code = reader.GetInt64("code");

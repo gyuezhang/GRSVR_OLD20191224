@@ -8,17 +8,17 @@ using MySql.Data.MySqlClient;
 
 namespace Util
 {
-    public class DbAdminUser
+    public class C_DbAdminUser
     {
         public static void InitTabs()
         {
-            Db.Exec("create table if not exists Grims.AdminPwd(pwd varchar(255) not null) default charset=utf8;");
+            C_Db.Exec("create table if not exists Grims.AdminPwd(pwd varchar(255) not null) default charset=utf8;");
 
             string cmd = "select * from Grims.AdminPwd;";
-            MySqlDataReader reader = Db.Query(cmd);
+            MySqlDataReader reader = C_Db.Query(cmd);
             if (!reader.HasRows)
             {
-                Db.Exec("insert into Grims.AdminPwd (pwd) values(\'123456\');");
+                C_Db.Exec("insert into Grims.AdminPwd (pwd) values(\'123456\');");
             }
         }
 
@@ -26,7 +26,7 @@ namespace Util
         {
             try
             {
-                MySqlDataReader reader = Db.Query("select * from Grims.AdminPwd;");
+                MySqlDataReader reader = C_Db.Query("select * from Grims.AdminPwd;");
                 reader.Read();
                 if (pwd == reader.GetString("pwd"))
                     return true;
@@ -41,13 +41,13 @@ namespace Util
 
         public static bool ChangePwd(string oldPwd, string newPwd)
         {
-            MySqlDataReader reader = Db.Query("select * from Grims.AdminPwd;");
+            MySqlDataReader reader = C_Db.Query("select * from Grims.AdminPwd;");
             try
             {
                 if(oldPwd == reader.GetString("pwd"))
                 {
                     string cmd = "udpate Grims.AdminPwd set pwd='" + newPwd + "';";
-                    Db.Exec(cmd);
+                    C_Db.Exec(cmd);
                     return true;
                 }
                 else
@@ -62,11 +62,11 @@ namespace Util
         }
     }
 
-    public class DbDept
+    public class C_DbDept
     {
         public static void InitTabs()
         {
-            Db.Exec("create table if not exists Grims.Dept(id int auto_increment,deptName varchar(255) not null unique,primary key(Id)) default charset=utf8;");
+            C_Db.Exec("create table if not exists Grims.Dept(id int auto_increment,deptName varchar(255) not null unique,primary key(Id)) default charset=utf8;");
         }
 
         public static bool AddDept(string deptName)
@@ -74,7 +74,7 @@ namespace Util
             try
             {
                 string cmd = "insert into Grims.Dept (deptName) values('" + deptName + "');";
-                Db.Exec(cmd);
+                C_Db.Exec(cmd);
                 return true;
             }
             catch
@@ -88,7 +88,7 @@ namespace Util
             try
             {
                 string cmd = "delete from Grims.Dept where deptName='" + deptName + "');";
-                Db.Exec(cmd);
+                C_Db.Exec(cmd);
                 return true;
             }
             catch
@@ -102,7 +102,7 @@ namespace Util
             try
             {
                 string cmd = "update Grims.Dept set deptName='" + newDeptName + "' where deptName='" + oldDeptName + "';";
-                Db.Exec(cmd);
+                C_Db.Exec(cmd);
                 return true;
             }
             catch
@@ -114,7 +114,7 @@ namespace Util
         public static List<string> GetAllDepts()
         {
             List<string> res = new List<string>();
-            MySqlDataReader reader = Db.Query("select * from Grims.Dept;");
+            MySqlDataReader reader = C_Db.Query("select * from Grims.Dept;");
 
             try
             {
@@ -131,11 +131,11 @@ namespace Util
         }
     }
 
-    public class DbUser
+    public class C_DbUser
     {
         public static void InitTabs()
         {
-            Db.Exec("create table if not exists Grims.User(" +
+            C_Db.Exec("create table if not exists Grims.User(" +
                             "id int auto_increment," +
                             "name varchar(255) not null unique," +
                             "pwd varchar(255) not null," +
@@ -146,7 +146,7 @@ namespace Util
                             ") default charset=utf8;");
         }
 
-        public static bool AddUser(User user)
+        public static bool AddUser(C_User user)
         {
             try
             {
@@ -156,7 +156,7 @@ namespace Util
                     "','" + user.Tel +
                     "','" + user.Email +
                     "');";
-                Db.Exec(cmd);
+                C_Db.Exec(cmd);
                 return true;
             }
             catch
@@ -165,7 +165,7 @@ namespace Util
             }
         }
 
-        public static bool DeleteUser(User user)
+        public static bool DeleteUser(C_User user)
         {
             try
             {
@@ -175,7 +175,7 @@ namespace Util
                     cmd += user.Id.ToString();
                     cmd += "' or ";
                 cmd += "Id='-1';";
-                Db.Exec(cmd);
+                C_Db.Exec(cmd);
                 return true;
             }
             catch
@@ -189,7 +189,7 @@ namespace Util
             try
             {
                 string cmd = "update grims.user set Tel='" + newTel + "',Email='" + newEmail + "' where Id='" + userid + "';";
-                Db.Exec(cmd);
+                C_Db.Exec(cmd);
                 return true;
             }
             catch
@@ -198,11 +198,11 @@ namespace Util
             }
         }
 
-        public static List<User> GetAllUsers()
+        public static List<C_User> GetAllUsers()
         {
-            List<User> res = new List<User>();
-            User tmp = new User();
-            MySqlDataReader reader = Db.Query("select * from grims.user;");
+            List<C_User> res = new List<C_User>();
+            C_User tmp = new C_User();
+            MySqlDataReader reader = C_Db.Query("select * from grims.user;");
             while (reader.Read())
             {
                 tmp.Id = reader.GetInt32("Id");
@@ -221,7 +221,7 @@ namespace Util
             try
             {
                 string cmd = "update grims.user set Tel='" + newTel + "',Email='" + newEmail + "' where Id='" + userid + "';";
-                Db.Exec(cmd);
+                C_Db.Exec(cmd);
                 return true;
             }
             catch
@@ -235,7 +235,7 @@ namespace Util
             try
             {
                 string cmd = "select grims.user.Pwd from grims.user where grims.user.Id='" + userid + "';";
-                MySqlDataReader reader = Db.Query(cmd);
+                MySqlDataReader reader = C_Db.Query(cmd);
                 string getOldPwd = "";
                 while (reader.Read())
                 {
@@ -246,7 +246,7 @@ namespace Util
                     return false;
                 }
                 cmd = "update grims.user set Pwd='" + newPwd + "'where grims.user.Id='" + userid + "';";
-                Db.Exec(cmd);
+                C_Db.Exec(cmd);
                 return true;
             }
             catch
@@ -257,8 +257,8 @@ namespace Util
 
         public static bool Login(string Name, string Pwd)
         {
-            List<User> res = GetAllUsers();
-            foreach (User usr in res)
+            List<C_User> res = GetAllUsers();
+            foreach (C_User usr in res)
             {
                 if (Name == usr.Name && Pwd == usr.Pwd)
                 {

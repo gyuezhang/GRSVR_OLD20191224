@@ -8,7 +8,7 @@ namespace Model
     /// 区划节点
     /// </summary>
    [JsonObject(MemberSerialization.OptIn)]
-    public class AreaCode : PropertyChangedBase
+    public class C_AreaCode : PropertyChangedBase
     {
         private long _code;
         private long _pCode;
@@ -60,15 +60,15 @@ namespace Model
     /// 宝坻区划
     /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
-    public class BDAreaCode : PropertyChangedBase
+    public class C_BdAreaCode : PropertyChangedBase
     {
-        public BDAreaCode(){ }
+        public C_BdAreaCode(){ }
 
-        public BDAreaCode(List<AreaCode> ac)
+        public C_BdAreaCode(List<C_AreaCode> ac)
         {
             if (ac.Count == 0)
                 return;
-            foreach (AreaCode node in ac)
+            foreach (C_AreaCode node in ac)
             {
                 if(node.Level == 4)
                 {
@@ -83,14 +83,14 @@ namespace Model
                 L4Index = AllL4AreaCodes[0];
         }
 
-        private AreaCode _l4Index = new AreaCode();
-        private AreaCode _l5Index = new AreaCode();
-        private List<AreaCode> _allL4AreaCodes = new List<AreaCode>();
-        private List<AreaCode> _allL5AreaCodes = new List<AreaCode>();
-        private List<AreaCode> _curL5AreaCodes = new List<AreaCode>();
+        private C_AreaCode _l4Index = new C_AreaCode();
+        private C_AreaCode _l5Index = new C_AreaCode();
+        private List<C_AreaCode> _allL4AreaCodes = new List<C_AreaCode>();
+        private List<C_AreaCode> _allL5AreaCodes = new List<C_AreaCode>();
+        private List<C_AreaCode> _curL5AreaCodes = new List<C_AreaCode>();
 
         [JsonProperty]
-        public AreaCode L4Index
+        public C_AreaCode L4Index
         {
             get { return _l4Index; }
             set
@@ -99,7 +99,7 @@ namespace Model
                 CurL5AreaCodes.Clear();
                 if (AllL5AreaCodes.Count == 0)
                     return;
-                foreach(AreaCode node in AllL5AreaCodes)
+                foreach(C_AreaCode node in AllL5AreaCodes)
                 {
                     if (node.PCode == L4Index.Code)
                         CurL5AreaCodes.Add(node);
@@ -110,7 +110,7 @@ namespace Model
         }
 
         [JsonProperty]
-        public AreaCode L5Index
+        public C_AreaCode L5Index
         {
             get { return _l5Index; }
             set
@@ -120,7 +120,7 @@ namespace Model
         }
 
         [JsonProperty]
-        public List<AreaCode> AllL4AreaCodes
+        public List<C_AreaCode> AllL4AreaCodes
         {
             get { return _allL4AreaCodes; }
             set
@@ -130,7 +130,7 @@ namespace Model
         }
 
         [JsonProperty]
-        public List<AreaCode> AllL5AreaCodes
+        public List<C_AreaCode> AllL5AreaCodes
         {
             get { return _allL5AreaCodes; }
             set
@@ -140,7 +140,7 @@ namespace Model
         }
 
         [JsonProperty]
-        public List<AreaCode> CurL5AreaCodes
+        public List<C_AreaCode> CurL5AreaCodes
         {
             get { return _curL5AreaCodes; }
             set

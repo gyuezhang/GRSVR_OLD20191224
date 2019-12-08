@@ -7,7 +7,7 @@ namespace Model
     /// 管理员用户
     /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
-    public class AdminUser : PropertyChangedBase
+    public class C_AdminUser : PropertyChangedBase
     {
         private string _name;
         private string _pwd;
@@ -37,7 +37,7 @@ namespace Model
     /// 普通用户
     /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
-    public class User : PropertyChangedBase
+    public class C_User : PropertyChangedBase
     {
         private int _id;
         private string _name;
@@ -106,5 +106,4 @@ namespace Model
             }
         }
     }
-
 }
