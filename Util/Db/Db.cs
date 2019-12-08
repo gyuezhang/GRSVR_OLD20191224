@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using System;
 
 namespace Util
 {
@@ -48,11 +49,31 @@ namespace Util
             return _reader;
         }
 
-        public static void Exec(string cmdStr)
+        public static Tuple<DbRes,Exception> Exec(string cmdStr)
         {
-            _cmd = new MySqlCommand(cmdStr, GetConn());
-            _cmd.ExecuteNonQuery();
+            try
+            {
+                _cmd = new MySqlCommand(cmdStr, GetConn());
+                _cmd.ExecuteNonQuery();
+                return new Tuple<DbRes, Exception>(DbRes.Success,null);
+            }
+            catch (Exception e)
+            {
+                return new Tuple<DbRes, Exception>(DbRes.Error, e);
+            }
         }
 
+    }
+
+    public enum DbRes
+    {
+        Success,
+        Error,
+        Created,
+        Deleted,
+        Changed,
+        NoResult,
+        GotSuccess,
+        GramError,
     }
 }
