@@ -32,7 +32,6 @@ namespace Util
         {
             Exec("create database If Not Exists grims Character Set UTF8");
             
-            C_DbLog.InitTabs();
             C_DbAreaCode.InitTabs();
             C_DbAdminUser.InitTabs();
             C_DbDept.InitTabs();
@@ -50,31 +49,31 @@ namespace Util
             InitDb();
         }
 
-        public static Tuple<E_DbRes, MySqlDataReader, Exception>  Query(string cmdStr)
+        public static Tuple<E_DbRState, MySqlDataReader, Exception>  Query(string cmdStr)
         {
             try
             {
                 _cmd = new MySqlCommand(cmdStr, GetConn());
                 _reader = _cmd.ExecuteReader();
-                return new Tuple<E_DbRes, MySqlDataReader, Exception>(E_DbRes.Success, _reader, null);
+                return new Tuple<E_DbRState, MySqlDataReader, Exception>(E_DbRState.Success, _reader, null);
             }
             catch (Exception e)
             {
-                return new Tuple<E_DbRes, MySqlDataReader, Exception>(E_DbRes.Error, null, e);
+                return new Tuple<E_DbRState, MySqlDataReader, Exception>(E_DbRState.Failed, null, e);
             }
         }
 
-        public static Tuple<E_DbRes,Exception> Exec(string cmdStr)
+        public static Tuple<E_DbRState,Exception> Exec(string cmdStr)
         {
             try
             {
                 _cmd = new MySqlCommand(cmdStr, GetConn());
                 _cmd.ExecuteNonQuery();
-                return new Tuple<E_DbRes, Exception>(E_DbRes.Success,null);
+                return new Tuple<E_DbRState, Exception>(E_DbRState.Success,null);
             }
             catch (Exception e)
             {
-                return new Tuple<E_DbRes, Exception>(E_DbRes.Error, e);
+                return new Tuple<E_DbRState, Exception>(E_DbRState.Failed, e);
             }
         }
 

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Model;
 using MySql.Data.MySqlClient;
 
@@ -12,29 +9,21 @@ namespace Util
     {
         public static void InitTabs()
         {
-            Tuple<E_DbRes, Exception> ERes;
-
-            ERes = C_Db.Exec("create table if not exists grims.areaCode(" +
+            C_Db.Exec("create table if not exists grims.areaCode(" +
                             "code bigint," +
                             "name varchar(255)," +
                             "level int," +
                             "pcode bigint" +
                             ") default charset=utf8;");
-            if(ERes.Item1 != E_DbRes.Success)
-            {
-                //
-            }
 
-            if (Get().Count == 0)
+            if (Get().Item2.Count == 0)
                 InitData();
         }
 
         public static void InitData()
         {
-            Tuple<E_DbRes, Exception> ERes;
-
-            #region default bdareacode
-            ERes = C_Db.Exec("insert into grims.areaCode (code,name,level,pcode) values" +
+            #region
+            C_Db.Exec("insert into grims.areaCode (code,name,level,pcode) values" +
                 "(120115000000, '宝坻区', 3, 120100000000)," +
                 "(120115001000, '海滨街道', 4, 120115000000)," +
                 "(120115001001, '石幢南社区居委会', 5, 120115001000)," +
@@ -877,24 +866,20 @@ namespace Util
                 "(120115502598, '大钟农场虚拟社生活区', 5, 120115502000)" +
                 ";");
             #endregion
-
-            if (ERes.Item1 != E_DbRes.Success)
-            {
-                //
-            }
-
         }
 
-        public static List<C_AreaCode> Get()
+        //OUT
+        public static Tuple<E_DbRState, List<C_AreaCode>, Exception> Get()
         {
-            Tuple<E_DbRes, MySqlDataReader, Exception> QRes;
+            Tuple<E_DbRState, MySqlDataReader, Exception> QRes;
 
             string cmd = "select * from grims.areaCode;";
             List<C_AreaCode> res = new List<C_AreaCode>();
             C_AreaCode tmp = new C_AreaCode();
 
             QRes = C_Db.Query(cmd);
-            if (QRes.Item1 == E_DbRes.Success)
+
+            if (QRes.Item1 == E_DbRState.Success)
             {
                 while (QRes.Item2.Read())
                 {
@@ -904,12 +889,11 @@ namespace Util
                     tmp.Name = QRes.Item2.GetString("name");
                     res.Add(tmp);
                 }
-                return res;
+                return new Tuple<E_DbRState, List<C_AreaCode>, Exception>(QRes.Item1, res, QRes.Item3);
             }
             else
             {
-                //
-                return new List<C_AreaCode>();
+                return new Tuple<E_DbRState, List<C_AreaCode>, Exception>(QRes.Item1, null, QRes.Item3);
             }
         }
     }

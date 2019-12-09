@@ -54,10 +54,12 @@ namespace Model
     /// <summary>
     /// 数据库操作返回状态值
     /// </summary>
-    public enum E_DbRes
+    public enum E_DbRState
     {
+        //Db Return
         Success,
-        Error,
+        Failed,
+        //Other Return
         Created,
         Deleted,
         Changed,
