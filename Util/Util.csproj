@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Db\DbAreaCode.cs" />
     <Compile Include="Db\Db.cs" />
+    <Compile Include="Db\DbEntWell.cs" />
     <Compile Include="Db\DbUser.cs" />
     <Compile Include="Db\DbWell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

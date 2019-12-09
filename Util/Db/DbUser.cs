@@ -26,45 +26,33 @@ namespace Util
             }
         }
 
-        //OUT
-        public static bool ChangePwd(string oldPwd, string newPwd)
+        public static Tuple<E_DbRState, Exception> ResetPwd(string oldPwd, string newPwd)
         {
-            MySqlDataReader reader = C_Db.Query("select * from grims.adminPwd;").Item2;
-            try
+            Tuple<E_DbRState, MySqlDataReader, Exception> QRes = C_Db.Query("select * from grims.adminPwd;");
+            if (QRes.Item1 == E_DbRState.Failed) 
+                return new Tuple<E_DbRState, Exception>(QRes.Item1, QRes.Item3);
+
+            if (oldPwd == QRes.Item2.GetString("pwd"))
             {
-                if (oldPwd == reader.GetString("pwd"))
-                {
-                    string cmd = "udpate grims.adminPwd set pwd='" + newPwd + "';";
-                    C_Db.Exec(cmd);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return C_Db.Exec("udpate grims.adminPwd set pwd='" + newPwd + "';");
             }
-            catch
+            else
             {
-                return false;
+                return new Tuple<E_DbRState, Exception>(E_DbRState.ErrorPwd, null);
             }
         }
 
-        //OUT
-        public static bool Login(string pwd)
+        public static Tuple<E_DbRState, Exception> Login(string pwd)
         {
-            try
-            {
-                MySqlDataReader reader = C_Db.Query("select * from grims.adminPwd;").Item2;
-                reader.Read();
-                if (pwd == reader.GetString("pwd"))
-                    return true;
-                else
-                    return false;
-            }
-            catch
-            {
-                return false;
-            }
+            Tuple<E_DbRState, MySqlDataReader, Exception> QRes = C_Db.Query("select * from grims.adminPwd;");
+            if(QRes.Item1 == E_DbRState.Failed)
+                return new Tuple<E_DbRState, Exception>(QRes.Item1, QRes.Item3);
+                
+            QRes.Item2.Read();
+            if (pwd == QRes.Item2.GetString("pwd"))
+                return new Tuple<E_DbRState, Exception>(E_DbRState.Success, null);
+            else
+                return new Tuple<E_DbRState, Exception>(E_DbRState.ErrorPwd, null);
         }
     }
 
@@ -76,69 +64,52 @@ namespace Util
         }
 
         //OUT
-        public static bool Add(string deptName)
+        public static Tuple<E_DbRState, Exception> Add(string deptName)
         {
-            try
-            {
-                string cmd = "insert into grims.dept (deptName) values('" + deptName + "');";
-                C_Db.Exec(cmd);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return C_Db.Exec("insert into grims.dept (deptName) values('" + deptName + "');");
         }
 
         //OUT
-        public static bool Delete(string deptName)
+        public static Tuple<E_DbRState, Exception> Delete(string deptName)
         {
-            try
-            {
-                string cmd = "delete from grims.dept where deptName='" + deptName + "');";
-                C_Db.Exec(cmd);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return C_Db.Exec("delete from grims.dept where deptName='" + deptName + "');");
         }
 
         //OUT
-        public static bool Change(string oldDeptName, string newDeptName)
+        public static Tuple<E_DbRState, Exception> Change(string oldDeptName, string newDeptName)
         {
-            try
-            {
-                string cmd = "update grims.dept set deptName='" + newDeptName + "' where deptName='" + oldDeptName + "';";
-                C_Db.Exec(cmd);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return C_Db.Exec("update grims.dept set deptName='" + newDeptName + "' where deptName='" + oldDeptName + "';");
         }
 
         //OUT
-        public static List<string> Get()
+        public static Tuple<E_DbRState, List<string>, Exception>  Get()
         {
             List<string> res = new List<string>();
-            MySqlDataReader reader = C_Db.Query("select * from grims.dept;").Item2;
+            Tuple<E_DbRState, MySqlDataReader, Exception> QRes = C_Db.Query("select * from grims.dept;");
+            if (QRes.Item1 == E_DbRState.Failed)
+                return new Tuple<E_DbRState, List<string>, Exception>(QRes.Item1, null, QRes.Item3);
 
-            try
+            while (QRes.Item2.Read())
             {
-                while (reader.Read())
-                {
-                    res.Add(reader.GetString("deptName"));
-                }
-                return res;
+                res.Add(QRes.Item2.GetString("deptName"));
             }
-            catch
-            {
-                return res;
-            }
+            return new Tuple<E_DbRState, List<string>, Exception>(E_DbRState.Success, res, null);
         }
+
+        public static Tuple<E_DbRState, string, Exception> GetIdByName(string name)
+        {
+            Tuple<E_DbRState, MySqlDataReader, Exception> QRes = C_Db.Query("select * from grims.dept;");
+            if (QRes.Item1 == E_DbRState.Failed)
+                return new Tuple<E_DbRState, string, Exception>(QRes.Item1, null, QRes.Item3);
+
+            while (QRes.Item2.Read())
+            {
+                if (QRes.Item2.GetString("deptName") == name)
+                    return new Tuple<E_DbRState, string, Exception>(E_DbRState.Success, QRes.Item2.GetString("id"), null);
+            }
+            return new Tuple<E_DbRState, string, Exception>(E_DbRState.Success, null, null);
+        }
+
     }
 
     public class C_DbUser
@@ -156,112 +127,56 @@ namespace Util
                             ") default charset=utf8;");
         }
 
-        public static bool Add(C_User user)
+        public static Tuple<E_DbRState, Exception> Add(C_User user)
         {
-            try
-            {
-                string cmd = "insert into grims.user (name,pwd,deptId,tel,email) values('" + user.Name + "'" +
+            string cmd = "insert into grims.user (name,pwd,deptId,tel,email) values('" + user.Name + "'" +
                     ",'" + user.Pwd +
                     "','" + user.DeptName +
                     "','" + user.Tel +
                     "','" + user.Email +
                     "');";
-                C_Db.Exec(cmd);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return C_Db.Exec(cmd);
         }
 
-        public static bool Delete(C_User user)
+        public static Tuple<E_DbRState, Exception> Delete(C_User user)
         {
-            try
-            {
-                string cmd = "delete from grims.user where ";
-
-                    cmd += "id='";
-                    cmd += user.Id.ToString();
-                    cmd += "' or ";
-                cmd += "id='-1';";
-                C_Db.Exec(cmd);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return C_Db.Exec("delete from grims.user where id='" + user.Id.ToString() + "'");
         }
 
-        public static bool Change(string userid, string newTel, string newEmail)
+        public static Tuple<E_DbRState, Exception> Change(C_User user)
         {
-            try
-            {
-                string cmd = "update grims.user set tel='" + newTel + "',email='" + newEmail + "' where id='" + userid + "';";
-                C_Db.Exec(cmd);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return C_Db.Exec("update grims.user set name='" + user.Name + "',pwd='" + user.Pwd + "',deptId='" + user.DeptName + "',tel='" + user.Tel + "',email='" + user.Email + "' where id='" + user.Id + "';");
         }
 
-        public static bool ResetPwd(string userid, string oldPwd, string newPwd)
+        public static E_DbRState Login(string Name, string Pwd)
         {
-            try
-            {
-                string cmd = "select grims.user.pwd from grims.user where grims.user.id='" + userid + "';";
-                MySqlDataReader reader = C_Db.Query(cmd).Item2;
-                string getOldPwd = "";
-                while (reader.Read())
-                {
-                    getOldPwd = reader.GetString("pwd");
-                }
-                if (getOldPwd != oldPwd)
-                {
-                    return false;
-                }
-                cmd = "update grims.user set pwd='" + newPwd + "'where grims.user.id='" + userid + "';";
-                C_Db.Exec(cmd);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public static List<C_User> Get()
-        {
-            List<C_User> res = new List<C_User>();
-            C_User tmp = new C_User();
-            MySqlDataReader reader = C_Db.Query("select * from grims.user;").Item2;
-            while (reader.Read())
-            {
-                tmp.Id = reader.GetInt32("id");
-                tmp.Name = reader.GetString("name");
-                tmp.Pwd = reader.GetString("pwd");
-                tmp.DeptName = reader.GetString("deptName");
-                tmp.Tel = reader.GetString("tel");
-                tmp.Email = reader.GetString("email");
-                res.Add(tmp);
-            }
-            return res;
-        }
-
-        public static bool Login(string Name, string Pwd)
-        {
-            List<C_User> res = Get();
+            List<C_User> res = Get().Item2;
             foreach (C_User usr in res)
             {
                 if (Name == usr.Name && Pwd == usr.Pwd)
                 {
-                    return true;
+                    return E_DbRState.Success;
                 }
             }
-            return false;
+            return E_DbRState.ErrorPwd;
+        }
+
+        public static Tuple<E_DbRState, List<C_User>, Exception>  Get()
+        {
+            List<C_User> res = new List<C_User>();
+            C_User tmp = new C_User();
+            Tuple<E_DbRState, MySqlDataReader, Exception> QRes = C_Db.Query("select * from grims.user;");
+            while (QRes.Item2.Read())
+            {
+                tmp.Id = QRes.Item2.GetInt32("id");
+                tmp.Name = QRes.Item2.GetString("name");
+                tmp.Pwd = QRes.Item2.GetString("pwd");
+                tmp.DeptName = QRes.Item2.GetString("deptName");
+                tmp.Tel = QRes.Item2.GetString("tel");
+                tmp.Email = QRes.Item2.GetString("email");
+                res.Add(tmp);
+            }
+            return new Tuple<E_DbRState, List<C_User>, Exception>(E_DbRState.Success, res, null);
         }
     }
 }

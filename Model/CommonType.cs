@@ -66,5 +66,8 @@ namespace Model
         NoResult,
         GotSuccess,
         GramError,
+
+        //LOGIN
+        ErrorPwd,
     }
 }

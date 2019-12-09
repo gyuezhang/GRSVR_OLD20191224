@@ -14,14 +14,10 @@ namespace Util
         private static string _dbUserName;
         private static string _dbUserPwd;
 
-        private static MySqlDataReader _reader;
-        private static MySqlCommand _cmd;
         private static MySqlConnection _conn;
 
         private static MySqlConnection GetConn()
         {
-            if (_conn != null)
-                return _conn;
             string connStr = "datasource=" + _dbSvrIp + ";port=" + _dbSvrPort.ToString() + ";user=" + _dbUserName + ";pwd=" + _dbUserPwd + ";";
             _conn = new MySqlConnection(connStr);
             _conn.Open();
@@ -53,6 +49,8 @@ namespace Util
         {
             try
             {
+                MySqlDataReader _reader;
+                MySqlCommand _cmd;
                 _cmd = new MySqlCommand(cmdStr, GetConn());
                 _reader = _cmd.ExecuteReader();
                 return new Tuple<E_DbRState, MySqlDataReader, Exception>(E_DbRState.Success, _reader, null);
@@ -67,6 +65,7 @@ namespace Util
         {
             try
             {
+                MySqlCommand _cmd;
                 _cmd = new MySqlCommand(cmdStr, GetConn());
                 _cmd.ExecuteNonQuery();
                 return new Tuple<E_DbRState, Exception>(E_DbRState.Success,null);
