@@ -109,7 +109,6 @@ namespace Util
             }
             return new Tuple<E_DbRState, string, Exception>(E_DbRState.Success, null, null);
         }
-
     }
 
     public class C_DbUser
@@ -131,7 +130,7 @@ namespace Util
         {
             string cmd = "insert into grims.user (name,pwd,deptId,tel,email) values('" + user.Name + "'" +
                     ",'" + user.Pwd +
-                    "','" + user.DeptName +
+                    "','" + C_DbDept.GetIdByName(user.DeptName).Item2 +
                     "','" + user.Tel +
                     "','" + user.Email +
                     "');";
@@ -145,7 +144,7 @@ namespace Util
 
         public static Tuple<E_DbRState, Exception> Change(C_User user)
         {
-            return C_Db.Exec("update grims.user set name='" + user.Name + "',pwd='" + user.Pwd + "',deptId='" + user.DeptName + "',tel='" + user.Tel + "',email='" + user.Email + "' where id='" + user.Id + "';");
+            return C_Db.Exec("update grims.user set name='" + user.Name + "',pwd='" + user.Pwd + "',deptId='" + C_DbDept.GetIdByName(user.DeptName).Item2 + "',tel='" + user.Tel + "',email='" + user.Email + "' where id='" + user.Id + "';");
         }
 
         public static E_DbRState Login(string Name, string Pwd)
@@ -165,12 +164,12 @@ namespace Util
         {
             List<C_User> res = new List<C_User>();
             C_User tmp = new C_User();
-            Tuple<E_DbRState, MySqlDataReader, Exception> QRes = C_Db.Query("select * from grims.user;");
+            Tuple<E_DbRState, MySqlDataReader, Exception> QRes = C_Db.Query("select grims.user.id,grims.user.name,grims.dept.deptName,grims.user.tel,grims.user.email from grims.user left outer join grims.dept on grims.user.deptId = grims.dept.id ;");
             while (QRes.Item2.Read())
             {
                 tmp.Id = QRes.Item2.GetInt32("id");
                 tmp.Name = QRes.Item2.GetString("name");
-                tmp.Pwd = QRes.Item2.GetString("pwd");
+                tmp.Pwd = "";
                 tmp.DeptName = QRes.Item2.GetString("deptName");
                 tmp.Tel = QRes.Item2.GetString("tel");
                 tmp.Email = QRes.Item2.GetString("email");

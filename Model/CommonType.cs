@@ -108,7 +108,7 @@ namespace Model
         API_Admin_GetAllUsers,
         API_Admin_GetDeptIdByName,
 
-        API_Login,
+
         API_ChangeAccount,
         API_GetUserInfo,
 
