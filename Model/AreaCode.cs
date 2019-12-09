@@ -10,10 +10,21 @@ namespace Model
    [JsonObject(MemberSerialization.OptIn)]
     public class C_AreaCode : PropertyChangedBase
     {
+        private int _id;
         private long _code;
         private long _pCode;
         private int _level;
         private string _name;
+
+        [JsonProperty]
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                SetAndNotify(ref _id, value);
+            }
+        }
 
         [JsonProperty]
         public long Code

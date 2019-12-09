@@ -9,12 +9,13 @@ namespace Util
     {
         public static void InitTabs()
         {
-            Tuple<E_DbRState, Exception>  ERes = C_Db.Exec("create table if not exists grims.areaCode(" +
+            Tuple<E_DbRState, Exception>  ERes = C_Db.Exec("create table if not exists grims.areaCode( id int auto_increment," +
                             "code bigint," +
                             "name varchar(255)," +
                             "level int," +
                             "pcode bigint" +
                             ") default charset=utf8;");
+
             if (ERes.Item1 == E_DbRState.Success)
             {
                 if (Get().Item2.Count == 0)
@@ -870,7 +871,21 @@ namespace Util
             #endregion
         }
 
-        //OUT
+        public static Tuple<E_DbRState, Exception> Add(C_AreaCode ac)
+        {
+            return C_Db.Exec("insert into grims.areacode (code, name, level, pcode) values('" + ac.Code + "','" + ac.Name + "','" + ac.Level + "','" + ac.PCode +"';");
+        }
+
+        public static Tuple<E_DbRState, Exception> Delete(int id)
+        {
+            return C_Db.Exec("delete from grims.areacode where id='" + id.ToString() + "');");
+        }
+
+        public static Tuple<E_DbRState, Exception> Change(C_AreaCode ac)
+        {
+            return C_Db.Exec("update grims.areacode set code='" + ac.Code + "', name='" + ac.Name + "', level='" + ac.Level + "', pcode='" + ac.PCode + "' where id = '" + ac.Id + "';");
+        }
+
         public static Tuple<E_DbRState, List<C_AreaCode>, Exception> Get()
         {
             Tuple<E_DbRState, MySqlDataReader, Exception> QRes;
