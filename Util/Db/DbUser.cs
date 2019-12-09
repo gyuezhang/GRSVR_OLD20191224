@@ -164,12 +164,12 @@ namespace Util
         {
             List<C_User> res = new List<C_User>();
             C_User tmp = new C_User();
-            Tuple<E_DbRState, MySqlDataReader, Exception> QRes = C_Db.Query("select grims.user.id,grims.user.name,grims.dept.deptName,grims.user.tel,grims.user.email from grims.user left outer join grims.dept on grims.user.deptId = grims.dept.id ;");
+            Tuple<E_DbRState, MySqlDataReader, Exception> QRes = C_Db.Query("select grims.user.id,grims.user.pwd,grims.user.name,grims.dept.deptName,grims.user.tel,grims.user.email from grims.user left outer join grims.dept on grims.user.deptId = grims.dept.id ;");
             while (QRes.Item2.Read())
             {
                 tmp.Id = QRes.Item2.GetInt32("id");
                 tmp.Name = QRes.Item2.GetString("name");
-                tmp.Pwd = "";
+                tmp.Pwd = QRes.Item2.GetString("pwd");
                 tmp.DeptName = QRes.Item2.GetString("deptName");
                 tmp.Tel = QRes.Item2.GetString("tel");
                 tmp.Email = QRes.Item2.GetString("email");

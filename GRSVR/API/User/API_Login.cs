@@ -17,7 +17,7 @@ namespace GRSVR
         {
             string req = string.Join("", requestInfo.Parameters);
 
-            C_DbDept.Add(req);
+            C_DbUser.Login(requestInfo.Parameters[0], requestInfo.Parameters[1]);
 
             session.Send(API_ID.API_Login, RES_STATE.FAILED);
         }

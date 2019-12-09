@@ -2,6 +2,7 @@
 using SuperSocket.SocketBase.Command;
 using SuperSocket.SocketBase.Protocol;
 using Model;
+using System.Collections.Generic;
 
 namespace GRSVR
 {
@@ -16,7 +17,23 @@ namespace GRSVR
         {
             string req = string.Join("", requestInfo.Parameters);
 
-            C_DbDept.Add(req);
+            List<C_User> res = C_DbUser.Get().Item2;
+            foreach (C_User usr in res)
+            {
+                if (requestInfo.Parameters[0] == usr.Id.ToString())
+                {
+                    if(requestInfo.Parameters[1] == usr.Pwd)
+                    {
+                        usr.Pwd = requestInfo.Parameters[2];
+                        C_DbUser.Change(usr);
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+            //C_DbUser.Change(requestInfo.Parameters[0], requestInfo.Parameters[1]);
 
             session.Send(API_ID.API_ResetPwd, RES_STATE.FAILED);
         }
