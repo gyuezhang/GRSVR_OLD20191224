@@ -9,15 +9,17 @@ namespace Util
     {
         public static void InitTabs()
         {
-            C_Db.Exec("create table if not exists grims.areaCode(" +
+            Tuple<E_DbRState, Exception>  ERes = C_Db.Exec("create table if not exists grims.areaCode(" +
                             "code bigint," +
                             "name varchar(255)," +
                             "level int," +
                             "pcode bigint" +
                             ") default charset=utf8;");
-
-            if (Get().Item2.Count == 0)
-                InitData();
+            if (ERes.Item1 == E_DbRState.Success)
+            {
+                if (Get().Item2.Count == 0)
+                    InitData();
+            }
         }
 
         public static void InitData()
