@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Util
+﻿namespace Util
 {
-    class DbEntWell
+    public class C_DbEntWell
     {
+        public static void InitTabs()
+        {
+
+        }
     }
 }
