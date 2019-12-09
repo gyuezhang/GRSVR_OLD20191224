@@ -61,9 +61,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="C_Md5.cs" />
     <Compile Include="Db\DbAreaCode.cs" />
     <Compile Include="Db\Db.cs" />
-    <Compile Include="Db\DbLog.cs" />
+    <Compile Include="Db\DbEntWell.cs" />
     <Compile Include="Db\DbUser.cs" />
     <Compile Include="Db\DbWell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

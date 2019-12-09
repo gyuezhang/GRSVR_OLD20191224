@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Model;
 using MySql.Data.MySqlClient;
 
@@ -12,29 +9,19 @@ namespace Util
     {
         public static void InitTabs()
         {
-            Tuple<E_DbRes, Exception> ERes;
+            Tuple<E_DbRState, Exception>  ERes = C_Db.Exec("create table if not exists grims.areaCode( id int auto_increment,code bigint,name varchar(255),level int,pcode bigint ,primary key(id)) default charset=utf8mb4;");
 
-            ERes = C_Db.Exec("create table if not exists grims.areaCode(" +
-                            "code bigint," +
-                            "name varchar(255)," +
-                            "level int," +
-                            "pcode bigint" +
-                            ") default charset=utf8;");
-            if(ERes.Item1 != E_DbRes.Success)
+            if (ERes.Item1 == E_DbRState.Success)
             {
-                //
+                if (Get().Item2.Count == 0)
+                    InitData();
             }
-
-            if (Get().Count == 0)
-                InitData();
         }
 
         public static void InitData()
         {
-            Tuple<E_DbRes, Exception> ERes;
-
-            #region default bdareacode
-            ERes = C_Db.Exec("insert into grims.areaCode (code,name,level,pcode) values" +
+            #region
+            C_Db.Exec("insert into grims.areaCode (code,name,level,pcode) values" +
                 "(120115000000, '宝坻区', 3, 120100000000)," +
                 "(120115001000, '海滨街道', 4, 120115000000)," +
                 "(120115001001, '石幢南社区居委会', 5, 120115001000)," +
@@ -877,39 +864,49 @@ namespace Util
                 "(120115502598, '大钟农场虚拟社生活区', 5, 120115502000)" +
                 ";");
             #endregion
-
-            if (ERes.Item1 != E_DbRes.Success)
-            {
-                //
-            }
-
         }
 
-        public static List<C_AreaCode> Get()
+        public static Tuple<E_DbRState, Exception> Add(C_AreaCode ac)
         {
-            Tuple<E_DbRes, MySqlDataReader, Exception> QRes;
+            return C_Db.Exec("insert into grims.areacode (code, name, level, pcode) values('" + ac.Code + "','" + ac.Name + "','" + ac.Level + "','" + ac.PCode +"');");
+        }
+
+        public static Tuple<E_DbRState, Exception> Delete(int id)
+        {
+            return C_Db.Exec("delete from grims.areacode where id='" + id.ToString() + "';");
+        }
+
+        public static Tuple<E_DbRState, Exception> Change(C_AreaCode ac)
+        {
+            return C_Db.Exec("update grims.areacode set code='" + ac.Code + "', name='" + ac.Name + "', level='" + ac.Level + "', pcode='" + ac.PCode + "' where id = '" + ac.Id + "';");
+        }
+
+        public static Tuple<E_DbRState, List<C_AreaCode>, Exception> Get()
+        {
+            Tuple<E_DbRState, MySqlDataReader, Exception> QRes;
 
             string cmd = "select * from grims.areaCode;";
             List<C_AreaCode> res = new List<C_AreaCode>();
-            C_AreaCode tmp = new C_AreaCode();
 
             QRes = C_Db.Query(cmd);
-            if (QRes.Item1 == E_DbRes.Success)
+
+            if (QRes.Item1 == E_DbRState.Success)
             {
                 while (QRes.Item2.Read())
                 {
+                    C_AreaCode tmp = new C_AreaCode();
+                    tmp.Id = QRes.Item2.GetInt32("id");
                     tmp.Code = QRes.Item2.GetInt64("code");
                     tmp.PCode = QRes.Item2.GetInt64("pcode");
                     tmp.Level = QRes.Item2.GetInt32("level");
                     tmp.Name = QRes.Item2.GetString("name");
                     res.Add(tmp);
                 }
-                return res;
+                return new Tuple<E_DbRState, List<C_AreaCode>, Exception>(QRes.Item1, res, QRes.Item3);
             }
             else
             {
-                //
-                return new List<C_AreaCode>();
+                return new Tuple<E_DbRState, List<C_AreaCode>, Exception>(QRes.Item1, null, QRes.Item3);
             }
         }
     }

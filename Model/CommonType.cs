@@ -54,15 +54,84 @@ namespace Model
     /// <summary>
     /// 数据库操作返回状态值
     /// </summary>
-    public enum E_DbRes
+    public enum E_DbRState
     {
+        //Db Return
         Success,
-        Error,
+        Failed,
+        //Other Return
         Created,
         Deleted,
         Changed,
         NoResult,
         GotSuccess,
         GramError,
+
+        //LOGIN
+        ErrorPwd,
+    }
+
+    public enum API_ID
+    {
+        API_ConnState,
+
+        API_AddAreaCode,
+        API_DeleteAreaCode,
+        API_ChangeAreaCode,
+        API_GetAreaCodes,
+
+        API_AdminUserResetPwd,
+        API_AdminUserLogin,
+
+        API_AddDept,
+        API_DeleteDept,
+        API_ChangeDept,
+        API_GetDepts,
+
+        API_AddUser,
+        API_DeleteUser,
+        API_ChangeUser,
+        API_GetUsers,
+        API_Login,
+        API_ResetPwd,
+
+        API_Admin_ChangePwd,
+        API_ChangeUserInfo,
+
+        API_Admin_CreateDept,
+        API_Admin_DeleteDept,
+        API_Admin_ChangeDept,
+        API_Admin_GetAllDepts,
+        API_Admin_CreateUser,
+        API_Admin_DeleteUsers,
+        API_Admin_ChangeUser,
+        API_Admin_GetAllUsers,
+        API_Admin_GetDeptIdByName,
+
+
+        API_ChangeAccount,
+        API_GetUserInfo,
+
+        API_ChangeWell,
+        API_CreateWell,
+        API_DeleteWell,
+        API_GetWellByFilter,
+        API_SetWellParas,
+        API_GetWellParas,
+
+        API_ChangeEntWell,
+        API_CreateEntWell,
+        API_DeleteEntWell,
+        API_GetEntWellByFilter,
+
+        API_GetLevelZoning,
+    }
+
+    public enum RES_STATE
+    {
+        OK,         //成功
+        FAILED,
+        BAD_REQUEST,//请求参数（格式）错误
+        INCORRECT,//请求参数（值）不正确
     }
 }
