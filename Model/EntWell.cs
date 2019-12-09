@@ -12,17 +12,17 @@ namespace Model
     public class C_EntWellPara : PropertyChangedBase
     {
         public C_EntWellPara() { }
-        public C_EntWellPara(E_WellParaType type, string value)
+        public C_EntWellPara(E_EntWellParaType type, string value)
         {
             Type = type;
             Value = value;
         }
 
-        private E_WellParaType _type;
+        private E_EntWellParaType _type;
         private string _value;
 
         [JsonProperty]
-        public E_WellParaType Type
+        public E_EntWellParaType Type
         {
             get { return _type; }
             set
@@ -50,7 +50,7 @@ namespace Model
     {
         public C_EntWellParas() { }
 
-        public C_EntWellParas(List<C_WellPara> paras)
+        public C_EntWellParas(List<C_EntWellPara> paras)
         {
             AllParas = paras;
             UnitCat.Clear();
@@ -63,20 +63,20 @@ namespace Model
             if (paras.Count == 0)
                 return;
 
-            foreach (C_WellPara node in paras)
+            foreach (C_EntWellPara node in paras)
             {
                 switch (node.Type)
                 {
-                    case E_WellParaType.Loc:
+                    case E_EntWellParaType.Loc:
                         Loc.Add(node);
                         break;
-                    case E_WellParaType.PumpModel:
+                    case E_EntWellParaType.PumpModel:
                         PumpModel.Add(node);
                         break;
-                    case E_WellParaType.TubeMat:
+                    case E_EntWellParaType.TubeMat:
                         TubeMat.Add(node);
                         break;
-                    case E_WellParaType.UnitCat:
+                    case E_EntWellParaType.UnitCat:
                         UnitCat.Add(node);
                         break;
                     default:
@@ -111,19 +111,19 @@ namespace Model
             AllParas.AddRange(PumpModel);
         }
 
-        private List<C_WellPara> _allParas = new List<C_WellPara>();
-        private List<C_WellPara> _unitCat = new List<C_WellPara>();
-        private List<C_WellPara> _loc = new List<C_WellPara>();
-        private List<C_WellPara> _tubeMat = new List<C_WellPara>();
-        private List<C_WellPara> _pumpModel = new List<C_WellPara>();
+        private List<C_EntWellPara> _allParas = new List<C_EntWellPara>();
+        private List<C_EntWellPara> _unitCat = new List<C_EntWellPara>();
+        private List<C_EntWellPara> _loc = new List<C_EntWellPara>();
+        private List<C_EntWellPara> _tubeMat = new List<C_EntWellPara>();
+        private List<C_EntWellPara> _pumpModel = new List<C_EntWellPara>();
 
-        private C_WellPara _unitCatIndex = new C_WellPara();
-        private C_WellPara _locIndex = new C_WellPara();
-        private C_WellPara _tubeMatIndex = new C_WellPara();
-        private C_WellPara _pumpModelIndex = new C_WellPara();
+        private C_EntWellPara _unitCatIndex = new C_EntWellPara();
+        private C_EntWellPara _locIndex = new C_EntWellPara();
+        private C_EntWellPara _tubeMatIndex = new C_EntWellPara();
+        private C_EntWellPara _pumpModelIndex = new C_EntWellPara();
 
         [JsonProperty]
-        public List<C_WellPara> AllParas
+        public List<C_EntWellPara> AllParas
         {
             get { return _allParas; }
             set
@@ -133,7 +133,7 @@ namespace Model
         }
 
         [JsonProperty]
-        public List<C_WellPara> UnitCat
+        public List<C_EntWellPara> UnitCat
         {
             get { return _unitCat; }
             set
@@ -143,7 +143,7 @@ namespace Model
         }
 
         [JsonProperty]
-        public List<C_WellPara> Loc
+        public List<C_EntWellPara> Loc
         {
             get { return _loc; }
             set
@@ -153,7 +153,7 @@ namespace Model
         }
 
         [JsonProperty]
-        public List<C_WellPara> TubeMat
+        public List<C_EntWellPara> TubeMat
         {
             get { return _tubeMat; }
             set
@@ -163,7 +163,7 @@ namespace Model
         }
 
         [JsonProperty]
-        public List<C_WellPara> PumpModel
+        public List<C_EntWellPara> PumpModel
         {
             get { return _pumpModel; }
             set
@@ -172,7 +172,7 @@ namespace Model
             }
         }
 
-        public C_WellPara UnitCatIndex
+        public C_EntWellPara UnitCatIndex
         {
             get { return _unitCatIndex; }
             set
@@ -181,7 +181,7 @@ namespace Model
             }
         }
 
-        public C_WellPara LocIndex
+        public C_EntWellPara LocIndex
         {
             get { return _locIndex; }
             set
@@ -190,7 +190,7 @@ namespace Model
             }
         }
 
-        public C_WellPara TubeMatIndex
+        public C_EntWellPara TubeMatIndex
         {
             get { return _tubeMatIndex; }
             set
@@ -199,7 +199,7 @@ namespace Model
             }
         }
 
-        public C_WellPara PumpModelIndex
+        public C_EntWellPara PumpModelIndex
         {
             get { return _pumpModelIndex; }
             set
