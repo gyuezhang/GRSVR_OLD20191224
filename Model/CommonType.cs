@@ -80,6 +80,9 @@ namespace Model
         API_ChangeAreaCode,
         API_GetAreaCodes,
 
+        API_AdminUserResetPwd,
+        API_AdminUserLogin,
+
         API_Admin_ChangePwd,
         API_ChangeUserInfo,
         API_ResetPwd,

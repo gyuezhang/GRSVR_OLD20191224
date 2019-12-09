@@ -149,7 +149,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\API_AdminLogin.cs" />
+    <Compile Include="API\Admin\API_AdminUserLogin.cs" />
+    <Compile Include="API\Admin\API_AdminUserResetPwd.cs" />
     <Compile Include="API\AreaCode\API_AddAreaCode.cs" />
     <Compile Include="API\AreaCode\API_ChangeAreaCode.cs" />
     <Compile Include="API\AreaCode\API_DeleteAreaCode.cs" />

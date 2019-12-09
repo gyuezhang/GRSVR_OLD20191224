@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="C_Md5.cs" />
     <Compile Include="Db\DbAreaCode.cs" />
     <Compile Include="Db\Db.cs" />
     <Compile Include="Db\DbEntWell.cs" />

@@ -21,7 +21,7 @@ namespace Util
             {
                 if (!QRes.Item2.HasRows)
                 {
-                    C_Db.Exec("insert into grims.AdminPwd (pwd) values(\'123456\');");
+                    C_Db.Exec("insert into grims.AdminPwd (pwd) values('" + C_Md5.GetHash("123456") + "');");
                 }
             }
         }
@@ -31,10 +31,10 @@ namespace Util
             Tuple<E_DbRState, MySqlDataReader, Exception> QRes = C_Db.Query("select * from grims.adminPwd;");
             if (QRes.Item1 == E_DbRState.Failed) 
                 return new Tuple<E_DbRState, Exception>(QRes.Item1, QRes.Item3);
-
+            QRes.Item2.Read();
             if (oldPwd == QRes.Item2.GetString("pwd"))
             {
-                return C_Db.Exec("udpate grims.adminPwd set pwd='" + newPwd + "';");
+                return C_Db.Exec("update grims.adminPwd set pwd='" + newPwd + "';");
             }
             else
             {
