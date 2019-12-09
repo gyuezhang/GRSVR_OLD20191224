@@ -72,7 +72,7 @@ namespace Util
         //OUT
         public static Tuple<E_DbRState, Exception> Delete(string deptName)
         {
-            return C_Db.Exec("delete from grims.dept where deptName='" + deptName + "');");
+            return C_Db.Exec("delete from grims.dept where deptName='" + deptName + "';");
         }
 
         //OUT

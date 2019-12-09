@@ -83,9 +83,20 @@ namespace Model
         API_AdminUserResetPwd,
         API_AdminUserLogin,
 
+        API_AddDept,
+        API_DeleteDept,
+        API_ChangeDept,
+        API_GetDepts,
+
+        API_AddUser,
+        API_DeleteUser,
+        API_ChangeUser,
+        API_GetUsers,
+        API_Login,
+        API_ResetPwd,
+
         API_Admin_ChangePwd,
         API_ChangeUserInfo,
-        API_ResetPwd,
 
         API_Admin_CreateDept,
         API_Admin_DeleteDept,
