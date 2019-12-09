@@ -9,12 +9,7 @@ namespace Util
     {
         public static void InitTabs()
         {
-            Tuple<E_DbRState, Exception>  ERes = C_Db.Exec("create table if not exists grims.areaCode( id int auto_increment," +
-                            "code bigint," +
-                            "name varchar(255)," +
-                            "level int," +
-                            "pcode bigint" +
-                            ") default charset=utf8;");
+            Tuple<E_DbRState, Exception>  ERes = C_Db.Exec("create table if not exists grims.areaCode( id int auto_increment,code bigint,name varchar(255),level int,pcode bigint ,primary key(id)) default charset=utf8mb4;");
 
             if (ERes.Item1 == E_DbRState.Success)
             {
@@ -873,12 +868,12 @@ namespace Util
 
         public static Tuple<E_DbRState, Exception> Add(C_AreaCode ac)
         {
-            return C_Db.Exec("insert into grims.areacode (code, name, level, pcode) values('" + ac.Code + "','" + ac.Name + "','" + ac.Level + "','" + ac.PCode +"';");
+            return C_Db.Exec("insert into grims.areacode (code, name, level, pcode) values('" + ac.Code + "','" + ac.Name + "','" + ac.Level + "','" + ac.PCode +"');");
         }
 
         public static Tuple<E_DbRState, Exception> Delete(int id)
         {
-            return C_Db.Exec("delete from grims.areacode where id='" + id.ToString() + "');");
+            return C_Db.Exec("delete from grims.areacode where id='" + id.ToString() + "';");
         }
 
         public static Tuple<E_DbRState, Exception> Change(C_AreaCode ac)
@@ -892,7 +887,6 @@ namespace Util
 
             string cmd = "select * from grims.areaCode;";
             List<C_AreaCode> res = new List<C_AreaCode>();
-            C_AreaCode tmp = new C_AreaCode();
 
             QRes = C_Db.Query(cmd);
 
@@ -900,6 +894,8 @@ namespace Util
             {
                 while (QRes.Item2.Read())
                 {
+                    C_AreaCode tmp = new C_AreaCode();
+                    tmp.Id = QRes.Item2.GetInt32("id");
                     tmp.Code = QRes.Item2.GetInt64("code");
                     tmp.PCode = QRes.Item2.GetInt64("pcode");
                     tmp.Level = QRes.Item2.GetInt32("level");

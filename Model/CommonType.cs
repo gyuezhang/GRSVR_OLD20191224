@@ -75,7 +75,11 @@ namespace Model
     {
         API_ConnState,
 
-        API_AdminLogin,
+        API_AddAreaCode,
+        API_DeleteAreaCode,
+        API_ChangeAreaCode,
+        API_GetAreaCodes,
+
         API_Admin_ChangePwd,
         API_ChangeUserInfo,
         API_ResetPwd,

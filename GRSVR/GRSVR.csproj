@@ -150,6 +150,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\API_AdminLogin.cs" />
+    <Compile Include="API\AreaCode\API_AddAreaCode.cs" />
+    <Compile Include="API\AreaCode\API_ChangeAreaCode.cs" />
+    <Compile Include="API\AreaCode\API_DeleteAreaCode.cs" />
+    <Compile Include="API\AreaCode\API_GetAreaCodes.cs" />
     <Compile Include="GRSVR.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
