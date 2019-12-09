@@ -52,6 +52,17 @@ namespace Model
     }
 
     /// <summary>
+    /// 机井参数类型
+    /// </summary>
+    public enum E_EntWellParaType
+    {
+        UnitCat,
+        Loc,
+        TubeMat,
+        PumpModel,
+    }
+
+    /// <summary>
     /// 数据库操作返回状态值
     /// </summary>
     public enum E_DbRState
