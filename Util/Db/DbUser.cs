@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace Util
 {
-    public class C_DbAdminUser
+    public class C_DbTabAdminPwd
     {
         public static void InitTabs()
         {
@@ -56,7 +56,7 @@ namespace Util
         }
     }
 
-    public class C_DbDept
+    public class C_DbTabDept
     {
         public static void InitTabs()
         {
@@ -111,7 +111,7 @@ namespace Util
         }
     }
 
-    public class C_DbUser
+    public class C_DbTabUser
     {
         public static void InitTabs()
         {
@@ -130,7 +130,7 @@ namespace Util
         {
             string cmd = "insert into grims.user (name,pwd,deptId,tel,email) values('" + user.Name + "'" +
                     ",'" + user.Pwd +
-                    "','" + C_DbDept.GetIdByName(user.DeptName).Item2 +
+                    "','" + C_DbTabDept.GetIdByName(user.DeptName).Item2 +
                     "','" + user.Tel +
                     "','" + user.Email +
                     "');";
@@ -144,7 +144,7 @@ namespace Util
 
         public static Tuple<E_DbRState, Exception> Change(C_User user)
         {
-            return C_Db.Exec("update grims.user set name='" + user.Name + "',pwd='" + user.Pwd + "',deptId='" + C_DbDept.GetIdByName(user.DeptName).Item2 + "',tel='" + user.Tel + "',email='" + user.Email + "' where id='" + user.Id + "';");
+            return C_Db.Exec("update grims.user set name='" + user.Name + "',pwd='" + user.Pwd + "',deptId='" + C_DbTabDept.GetIdByName(user.DeptName).Item2 + "',tel='" + user.Tel + "',email='" + user.Email + "' where id='" + user.Id + "';");
         }
 
         public static E_DbRState Login(string Name, string Pwd)

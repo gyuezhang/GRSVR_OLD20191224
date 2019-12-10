@@ -18,7 +18,7 @@ namespace GRSVR
             string req = string.Join("", requestInfo.Parameters);
             C_User ac = JsonConvert.DeserializeObject<C_User>(req);
 
-            C_DbUser.Delete(ac);
+            C_DbTabUser.Delete(ac);
             session.Send(API_ID.API_DeleteUser, RES_STATE.FAILED);
         }
     }

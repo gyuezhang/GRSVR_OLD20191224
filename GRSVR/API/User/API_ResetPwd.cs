@@ -17,7 +17,7 @@ namespace GRSVR
         {
             string req = string.Join("", requestInfo.Parameters);
 
-            List<C_User> res = C_DbUser.Get().Item2;
+            List<C_User> res = C_DbTabUser.Get().Item2;
             foreach (C_User usr in res)
             {
                 if (requestInfo.Parameters[0] == usr.Id.ToString())
@@ -25,7 +25,7 @@ namespace GRSVR
                     if(requestInfo.Parameters[1] == usr.Pwd)
                     {
                         usr.Pwd = requestInfo.Parameters[2];
-                        C_DbUser.Change(usr);
+                        C_DbTabUser.Change(usr);
                     }
                     else
                     {

@@ -17,7 +17,7 @@ namespace GRSVR
         {
             string req = string.Join("", requestInfo.Parameters);
 
-            C_DbDept.Delete(req);
+            C_DbTabDept.Delete(req);
         }
     }
 }

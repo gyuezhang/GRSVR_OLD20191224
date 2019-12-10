@@ -17,7 +17,7 @@ namespace GRSVR
         {
             //string req = string.Join("", requestInfo.Parameters);
 
-            C_DbDept.Change(requestInfo.Parameters[0], requestInfo.Parameters[1]);
+            C_DbTabDept.Change(requestInfo.Parameters[0], requestInfo.Parameters[1]);
         }
     }
 }
