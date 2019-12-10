@@ -14,7 +14,7 @@ namespace Util
         {
             Tuple<E_DbRState, MySqlDataReader, Exception> QRes;
 
-            C_Db.Exec("create table if not exists grims.adminPwd(pwd varchar(255) not null) default charset=utf8;");
+            C_Db.Exec("create table if not exists grims.adminPwd(pwd varchar(255) not null) default charset=utf8mb4;");
 
             QRes = C_Db.Query("select * from grims.adminPwd;");
             if (QRes.Item1 == E_DbRState.Success)
@@ -60,7 +60,7 @@ namespace Util
     {
         public static void InitTabs()
         {
-            C_Db.Exec("create table if not exists grims.dept(id int auto_increment,deptName varchar(255) not null unique,primary key(id)) default charset=utf8;");
+            C_Db.Exec("create table if not exists grims.dept(id int auto_increment,deptName varchar(255) not null unique,primary key(id)) default charset=utf8mb4;");
         }
 
         //OUT
@@ -123,7 +123,7 @@ namespace Util
                             "tel varchar(255)," +
                             "email varchar(255)," +
                             "primary key(id),foreign key(deptId) references grims.dept(id)" +
-                            ") default charset=utf8;");
+                            ") default charset=utf8mb4;");
         }
 
         public static Tuple<E_DbRState, Exception> Add(C_User user)
