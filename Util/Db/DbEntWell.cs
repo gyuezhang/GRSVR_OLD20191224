@@ -143,9 +143,76 @@ namespace Util
 
         }
 
-        public static Tuple<E_DbRState, List<C_EntWell>, Exception> Get()
+        public static Tuple<E_DbRState, List<C_EntWell>, Exception> Get(string filter)
         {
-            return new Tuple<E_DbRState, List<C_EntWell>, Exception>(E_DbRState.Changed, null, null);
+            List<C_EntWell> res = new List<C_EntWell>();
+            Tuple<E_DbRState, MySqlDataReader, Exception> QRes;
+            if(filter == null ||filter == "")
+            {
+                QRes = C_Db.Query("select * from grims.entwell;");
+            }
+            else
+            {
+                QRes = C_Db.Query("select * from grims.entwell where (" +
+                        "TsOrSt                   LIKE '%" + filter + "%' OR " +//1
+                        "EntName                  LIKE '%" + filter + "%' OR " +//2
+                        "UnitCat                  LIKE '%" + filter + "%' OR " +//3
+                        "Loc                      LIKE '%" + filter + "%' OR " +//4
+                        "Lng                      LIKE '%" + filter + "%' OR " +//5
+                        "Lat                      LIKE '%" + filter + "%' OR " +//6
+                        "Usefor                   LIKE '%" + filter + "%' OR " +//7
+                        "DigTime                  LIKE '%" + filter + "%' OR " +//8
+                                                                                
+                        "FetchWaterId             LIKE '%" + filter + "%' OR " +//9
+                        "IsPaid                   LIKE '%" + filter + "%' OR " +//10
+                                                                                
+                        "WellDepth                LIKE '%" + filter + "%' OR " +//11
+                        "TubeMat                  LIKE '%" + filter + "%' OR " +//12
+                        "TubeIr                   LIKE '%" + filter + "%' OR " +//13
+                        "StanWaterDepth           LIKE '%" + filter + "%' OR " +//14
+                        "SaltWaterFloorDepth      LIKE '%" + filter + "%' OR " +//15
+                        "FilterLocLow             LIKE '%" + filter + "%' OR " +//16
+                        "FilterLocHigh            LIKE '%" + filter + "%' OR " +//17
+                        "StillWaterLoc            LIKE '%" + filter + "%' OR " +//18
+                        "PumpMode                 LIKE '%" + filter + "%' OR " +//19
+                        "PumpPower                LIKE '%" + filter + "%' OR " +//20
+                        "IsWaterLevelOp           LIKE '%" + filter + "%' OR " +//21
+                        "IsMfInstalled            LIKE '%" + filter + "%' OR " +//22
+                        "Remark                   LIKE '%" + filter + "%' " +
+                        ");");
+            }
+            while (QRes.Item2.Read())
+            {
+                C_EntWell well = new C_EntWell();
+                well.Id = QRes.Item2.GetInt32("Id");
+                well.TsOrSt = QRes.Item2.GetString("TsOrSt");
+                well.EntName = QRes.Item2.GetString("EntName");
+                well.UnitCat = QRes.Item2.GetString("UnitCat");
+                well.Loc = QRes.Item2.GetString("Loc");
+                well.Lng = QRes.Item2.GetString("Lng");//5
+                well.Lat = QRes.Item2.GetString("Lat");
+                well.Usefor = QRes.Item2.GetString("Usefor");
+                well.DigTime = QRes.Item2.GetDateTime("DigTime");
+
+                well.FetchWaterId = QRes.Item2.GetString("FetchWaterId");
+                well.IsPaid = QRes.Item2.GetBoolean("IsPaid");
+
+                well.WellDepth = QRes.Item2.GetFloat("WellDepth");//11
+                well.TubeMat = QRes.Item2.GetString("TubeMat");//12
+                well.TubeIr = QRes.Item2.GetFloat("TubeIr");
+                well.StanWaterDepth = QRes.Item2.GetFloat("StanWaterDepth");
+                well.SaltWaterFloorDepth = QRes.Item2.GetFloat("SaltWaterFloorDepth");
+                well.FilterLocLow = QRes.Item2.GetFloat("FilterLocLow");//16
+                well.FilterLocHigh = QRes.Item2.GetFloat("FilterLocHigh");
+                well.StillWaterLoc = QRes.Item2.GetFloat("StillWaterLoc");
+                well.PumpMode = QRes.Item2.GetString("PumpMode");
+                well.PumpPower = QRes.Item2.GetFloat("PumpPower");//20
+                well.IsWaterLevelOp = QRes.Item2.GetBoolean("IsWaterLevelOp");
+                well.IsMfInstalled = QRes.Item2.GetBoolean("IsMfInstalled");
+                well.Remark = QRes.Item2.GetString("Remark");
+                res.Add(well);
+            }
+            return new Tuple<E_DbRState, List<C_EntWell>, Exception>(E_DbRState.Changed, res,null);
         }
     }
 
