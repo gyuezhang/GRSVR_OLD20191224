@@ -159,12 +159,28 @@
     <Compile Include="API\Dept\API_ChangeDept.cs" />
     <Compile Include="API\Dept\API_DeleteDept.cs" />
     <Compile Include="API\Dept\API_GetDepts.cs" />
+    <Compile Include="API\EntWellPara\API_AddEntWellPara.cs" />
+    <Compile Include="API\EntWellPara\API_ChangeEntWellPara.cs" />
+    <Compile Include="API\EntWellPara\API_DeleteEntWellPara.cs" />
+    <Compile Include="API\EntWellPara\API_GetEntWellParas.cs" />
+    <Compile Include="API\EntWell\API_AddEntWell.cs" />
+    <Compile Include="API\EntWell\API_ChangeEntWell.cs" />
+    <Compile Include="API\EntWell\API_DeleteEntWell.cs" />
+    <Compile Include="API\EntWell\API_GetEntWells.cs" />
     <Compile Include="API\User\API_AddUser.cs" />
     <Compile Include="API\User\API_ChangeUser.cs" />
     <Compile Include="API\User\API_DeleteUser.cs" />
     <Compile Include="API\User\API_GetUsers.cs" />
     <Compile Include="API\User\API_Login.cs" />
     <Compile Include="API\User\API_ResetPwd.cs" />
+    <Compile Include="API\WellPara\API_AddWellPara.cs" />
+    <Compile Include="API\WellPara\API_ChangeWellPara.cs" />
+    <Compile Include="API\WellPara\API_DeleteWellPara.cs" />
+    <Compile Include="API\WellPara\API_GetWellParas.cs" />
+    <Compile Include="API\Well\API_AddWell.cs" />
+    <Compile Include="API\Well\API_ChangeWell.cs" />
+    <Compile Include="API\Well\API_DeleteWell.cs" />
+    <Compile Include="API\Well\API_GetWells.cs" />
     <Compile Include="GRSVR.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -192,12 +208,7 @@
   <ItemGroup>
     <Content Include="Logo.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="API\EntWellPara\" />
-    <Folder Include="API\EntWell\" />
-    <Folder Include="API\WellPara\" />
-    <Folder Include="API\Well\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.0.5\build\Fody.targets" Condition="Exists('..\packages\Fody.6.0.5\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

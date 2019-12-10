@@ -57,6 +57,7 @@ namespace Model
             Loc.Clear();
             TubeMat.Clear();
             PumpModel.Clear();
+            UseFor.Clear();
 
             if (paras == null)
                 return;
@@ -79,6 +80,9 @@ namespace Model
                     case E_WellParaType.UnitCat:
                         UnitCat.Add(node);
                         break;
+                    case E_WellParaType.UseFor:
+                        UseFor.Add(node);
+                        break;
                     default:
                         break;
                 }
@@ -100,6 +104,10 @@ namespace Model
             {
                 TubeMatIndex = TubeMat[0];
             }
+            if (UseFor.Count != 0)
+            {
+                UseForIndex = UseFor[0];
+            }
         }
 
         public void ResetAllPara()
@@ -109,6 +117,7 @@ namespace Model
             AllParas.AddRange(Loc);
             AllParas.AddRange(TubeMat);
             AllParas.AddRange(PumpModel);
+            AllParas.AddRange(UseFor);
         }
 
         private List<C_WellPara> _allParas = new List<C_WellPara>();
@@ -116,11 +125,13 @@ namespace Model
         private List<C_WellPara> _loc = new List<C_WellPara>();
         private List<C_WellPara> _tubeMat = new List<C_WellPara>();
         private List<C_WellPara> _pumpModel = new List<C_WellPara>();
+        private List<C_WellPara> _useFor = new List<C_WellPara>();
 
         private C_WellPara _unitCatIndex = new C_WellPara();
         private C_WellPara _locIndex = new C_WellPara();
         private C_WellPara _tubeMatIndex = new C_WellPara();
         private C_WellPara _pumpModelIndex = new C_WellPara();
+        private C_WellPara _useForIndex = new C_WellPara();
 
         [JsonProperty]
         public List<C_WellPara> AllParas
@@ -172,6 +183,16 @@ namespace Model
             }
         }
 
+        [JsonProperty]
+        public List<C_WellPara> UseFor
+        {
+            get { return _useFor; }
+            set
+            {
+                SetAndNotify(ref _useFor, value);
+            }
+        }
+
         public C_WellPara UnitCatIndex
         {
             get { return _unitCatIndex; }
@@ -208,6 +229,15 @@ namespace Model
             }
         }
 
+        public C_WellPara UseForIndex
+        {
+            get { return _useForIndex; }
+            set
+            {
+                SetAndNotify(ref _useForIndex, value);
+            }
+        }
+
     }
 
     /// <summary>
@@ -216,8 +246,8 @@ namespace Model
     [JsonObject(MemberSerialization.OptIn)]
     public class C_Well : PropertyChangedBase
     {
-        private int _id;                                     //0
-        private string _tsOrSt;                             //所属乡镇（街道）                  1
+        private int _id;                                    //0
+        private string _tsOrSt;                             //所属乡镇（街道）                   1
         private string _village;                            //所属村                            2
         private string _loc;                                //位置                              3
         private string _lng;                                //东经                              4

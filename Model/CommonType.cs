@@ -49,17 +49,7 @@ namespace Model
         Loc,
         TubeMat,
         PumpModel,
-    }
-
-    /// <summary>
-    /// 机井参数类型
-    /// </summary>
-    public enum E_EntWellParaType
-    {
-        UnitCat,
-        Loc,
-        TubeMat,
-        PumpModel,
+        UseFor,
     }
 
     /// <summary>
@@ -106,36 +96,28 @@ namespace Model
         API_Login,
         API_ResetPwd,
 
-        API_Admin_ChangePwd,
-        API_ChangeUserInfo,
+        API_AddEntWell,
+        API_ChangeEntWell,
+        API_DeleteEntWell,
+        API_GetEntWells,
 
-        API_Admin_CreateDept,
-        API_Admin_DeleteDept,
-        API_Admin_ChangeDept,
-        API_Admin_GetAllDepts,
-        API_Admin_CreateUser,
-        API_Admin_DeleteUsers,
-        API_Admin_ChangeUser,
-        API_Admin_GetAllUsers,
-        API_Admin_GetDeptIdByName,
+        API_AddEntWellPara,
+        API_ChangeEntWellPara,
+        API_DeleteEntWellPara,
+        API_GetEntWellParas,
 
-
-        API_ChangeAccount,
-        API_GetUserInfo,
-
+        API_AddWell,
         API_ChangeWell,
-        API_CreateWell,
         API_DeleteWell,
-        API_GetWellByFilter,
-        API_SetWellParas,
+        API_GetWells,
+
+        API_AddWellPara,
+        API_ChangeWellPara,
+        API_DeleteWellPara,
         API_GetWellParas,
 
-        API_ChangeEntWell,
-        API_CreateEntWell,
-        API_DeleteEntWell,
-        API_GetEntWellByFilter,
 
-        API_GetLevelZoning,
+
     }
 
     public enum RES_STATE
