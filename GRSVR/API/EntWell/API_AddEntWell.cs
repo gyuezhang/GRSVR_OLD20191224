@@ -3,6 +3,7 @@ using SuperSocket.SocketBase.Command;
 using SuperSocket.SocketBase.Protocol;
 using Model;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace GRSVR
 {
@@ -16,11 +17,9 @@ namespace GRSVR
         public override void ExecuteCommand(GRSession session, StringRequestInfo requestInfo)
         {
             string req = string.Join("", requestInfo.Parameters);
-            C_User ac = JsonConvert.DeserializeObject<C_User>(req);
+            List<C_EntWell> wells = JsonConvert.DeserializeObject<List<C_EntWell>>(req);
 
-            C_DbTabUser.Add(ac);
-
-            session.Send(API_ID.API_AddUser, RES_STATE.FAILED);
+            C_DbTabEntWell.Add(wells);
         }
     }
 }

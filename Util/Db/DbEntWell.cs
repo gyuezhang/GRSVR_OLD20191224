@@ -40,17 +40,107 @@ namespace Util
 
         public static Tuple<E_DbRState, Exception> Add(List<C_EntWell> wells)
         {
-            return C_Db.Exec("insert into grims.areacode (code, name, level, pcode) values;");
+
+            string cmd = "insert into grims.entwell (   TsOrSt," +//1
+                                                        "EntName," +//2
+                                                        "UnitCat," +//3
+                                                        "Loc," +//4
+                                                        "Lng," +//5
+                                                        "Lat," +//6
+                                                        "Usefor," +//7
+                                                        "DigTime," +//8
+
+
+                                                        "FetchWaterId," +//9
+                                                        "IsPaid," +//10
+
+                                                        "WellDepth," +//11
+                                                        "TubeMat," +//12
+                                                        "TubeIr," +//13
+                                                        "StanWaterDepth," +//14
+                                                        "SaltWaterFloorDepth," +//15
+                                                        "FilterLocLow," +//16
+                                                        "FilterLocHigh," +//17
+                                                        "StillWaterLoc," +//18
+                                                        "PumpMode," +//19
+                                                        "PumpPower," +//20
+                                                        "IsWaterLevelOp," +//21
+                                                        "IsMfInstalled," +//22
+                                                        "Remark" +//23
+                                                        ")values";
+            string tmp;
+            for (int i = 0; i < wells.Count; ++i)
+            {
+                tmp = "('" +
+                wells[i].TsOrSt + "','" +    //1
+                wells[i].EntName + "','" +   //2
+                wells[i].UnitCat + "','" +   //3
+                wells[i].Loc + "','" +   //4
+                wells[i].Lng + "','" +   //5
+                wells[i].Lat + "','" +   //6
+                wells[i].Usefor + "','" +   //7
+                wells[i].DigTime.ToString("yyyy-MM-dd") + "','" +   //8
+
+                wells[i].FetchWaterId + "'," +   //9
+                wells[i].IsPaid + "," +   //10
+
+                wells[i].WellDepth + ",'" +   //11
+                wells[i].TubeMat + "'," +   //12
+                wells[i].TubeIr + "," +   //13
+                wells[i].StanWaterDepth + "," +   //14
+                wells[i].SaltWaterFloorDepth + "," +   //15
+                wells[i].FilterLocLow + "," +   //16
+                wells[i].FilterLocHigh + "," +   //17
+                wells[i].StillWaterLoc + ",'" +   //18
+                wells[i].PumpMode + "'," +   //19
+                wells[i].PumpPower + "," +   //20
+                wells[i].IsWaterLevelOp + "," +   //21
+                wells[i].IsMfInstalled + ",'" +   //22
+                wells[i].Remark +         //23
+                "')";
+                if (i == wells.Count - 1)
+                    tmp += ";";
+                else
+                    tmp += ",";
+                cmd += tmp;
+            }
+
+            return C_Db.Exec(cmd);
         }
 
         public static Tuple<E_DbRState, Exception> Delete(C_EntWell well)
         {
-            return C_Db.Exec("insert into grims.areacode (code, name, level, pcode) values;");
+            return C_Db.Exec("delete from grims.entwell where Id='" + well.Id.ToString() + "';");
         }
 
         public static Tuple<E_DbRState, Exception> Change(C_EntWell well)
         {
-            return C_Db.Exec("insert into grims.areacode (code, name, level, pcode) values;");
+            return C_Db.Exec("update grims.entwell set TsOrSt='" + well.TsOrSt + 
+                                                     "', EntName='" + well.EntName +
+                                                     "', UnitCat='" + well.UnitCat +
+                                                     "', Loc='" + well.Loc +
+                                                     "', Lng='" + well.Lng +
+                                                     "', Lat='" + well.Lat +
+                                                     "', Usefor='" + well.Usefor +
+                                                     "', DigTime='" + well.DigTime.ToString("yyyy-MM-dd") +
+                                                     "', FetchWaterId='" + well.FetchWaterId +
+                                                     "', IsPaid=" + well.IsPaid +
+                                                     ", WellDepth=" + well.WellDepth +
+                                                     ", TubeMat='" + well.TubeMat +
+                                                     "', TubeIr=" + well.TubeIr +
+                                                     ", StanWaterDepth=" + well.StanWaterDepth +
+                                                     ", SaltWaterFloorDepth=" + well.SaltWaterFloorDepth +
+                                                     ", FilterLocLow=" + well.FilterLocLow +
+                                                     ", FilterLocHigh=" + well.FilterLocHigh +
+                                                     ", StillWaterLoc=" + well.StillWaterLoc +
+                                                     ", PumpMode='" + well.PumpMode +
+                                                     "', PumpPower=" + well.PumpPower +
+                                                     ", IsWaterLevelOp=" + well.IsWaterLevelOp +
+                                                     ", IsMfInstalled=" + well.IsMfInstalled +
+                                                     ", Remark='" + well.Remark +
+                                                     "' where Id = '" + well.Id + "';"
+                            );
+
         }
 
         public static Tuple<E_DbRState, List<C_EntWell>, Exception> Get()

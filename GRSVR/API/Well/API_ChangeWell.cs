@@ -16,11 +16,9 @@ namespace GRSVR
         public override void ExecuteCommand(GRSession session, StringRequestInfo requestInfo)
         {
             string req = string.Join("", requestInfo.Parameters);
-            C_User ac = JsonConvert.DeserializeObject<C_User>(req);
+            C_Well well = JsonConvert.DeserializeObject<C_Well>(req);
 
-            C_DbTabUser.Add(ac);
-
-            session.Send(API_ID.API_AddUser, RES_STATE.FAILED);
+            C_DbTabWell.Change(well);
         }
     }
 }

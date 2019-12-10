@@ -44,17 +44,111 @@ namespace Util
 
         public static Tuple<E_DbRState, Exception> Add(List<C_Well> wells)
         {
-            return C_Db.Exec("insert into grims.areacode (code, name, level, pcode) values;");
+            string cmd = "insert into grims.well (   TsOrSt," +//1
+                                                        "Village," +//2
+                                                        "UnitCat," +//3
+                                                        "Loc," +//4
+                                                        "Lng," +//5
+                                                        "Lat," +//6
+                                                        "Usefor," +//7
+                                                        "DigTime," +//8
+                                                        "WellDepth," +//9
+                                                        "TubeMat," +//10
+                                                        "TubeIr," +//11
+                                                        "StanWaterDepth," +//12
+                                                        "SaltWaterFloorDepth," +//13
+                                                        "FilterLocLow," +//14
+                                                        "FilterLocHigh," +//15
+                                                        "StillWaterLoc," +//16
+                                                        "PumpMode," +//17
+                                                        "PumpPower," +//18
+                                                        "CoverArea," +//19
+                                                        "SupPeopleNum," +//20
+                                                        "IsWaterLevelOp," +//21
+                                                        "IsMfInstalled," +//22
+                                                        "LinkWellNo," +//23
+                                                        "IsSeepChnLinked," +//24
+                                                        "SeepChnLength," +//25
+                                                        "Remark" +//26
+                                                        ")values";
+            string tmp;
+            for (int i = 0; i < wells.Count; ++i)
+            {
+                tmp = "('" +
+                wells[i].TsOrSt + "','" +    //1
+                wells[i].Village + "','" +   //2
+                wells[i].UnitCat + "','" +   //3
+                wells[i].Loc + "','" +   //4
+                wells[i].Lng + "','" +   //5
+                wells[i].Lat + "','" +   //6
+                wells[i].Usefor + "','" +   //7
+                wells[i].DigTime.ToString("yyyy-MM-dd") + "'," +   //8
+                wells[i].WellDepth + ",'" +   //9
+                wells[i].TubeMat + "'," +   //10
+                wells[i].TubeIr + "," +   //11
+                wells[i].StanWaterDepth + "," +   //12
+                wells[i].SaltWaterFloorDepth + "," +   //13
+                wells[i].FilterLocLow + "," +   //14
+                wells[i].FilterLocHigh + "," +   //15
+                wells[i].StillWaterLoc + ",'" +   //16
+                wells[i].PumpMode + "'," +   //17
+                wells[i].PumpPower + "," +   //18
+                wells[i].CoverArea + "," +   //19
+                wells[i].SupPeopleNum + "," +   //20
+                wells[i].IsWaterLevelOp + "," +   //21
+                wells[i].IsMfInstalled + "," +   //22
+                wells[i].LinkWellNo + "," +   //23
+                wells[i].IsSeepChnLinked + "," +   //24
+                wells[i].SeepChnLength + ",'" +   //25
+                wells[i].Remark +         //26
+                "')";
+                if (i == wells.Count - 1)
+                    tmp += ";";
+                else
+                    tmp += ",";
+                cmd += tmp;
+            }
+
+            return C_Db.Exec(cmd);
         }
 
         public static Tuple<E_DbRState, Exception> Delete(C_Well well)
         {
-            return C_Db.Exec("insert into grims.areacode (code, name, level, pcode) values;");
+            return C_Db.Exec("delete from grims.well where Id='" + well.Id.ToString() + "';");
         }
 
         public static Tuple<E_DbRState, Exception> Change(C_Well well)
         {
-            return C_Db.Exec("insert into grims.areacode (code, name, level, pcode) values;");
+            return C_Db.Exec("  update grims.well set " +
+                                "TsOrSt             ='" + well.TsOrSt + "'," +
+                                "Village            ='" + well.Village + "'," +
+                                "UnitCat            ='" + well.UnitCat + "'," +
+                                "Loc                ='" + well.Loc + "'," +
+                                "Lng                ='" + well.Lng + "'," +
+                                "Lat                ='" + well.Lat + "'," +
+                                "Usefor             ='" + well.Usefor + "'," +
+                                "DigTime            ='" + well.DigTime.ToString("yyyy-MM-dd") + "'," +
+                                "WellDepth          =" + well.WellDepth + "," +
+                                "TubeMat            ='" + well.TubeMat + "'," +
+                                "TubeIr             =" + well.TubeIr + "," +
+                                "StanWaterDepth     =" + well.StanWaterDepth + "," +
+                                "SaltWaterFloorDepth=" + well.SaltWaterFloorDepth + "," +
+                                "FilterLocLow       =" + well.FilterLocLow + "," +
+                                "FilterLocHigh      =" + well.FilterLocHigh + "," +
+                                "StillWaterLoc      =" + well.StillWaterLoc + "," +
+                                "PumpMode           ='" + well.PumpMode + "'," +
+                                "PumpPower          =" + well.PumpPower + "," +
+                                "CoverArea          =" + well.CoverArea + "," +
+                                "SupPeopleNum       =" + well.SupPeopleNum + "," +
+                                "IsWaterLevelOp     =" + well.IsWaterLevelOp + "," +
+                                "IsMfInstalled      =" + well.IsMfInstalled + "," +
+                                "LinkWellNo         =" + well.LinkWellNo + "," +
+                                "IsSeepChnLinked    =" + well.IsSeepChnLinked + "," +
+                                "SeepChnLength      =" + well.SeepChnLength + "," +
+                                "Remark             ='" + well.Remark + "'" +
+                                " where Id = " + well.Id + "" +
+                                ";"
+                            );
         }
 
         public static Tuple<E_DbRState, List<C_Well>, Exception> Get()
