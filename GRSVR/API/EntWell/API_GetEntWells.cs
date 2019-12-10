@@ -15,7 +15,11 @@ namespace GRSVR
 
         public override void ExecuteCommand(GRSession session, StringRequestInfo requestInfo)
         {
-            session.Send(API_ID.API_GetEntWells, RES_STATE.FAILED, JsonConvert.SerializeObject(C_DbTabEntWell.Get(requestInfo.Parameters[0])));
+            if (requestInfo.Parameters == null || requestInfo.Parameters.Length == 0)
+                session.Send(API_ID.API_GetEntWells, RES_STATE.FAILED, JsonConvert.SerializeObject(C_DbTabEntWell.Get(null)));
+            else
+                session.Send(API_ID.API_GetEntWells, RES_STATE.FAILED, JsonConvert.SerializeObject(C_DbTabEntWell.Get(requestInfo.Parameters[0])));
+
         }
     }
 }
