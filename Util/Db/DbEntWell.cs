@@ -1,4 +1,5 @@
 ﻿using Model;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
@@ -67,17 +68,42 @@ namespace Util
 
         public static Tuple<E_DbRState, Exception> Add(C_WellPara wellPara)
         {
-            return C_Db.Exec("insert into grims.areacode (code, name, level, pcode) values');");
+            return C_Db.Exec("insert into grims.entwellpara (paraType,paraValue) values('" + wellPara.Type + "','" + wellPara.Value + "');");
         }
 
         public static Tuple<E_DbRState, Exception> Delete(C_WellPara wellPara)
         {
-            return C_Db.Exec("insert into grims.areacode (code, name, level, pcode) values');");
+            return C_Db.Exec("delete from grims.entwellpara where paraType='"+ wellPara.Type + "' and paraValue='" + wellPara.Value + "';");
+        }
+                   // return C_Db.Exec("update grims.dept set deptName='" + newDeptName + "' where deptName='" + oldDeptName + "';");
+
+        public static Tuple<E_DbRState, Exception> Change(C_WellPara oldWp, C_WellPara newWp)
+        {
+            return C_Db.Exec("update grims.entwellpara set paraType='" + newWp.Type + "' , paraValue='" + newWp.Value + "' where paraType='" + oldWp.Type + "' and paraValue='" + oldWp.Value + "';");
         }
 
-        public static Tuple<E_DbRState, List<C_WellPara>, Exception> Get()
+        public static Tuple<E_DbRState, C_WellParas, Exception> Get()
         {
-            return new Tuple<E_DbRState, List<C_WellPara>, Exception>(E_DbRState.Changed, null, null);
+            Tuple<E_DbRState, MySqlDataReader, Exception> QRes;
+            List<C_WellPara> res = new List<C_WellPara>();
+            QRes = C_Db.Query("select * from grims.entwellpara;");
+
+            if (QRes.Item1 == E_DbRState.Success)
+            {
+                while (QRes.Item2.Read())
+                {
+                    C_WellPara tmp = new C_WellPara();
+                    tmp.Type = (E_WellParaType)Enum.Parse(typeof(E_WellParaType), QRes.Item2.GetString("paraType"), true);
+                    tmp.Value = QRes.Item2.GetString("paraValue");
+                    res.Add(tmp);
+                }
+                C_WellParas wps = new C_WellParas(res);
+                return new Tuple<E_DbRState, C_WellParas, Exception>(QRes.Item1, wps, QRes.Item3);
+            }
+            else
+            {
+                return new Tuple<E_DbRState, C_WellParas, Exception>(QRes.Item1, null, QRes.Item3);
+            }
         }
     }
 }

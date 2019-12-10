@@ -19,8 +19,6 @@ namespace GRSVR
             C_User ac = JsonConvert.DeserializeObject<C_User>(req);
 
             C_DbTabUser.Add(ac);
-
-            session.Send(API_ID.API_AddUser, RES_STATE.FAILED);
         }
     }
 }
