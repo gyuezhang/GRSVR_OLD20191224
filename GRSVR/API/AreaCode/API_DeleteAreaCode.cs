@@ -17,7 +17,7 @@ namespace GRSVR
         {
             string req = string.Join("", requestInfo.Parameters);
 
-            C_DbAreaCode.Delete(int.Parse(req));
+            C_DbTabAreaCode.Delete(int.Parse(req));
 
           //  session.Send(API_ID.API_DeleteAreaCode, RES_STATE.FAILED);
 

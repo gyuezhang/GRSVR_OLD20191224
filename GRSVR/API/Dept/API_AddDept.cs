@@ -17,7 +17,7 @@ namespace GRSVR
         {
             string req = string.Join("", requestInfo.Parameters);
 
-            C_DbDept.Add(req);
+            C_DbTabDept.Add(req);
 
             session.Send(API_ID.API_AddAreaCode, RES_STATE.FAILED);
         }

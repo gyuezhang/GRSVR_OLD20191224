@@ -8,13 +8,13 @@ using MySql.Data.MySqlClient;
 
 namespace Util
 {
-    public class C_DbAdminUser
+    public class C_DbTabAdminPwd
     {
         public static void InitTabs()
         {
             Tuple<E_DbRState, MySqlDataReader, Exception> QRes;
 
-            C_Db.Exec("create table if not exists grims.adminPwd(pwd varchar(255) not null) default charset=utf8;");
+            C_Db.Exec("create table if not exists grims.adminPwd(pwd varchar(255) not null) default charset=utf8mb4;");
 
             QRes = C_Db.Query("select * from grims.adminPwd;");
             if (QRes.Item1 == E_DbRState.Success)
@@ -56,11 +56,11 @@ namespace Util
         }
     }
 
-    public class C_DbDept
+    public class C_DbTabDept
     {
         public static void InitTabs()
         {
-            C_Db.Exec("create table if not exists grims.dept(id int auto_increment,deptName varchar(255) not null unique,primary key(id)) default charset=utf8;");
+            C_Db.Exec("create table if not exists grims.dept(id int auto_increment,deptName varchar(255) not null unique,primary key(id)) default charset=utf8mb4;");
         }
 
         //OUT
@@ -111,7 +111,7 @@ namespace Util
         }
     }
 
-    public class C_DbUser
+    public class C_DbTabUser
     {
         public static void InitTabs()
         {
@@ -123,14 +123,14 @@ namespace Util
                             "tel varchar(255)," +
                             "email varchar(255)," +
                             "primary key(id),foreign key(deptId) references grims.dept(id)" +
-                            ") default charset=utf8;");
+                            ") default charset=utf8mb4;");
         }
 
         public static Tuple<E_DbRState, Exception> Add(C_User user)
         {
             string cmd = "insert into grims.user (name,pwd,deptId,tel,email) values('" + user.Name + "'" +
                     ",'" + user.Pwd +
-                    "','" + C_DbDept.GetIdByName(user.DeptName).Item2 +
+                    "','" + C_DbTabDept.GetIdByName(user.DeptName).Item2 +
                     "','" + user.Tel +
                     "','" + user.Email +
                     "');";
@@ -144,7 +144,7 @@ namespace Util
 
         public static Tuple<E_DbRState, Exception> Change(C_User user)
         {
-            return C_Db.Exec("update grims.user set name='" + user.Name + "',pwd='" + user.Pwd + "',deptId='" + C_DbDept.GetIdByName(user.DeptName).Item2 + "',tel='" + user.Tel + "',email='" + user.Email + "' where id='" + user.Id + "';");
+            return C_Db.Exec("update grims.user set name='" + user.Name + "',pwd='" + user.Pwd + "',deptId='" + C_DbTabDept.GetIdByName(user.DeptName).Item2 + "',tel='" + user.Tel + "',email='" + user.Email + "' where id='" + user.Id + "';");
         }
 
         public static E_DbRState Login(string Name, string Pwd)

@@ -5,7 +5,7 @@ using MySql.Data.MySqlClient;
 
 namespace Util
 {
-    public class C_DbAreaCode
+    public class C_DbTabAreaCode
     {
         public static void InitTabs()
         {

@@ -17,7 +17,7 @@ namespace GRSVR
         {
             string req = string.Join("", requestInfo.Parameters);
 
-            C_DbAdminUser.Login(req);
+            C_DbTabAdminPwd.Login(req);
 
             //  session.Send(API_ID.API_DeleteAreaCode, RES_STATE.FAILED);
 

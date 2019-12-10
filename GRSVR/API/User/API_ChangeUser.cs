@@ -18,7 +18,7 @@ namespace GRSVR
             string req = string.Join("", requestInfo.Parameters);
             C_User ac = JsonConvert.DeserializeObject<C_User>(req);
 
-            C_DbUser.Change(ac);
+            C_DbTabUser.Change(ac);
 
             session.Send(API_ID.API_ChangeUser, RES_STATE.FAILED);
         }

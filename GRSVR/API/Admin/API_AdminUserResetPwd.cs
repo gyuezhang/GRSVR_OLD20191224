@@ -16,7 +16,7 @@ namespace GRSVR
         public override void ExecuteCommand(GRSession session, StringRequestInfo requestInfo)
         {
             string req = string.Join("", requestInfo.Parameters);
-            C_DbAdminUser.ResetPwd(requestInfo.Parameters[0], requestInfo.Parameters[1]);
+            C_DbTabAdminPwd.ResetPwd(requestInfo.Parameters[0], requestInfo.Parameters[1]);
 
             //  session.Send(API_ID.API_DeleteAreaCode, RES_STATE.FAILED);
 

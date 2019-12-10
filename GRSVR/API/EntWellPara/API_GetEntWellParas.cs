@@ -6,16 +6,16 @@ using Newtonsoft.Json;
 
 namespace GRSVR
 {
-    public class API_GetDepts : CommandBase<GRSession, StringRequestInfo>
+    public class API_GetEntWellParas : CommandBase<GRSession, StringRequestInfo>
     {
         public override string Name
         {
-            get { return "API_GetDepts"; }
+            get { return "API_GetEntWellParas"; }
         }
 
         public override void ExecuteCommand(GRSession session, StringRequestInfo requestInfo)
         {
-            session.Send(API_ID.API_GetDepts, RES_STATE.FAILED, JsonConvert.SerializeObject(C_DbTabDept.Get()));
+            session.Send(API_ID.API_GetEntWellParas, RES_STATE.FAILED, JsonConvert.SerializeObject(C_DbTabEntWellPara.Get()));
         }
     }
 }

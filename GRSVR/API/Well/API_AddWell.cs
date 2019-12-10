@@ -3,24 +3,25 @@ using SuperSocket.SocketBase.Command;
 using SuperSocket.SocketBase.Protocol;
 using Model;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace GRSVR
 {
-    public class API_AddUser : CommandBase<GRSession, StringRequestInfo>
+    public class API_AddWell : CommandBase<GRSession, StringRequestInfo>
     {
         public override string Name
         {
-            get { return "API_AddUser"; }
+            get { return "API_AddWell"; }
         }
 
         public override void ExecuteCommand(GRSession session, StringRequestInfo requestInfo)
         {
             string req = string.Join("", requestInfo.Parameters);
-            C_User ac = JsonConvert.DeserializeObject<C_User>(req);
+            List<C_Well> wells = JsonConvert.DeserializeObject<List<C_Well>>(req);
 
-            C_DbTabUser.Add(ac);
+            C_DbTabWell.Add(wells);
 
-            session.Send(API_ID.API_AddUser, RES_STATE.FAILED);
+            //session.Send(API_ID.API_AddUser, RES_STATE.FAILED);
         }
     }
 }

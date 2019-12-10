@@ -6,21 +6,19 @@ using Newtonsoft.Json;
 
 namespace GRSVR
 {
-    public class API_AddUser : CommandBase<GRSession, StringRequestInfo>
+    public class API_ChangeWell : CommandBase<GRSession, StringRequestInfo>
     {
         public override string Name
         {
-            get { return "API_AddUser"; }
+            get { return "API_ChangeWell"; }
         }
 
         public override void ExecuteCommand(GRSession session, StringRequestInfo requestInfo)
         {
             string req = string.Join("", requestInfo.Parameters);
-            C_User ac = JsonConvert.DeserializeObject<C_User>(req);
+            C_Well well = JsonConvert.DeserializeObject<C_Well>(req);
 
-            C_DbTabUser.Add(ac);
-
-            session.Send(API_ID.API_AddUser, RES_STATE.FAILED);
+            C_DbTabWell.Change(well);
         }
     }
 }

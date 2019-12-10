@@ -17,7 +17,7 @@ namespace GRSVR
         {
             string req = string.Join("", requestInfo.Parameters);
             C_AreaCode ac = JsonConvert.DeserializeObject<C_AreaCode>(req);
-            C_DbAreaCode.Change(ac);
+            C_DbTabAreaCode.Change(ac);
 
             //  session.Send(API_ID.API_DeleteAreaCode, RES_STATE.FAILED);
 
