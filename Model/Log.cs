@@ -23,6 +23,7 @@ namespace Model
         }
 
         private int _id;
+        private E_LogLevel _logLevel;
         private E_LogType _logType;
         private E_UserType _userType;
         private int _userId;
@@ -38,6 +39,16 @@ namespace Model
             set
             {
                 SetAndNotify(ref _id, value);
+            }
+        }
+
+        [JsonProperty]
+        public E_LogLevel LogLevel
+        {
+            get { return _logLevel; }
+            set
+            {
+                SetAndNotify(ref _logLevel, value);
             }
         }
 

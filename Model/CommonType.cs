@@ -74,6 +74,12 @@ namespace Model
         ErrorPwd,
     }
 
+    public enum E_LogLevel
+    {
+        Debug,
+        Info,
+    }
+
     public enum API_ID
     {
         API_ConnState,
