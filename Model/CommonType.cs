@@ -30,7 +30,7 @@ namespace Model
     /// <summary>
     /// 操作类型
     /// </summary>
-    public enum E_OperType
+    public enum E_ActionType
     {
         AreaCodeInitTab,
         AreaCodeInitData,
@@ -40,6 +40,7 @@ namespace Model
         AdminUserGet,
         AdminUserInitPwd,
 
+        UserLogin,
     }
 
     /// <summary>
@@ -134,6 +135,7 @@ namespace Model
         FAILED,
         BAD_REQUEST,//请求参数（格式）错误
         INCORRECT,//请求参数（值）不正确
+        ErrorPwd,
     }
 
 

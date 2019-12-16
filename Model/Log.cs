@@ -12,12 +12,12 @@ namespace Model
     {
 
         public C_Log() { }
-        public C_Log(E_LogType logType, E_UserType userType, int userId, E_OperType operType, string desc, string exContent)
+        public C_Log(E_LogType logType, E_UserType userType, int userId, E_ActionType actionType, string desc, string exContent)
         {
             LogType = logType;
             UserType = userType;
             UserId = userId;
-            OperType = operType;
+            ActionType = actionType;
             Desc = desc;
             ExContent = exContent;
         }
@@ -27,7 +27,7 @@ namespace Model
         private E_LogType _logType;
         private E_UserType _userType;
         private int _userId;
-        private E_OperType _operType;
+        private E_ActionType _actionType;
         private DateTime _recordTime = DateTime.UtcNow;
         private string _desc;
         private string _exContent;
@@ -83,12 +83,12 @@ namespace Model
         }
 
         [JsonProperty]
-        public E_OperType OperType
+        public E_ActionType ActionType
         {
-            get { return _operType; }
+            get { return _actionType; }
             set
             {
-                SetAndNotify(ref _operType, value);
+                SetAndNotify(ref _actionType, value);
             }
         }
 

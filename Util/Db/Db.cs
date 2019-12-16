@@ -38,6 +38,8 @@ namespace Util
             C_DbTabWellPara.InitTabs();
             C_DbTabEntWell.InitTabs();
             C_DbTabEntWellPara.InitTabs();
+
+            C_DbLog.InitTabs();
         }
 
         public static void ConnDb(string ServerIp, int Port, string DbUserName, string DbUserPwd)
