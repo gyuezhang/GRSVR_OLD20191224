@@ -5,6 +5,7 @@ using Model;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace GRSVR
 {
@@ -19,6 +20,7 @@ namespace GRSVR
         {
             string req = string.Join("", requestInfo.Parameters);
             C_User user = new C_User();
+            Tuple<string, string> loginInputs = JsonConvert.DeserializeObject<Tuple<string, string>>(req);
             E_DbRState res = C_DbTabUser.Login(requestInfo.Parameters[0], requestInfo.Parameters[1]);
             if (res == E_DbRState.Success)
             {
