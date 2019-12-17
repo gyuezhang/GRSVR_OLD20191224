@@ -21,7 +21,7 @@ namespace GRSVR
             string req = string.Join("", requestInfo.Parameters);
             C_User user = new C_User();
             Tuple<string, string> loginInputs = JsonConvert.DeserializeObject<Tuple<string, string>>(req);
-            E_DbRState res = C_DbTabUser.Login(requestInfo.Parameters[0], requestInfo.Parameters[1]);
+            E_DbRState res = C_DbTabUser.Login(loginInputs.Item1, loginInputs.Item2);
             if (res == E_DbRState.Success)
             {
                 foreach(C_User u in C_DbTabUser.Get().Item2)
